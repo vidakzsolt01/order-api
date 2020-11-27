@@ -17,4 +17,27 @@ public class OrderItem extends Lot {
         grossAmount = netAmount + VATAmount;
     }
 
+    public Product getProduct(){
+        return product;
+    }
+
+    public Integer getQuantity(){
+        return quantity;
+    }
+
+    public void  setQuantity(Integer quantity){
+        super.quantity = quantity;
+    }
+
+    public Integer getNetAmount() {
+        return netAmount;
+    }
+
+    public Integer getVATAmount() {
+        return VATAmount;
+    }
+
+    public Integer getGrossAmount() {
+        return grossAmount;
+    }
 }

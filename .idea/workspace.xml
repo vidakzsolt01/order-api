@@ -23,15 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/Lot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/order/OrderItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Interfaces/StoreHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/order/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoOrderItemFounInOrdersException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoStockItemFoundInStockException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughOrderItemQuantityException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughSortItemInStockException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/dto/ProductTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/stock/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/stock/StockItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/Lot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Lot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/order/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/stock/Stock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +44,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -64,7 +69,17 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="dto" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -90,25 +105,49 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606404481285">
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606479219888">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606404481285" />
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479219888" />
+    <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606469019073" />
     <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606457690689">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606457690689" />
+    <state width="1692" height="187" key="GridCell.Tab.0.bottom" timestamp="1606479273929">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state width="1692" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
+    <state width="1692" height="187" key="GridCell.Tab.0.center" timestamp="1606479273929">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state width="1692" height="187" key="GridCell.Tab.0.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
+    <state width="1692" height="187" key="GridCell.Tab.0.left" timestamp="1606479273929">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state width="1692" height="187" key="GridCell.Tab.0.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
+    <state width="1692" height="187" key="GridCell.Tab.0.right" timestamp="1606479273929">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state width="1692" height="187" key="GridCell.Tab.0.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
     <state x="621" y="-914" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606404554365">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="621" y="-914" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606404554365" />
+    <state x="746" y="-781" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1606470155532">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="746" y="-781" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606470155532" />
     <state x="811" y="-777" key="refactoring.ChangeSignatureDialog" timestamp="1606458043543">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="811" y="-777" key="refactoring.ChangeSignatureDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606458043543" />
-    <state x="671" y="-279" key="run.anything.popup" timestamp="1606404618791">
+    <state x="671" y="-279" key="run.anything.popup" timestamp="1606477111963">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="671" y="-279" key="run.anything.popup/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606404618791" />
+    <state x="671" y="-279" key="run.anything.popup/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606477111963" />
   </component>
 </project>
