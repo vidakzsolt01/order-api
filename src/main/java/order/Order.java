@@ -1,4 +1,4 @@
-package dto.order;
+package order;
 
 import exceptions.NoOrderItemFounInOrdersException;
 import exceptions.NotEnoughOrderItemQuantityException;

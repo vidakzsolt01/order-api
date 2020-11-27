@@ -1,4 +1,4 @@
-package dto.order;
+package order;
 
 import dto.Lot;
 import dto.Product;

@@ -1,7 +1,6 @@
 package exceptions;
 
-import dto.order.OrderItem;
-import dto.stock.StockItem;
+import stock.StockItem;
 
 public class NotEnoughSortItemInStockException extends Exception{
     private static final String DEFAULT_MESSAGE = "Nincs elegendő a mennyiség raktáron a termékből.";

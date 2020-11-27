@@ -1,8 +1,6 @@
 package exceptions;
 
 import dto.Product;
-import dto.order.OrderItem;
-import dto.stock.StockItem;
 
 public class NoStockItemFoundInStockException extends Exception{
     private static final String DEFAULT_MESSAGE = "A keresett termék nem található a raktárban.";

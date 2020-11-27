@@ -1,6 +1,6 @@
 package exceptions;
 
-import dto.order.OrderItem;
+import order.OrderItem;
 
 public class NoOrderItemFounInOrdersException extends Exception{
 

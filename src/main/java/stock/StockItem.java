@@ -1,4 +1,4 @@
-package dto.stock;
+package stock;
 
 import dto.Lot;
 import dto.Product;

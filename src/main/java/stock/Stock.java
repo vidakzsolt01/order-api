@@ -1,9 +1,9 @@
-package dto.stock;
+package stock;
 
 import Interfaces.StoreHandler;
 import dto.Lot;
 import dto.Product;
-import dto.order.OrderItem;
+import order.OrderItem;
 import exceptions.NoStockItemFoundInStockException;
 import exceptions.NotEnoughSortItemInStockException;
 
