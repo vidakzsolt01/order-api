@@ -1,7 +1,6 @@
 package order;
 
-import dto.Container;
-import dto.Lot;
+import dto.*;
 import exceptions.NoItemFounException;
 import exceptions.NotEnoughItemException;
 
@@ -9,11 +8,19 @@ import java.util.Map;
 
 public class Order extends Container {
 
-    private Customer customer;
+    private Customer customer = null;
+    private OrderStatusEnum orderStatus = OrderStatusEnum.PENDING;
+    private PaymentModeEnum paymentMode = null;
+    private DeliveryModeEnum deliveryMode = null;
 
-    public Order(Customer customer) {
-        this.customer = customer;
+    public Order() {
+        super();
     }
+
+    public Order(Lot item) {
+        super(item);
+    }
+
     /*
     private final Map<String, OrderItem> orderItems;
 

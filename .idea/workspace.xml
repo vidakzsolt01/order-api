@@ -23,19 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Interfaces/ContainerHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/Container.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFounException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/DeliveryModeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/OrderStatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/PaymentModeEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/StoreHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/Lot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Lot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoOrderItemFounInOrdersException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoStockItemFoundInStockException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughOrderItemQuantityException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughItemException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughSortItemInStockException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Customer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/order/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/Stock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +40,7 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -86,6 +80,7 @@
       <recent name="dto" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="dto" />
       <recent name="" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -113,7 +108,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606403423835</updated>
-      <workItem from="1606490379674" duration="5820000" />
+      <workItem from="1606490379674" duration="8242000" />
     </task>
     <servers />
   </component>
@@ -133,10 +128,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606493840026">
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606497890842">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606493840026" />
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606497890842" />
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479219888" />
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
       <screen x="0" y="-1080" width="1920" height="1080" />
@@ -146,6 +141,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="596" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606490453455" />
+    <state x="755" y="367" width="433" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1606497597212">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="755" y="367" width="433" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1050@0.0.1920.1050" timestamp="1606497597212" />
     <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1606490455114">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
