@@ -1,6 +1,9 @@
 package dto;
 
 public class Product {
+
+    private static final int DEFAULT_VAT = 27;
+
     protected final String itemNumber;
     protected final String itemName;
     protected Integer netUntiPrice;
@@ -11,6 +14,20 @@ public class Product {
         this.itemName = itemName;
         this.netUntiPrice = netPrice;
         this.VATPercent = VATPercent;
+    }
+
+    public Product(String itemNumber, String itemName, Integer netPrice) {
+        this.itemNumber = itemNumber;
+        this.itemName = itemName;
+        this.netUntiPrice = netPrice;
+        this.VATPercent = DEFAULT_VAT;
+    }
+
+    public Product(Product other) {
+        this.itemNumber = other.itemNumber;
+        this.itemName = other.itemName;
+        this.netUntiPrice = other.netUntiPrice;
+        this.VATPercent = other.VATPercent;
     }
 
     public String getItemNumber() {

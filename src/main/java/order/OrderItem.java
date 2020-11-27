@@ -1,4 +1,4 @@
-package dto.order;
+package order;
 
 import dto.Lot;
 import dto.Product;
@@ -15,6 +15,10 @@ public class OrderItem extends Lot {
         netAmount = product.getNetUntiPrice() * quantity;
         VATAmount = Math.round(netAmount * VAT);
         grossAmount = netAmount + VATAmount;
+    }
+
+    public String getIndex(){
+        return index;
     }
 
     public Product getProduct(){
