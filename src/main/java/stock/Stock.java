@@ -1,8 +1,8 @@
 package stock;
 
-import dto.Container;
-import dto.Lot;
-import dto.Product;
+import baseclasses.Container;
+import baseclasses.Lot;
+import baseclasses.Product;
 import exceptions.NoItemFounException;
 import exceptions.NotEnoughItemException;
 import order.OrderItem;

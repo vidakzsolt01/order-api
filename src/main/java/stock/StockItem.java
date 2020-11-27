@@ -1,7 +1,7 @@
 package stock;
 
-import dto.Lot;
-import dto.Product;
+import baseclasses.Lot;
+import baseclasses.Product;
 
 import java.time.LocalDate;
 
