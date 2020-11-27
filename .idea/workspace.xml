@@ -23,16 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-api1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Stock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/StockItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/Lot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/order/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/stock/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/stock/StockItem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,16 +87,25 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606404481285">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606404481285" />
+    <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606457690689">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606457690689" />
     <state x="621" y="-914" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606404554365">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="621" y="-914" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606404554365" />
+    <state x="811" y="-777" key="refactoring.ChangeSignatureDialog" timestamp="1606458043543">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="811" y="-777" key="refactoring.ChangeSignatureDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606458043543" />
     <state x="671" y="-279" key="run.anything.popup" timestamp="1606404618791">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>

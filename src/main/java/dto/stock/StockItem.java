@@ -1,11 +1,18 @@
-public class StockItem {
+package dto.stock;
 
-    private Product product;
-    private Integer quantity;
+import dto.Lot;
+import dto.Product;
+
+import java.time.LocalDate;
+
+public class StockItem extends Lot {
+
+    private LocalDate stockInDate;
 
     public StockItem(Product product, Integer quantity) {
-        this.product = product;
+        super(product, quantity);
         this.quantity = quantity;
+        this.stockInDate = LocalDate.now();
     }
 
     public Product getProduct() {
