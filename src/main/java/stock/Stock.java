@@ -1,20 +1,22 @@
 package stock;
 
-import Interfaces.StoreHandler;
+import Interfaces.ContainerHandler;
+import dto.Container;
 import dto.Lot;
 import dto.Product;
+import exceptions.NoItemFounException;
+import exceptions.NotEnoughItemException;
 import order.OrderItem;
-import exceptions.NoStockItemFoundInStockException;
-import exceptions.NotEnoughSortItemInStockException;
 
 import java.util.Map;
 
-public class Stock implements StoreHandler {
+public class Stock extends Container {
 
+/*
     private Map<String, StockItem> stockItems;
 
     @Override
-    public void addNewItem(Lot itemToStockin) {
+    public void registerNewItem(Lot itemToStockin) {
         if (stockItems.containsKey(itemToStockin.getProduct().getItemNumber())){
             StockItem item = stockItems.get(itemToStockin.getProduct().getItemNumber());
             item.setQuantity(item.getQuantity() + itemToStockin.getQuantity());
@@ -24,28 +26,31 @@ public class Stock implements StoreHandler {
     }
 
     @Override
-    public void removeItem(Lot item) {
+    public void removeItem(Lot item) throws NoItemFounException {
+        if (!stockItems.containsKey(item.getProduct().getItemNumber())) throw new NoItemFounException();
         stockItems.remove(item.getProduct().getItemNumber());
     }
 
     @Override
-    public void changeItenQuantity(Lot lot, Integer quantity) {
-
+    public void changeItemQuantity(Lot item, Integer quantity) throws NotEnoughItemException {
+        item.changeItemQuantity(quantity);
     }
 
     @Override
-    public void checkZeroQuantity(Lot item) {
+    public void disposeEmptyItem(Lot item) throws NoItemFounException {
         if (item.getQuantity() == 0) removeItem(item);
     }
 
-    public OrderItem expendItem(Product product, Integer quantity) throws NoStockItemFoundInStockException, NotEnoughSortItemInStockException {
-        if (!stockItems.containsKey(product.getItemNumber()))
-            throw new NoStockItemFoundInStockException(product);
+*/
+    public OrderItem expendItem(StockItem item, Integer quantity) throws NoItemFounException, NotEnoughItemException {
+        if (!containerItems.containsKey(item.getProduct().getItemNumber()))
+            throw new NoItemFounException(item);
 
-        StockItem item = stockItems.get(product.getItemNumber());
-        if (item.getQuantity() < quantity)
-            throw new NotEnoughSortItemInStockException(item, quantity);
-        OrderItem result = new OrderItem(product, quantity);
+        StockItem itemInStock = (StockItem) containerItems.get(item.getProduct().getItemNumber());
+        if (itemInStock.getQuantity() < quantity)
+            throw new NotEnoughItemException(itemInStock, quantity);
+
+        OrderItem result = new OrderItem(new Product(item.getProduct()), quantity);
 
         return result;
     }

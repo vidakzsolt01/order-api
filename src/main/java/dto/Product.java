@@ -13,6 +13,13 @@ public class Product {
         this.VATPercent = VATPercent;
     }
 
+    public Product(Product other) {
+        this.itemNumber = other.itemNumber;
+        this.itemName = other.itemName;
+        this.netUntiPrice = other.netUntiPrice;
+        this.VATPercent = other.VATPercent;
+    }
+
     public String getItemNumber() {
         return itemNumber;
     }

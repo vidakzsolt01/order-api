@@ -1,5 +1,8 @@
 package dto;
 
+import exceptions.NotEnoughItemException;
+import order.OrderItem;
+
 public class Lot{
 
     protected Product product;
@@ -17,4 +20,13 @@ public class Lot{
     public Integer getQuantity() {
         return quantity;
     }
+
+    public void changeItemQuantity(Integer quantity) throws NotEnoughItemException {
+        if (quantity == null || quantity == 0) return;
+        if (this.quantity + quantity < 0){
+            throw new NotEnoughItemException(this, quantity);
+        }
+        this.quantity += quantity;
+    }
+
 }

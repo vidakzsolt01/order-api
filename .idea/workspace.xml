@@ -23,18 +23,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Interfaces/StoreHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dto/order/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoOrderItemFounInOrdersException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoStockItemFoundInStockException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughOrderItemQuantityException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughSortItemInStockException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/dto/ProductTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Interfaces/ContainerHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dto/Container.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFounException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/StoreHandler.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dto/Lot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Lot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/order/OrderItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/stock/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dto/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoOrderItemFounInOrdersException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoStockItemFoundInStockException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughOrderItemQuantityException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughItemException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughSortItemInStockException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/Stock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,18 +46,23 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.4\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -69,6 +75,8 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -77,9 +85,25 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="dto" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -89,8 +113,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606403423835</updated>
+      <workItem from="1606490379674" duration="5820000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -105,18 +133,31 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606479219888">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606493840026">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606493840026" />
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479219888" />
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606469019073" />
+    <state x="596" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1606490453455">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="596" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606490453455" />
+    <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1606490455114">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1050@0.0.1920.1050" timestamp="1606490455114" />
     <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606457690689">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606457690689" />
+    <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606492619308">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606492619308" />
     <state width="1692" height="187" key="GridCell.Tab.0.bottom" timestamp="1606479273929">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
@@ -133,6 +174,10 @@
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1692" height="187" key="GridCell.Tab.0.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
+    <state x="564" y="231" key="Vcs.Push.Dialog.v2" timestamp="1606490955072">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="564" y="231" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1606490955072" />
     <state x="621" y="-914" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606404554365">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>

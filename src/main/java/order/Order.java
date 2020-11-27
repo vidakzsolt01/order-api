@@ -1,62 +1,70 @@
 package order;
 
-import exceptions.NoOrderItemFounInOrdersException;
-import exceptions.NotEnoughOrderItemQuantityException;
+import dto.Container;
+import dto.Lot;
+import exceptions.NoItemFounException;
+import exceptions.NotEnoughItemException;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class Order {
+public class Order extends Container {
 
-    private Map<String, OrderItem> items;
+    private Customer customer;
+
+    public Order(Customer customer) {
+        this.customer = customer;
+    }
+    /*
+    private final Map<String, OrderItem> orderItems;
 
     public Order() {
-        items = new HashMap<>();
+        orderItems = new HashMap<>();
     }
 
     public Order(OrderItem item) {
         this();
-        items.put(item.getProduct().getItemNumber(), item);
+        orderItems.put(item.getProduct().getItemNumber(), item);
     }
 
-    public Map<String, OrderItem> addItem(OrderItem item){
-        if (items.containsKey(item.getProduct().getItemNumber())){
-            OrderItem itemInOrder = items.get(item.getProduct().getItemNumber());
+    @Override
+    public void registerNewItem(Lot item) {
+        if (orderItems.containsKey(item.getProduct().getItemNumber())){
+            OrderItem itemInOrder = orderItems.get(item.getProduct().getItemNumber());
             itemInOrder.setQuantity(itemInOrder.getQuantity() + item.getQuantity());
-            return items;
+        } else {
+            orderItems.put(item.getProduct().getItemNumber(), (OrderItem)item);
         }
-        items.put(item.getProduct().getItemNumber(), item);
-        return items;
     }
 
-    public Map<String, OrderItem> increaseItemQuantity(OrderItem item) throws NoOrderItemFounInOrdersException {
-        if (items.get(item.getProduct().getItemNumber()) != item){
-            throw new NoOrderItemFounInOrdersException(item);
-        }
-        item.setQuantity(item.getQuantity()+1);
-        return items;
+    @Override
+    public void removeItem(Lot lot) throws NoItemFounException {
+        if (!orderItems.containsKey(lot.getProduct().getItemNumber())) throw new NoItemFounException();
+        orderItems.remove(lot.getProduct().getItemNumber());
     }
 
-    public Map<String, OrderItem> decreaseItemQuantity(OrderItem item) throws NoOrderItemFounInOrdersException {
-        if (items.get(item.getProduct().getItemNumber()) != item){
-            throw new NoOrderItemFounInOrdersException(item);
-        }
-        item.setQuantity(item.getQuantity()-1);
-        zeroQuantityCheck(item);
-        return items;
+    @Override
+    public void changeItemQuantity(Lot item, Integer quantity) throws NotEnoughItemException {
+        item.changeItemQuantity(quantity);
     }
 
-    private void changeItemQuantity(OrderItem item, Integer quantity) throws NotEnoughOrderItemQuantityException {
-        if (quantity == null || quantity == 0) return;
-        if (item.getQuantity() + quantity < 0){
-            throw new NotEnoughOrderItemQuantityException(item, quantity);
+    @Override
+    public void disposeEmptyItem(Lot item) throws NoItemFounException {
+        if (item.getQuantity() == 0) removeItem(item);
+    }
+*/
+
+    public Map<String, Lot> increaseItemQuantity(OrderItem item) throws NoItemFounException, NotEnoughItemException {
+        if (containerItems.get(item.getProduct().getItemNumber()) != item){
+            throw new NoItemFounException(item);
         }
-        zeroQuantityCheck(item);
+        changeItemQuantity(item, 1);
+        return containerItems;
     }
 
-    private void zeroQuantityCheck(OrderItem item){
-        if (item.getQuantity() == 0){
-            items.remove(item.getProduct().getItemNumber());
-        }
+    public Map<String, Lot> decreaseItemQuantity(OrderItem item) throws NoItemFounException, NotEnoughItemException {
+        if (containerItems.get(item.getProduct().getItemNumber()) != item) throw new NoItemFounException(item);
+        changeItemQuantity(item, -1);
+        return containerItems;
     }
+
 }
