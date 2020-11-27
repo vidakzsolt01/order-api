@@ -1,7 +1,7 @@
 package order;
 
-import dto.Lot;
-import dto.Product;
+import baseclasses.Lot;
+import baseclasses.Product;
 
 public class OrderItem extends Lot {
 

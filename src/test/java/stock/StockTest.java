@@ -1,6 +1,6 @@
 package stock;
 
-import dto.Product;
+import baseclasses.Product;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

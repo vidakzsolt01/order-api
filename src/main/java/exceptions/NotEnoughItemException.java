@@ -1,7 +1,6 @@
 package exceptions;
 
-import dto.Lot;
-import order.OrderItem;
+import baseclasses.Lot;
 
 public class NotEnoughItemException extends Exception{
 

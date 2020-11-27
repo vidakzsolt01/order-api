@@ -1,6 +1,6 @@
 package Interfaces;
 
-import dto.Lot;
+import baseclasses.Lot;
 import exceptions.NoItemFounException;
 import exceptions.NotEnoughItemException;
 

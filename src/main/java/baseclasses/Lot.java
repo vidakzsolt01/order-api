@@ -1,7 +1,6 @@
-package dto;
+package baseclasses;
 
 import exceptions.NotEnoughItemException;
-import order.OrderItem;
 
 public class Lot{
 
