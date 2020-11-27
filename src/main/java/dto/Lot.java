@@ -5,12 +5,14 @@ import order.OrderItem;
 
 public class Lot{
 
-    protected Product product;
+    protected final Product product;
     protected Integer quantity;
+    protected final String index;
 
     public Lot(Product product, Integer quantity) {
         this.product = product;
         this.quantity = quantity;
+        index = product.itemNumber;
     }
 
     public Product getProduct() {

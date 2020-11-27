@@ -61,7 +61,7 @@ public class Order extends Container {
 */
 
     public Map<String, Lot> increaseItemQuantity(OrderItem item) throws NoItemFounException, NotEnoughItemException {
-        if (containerItems.get(item.getProduct().getItemNumber()) != item){
+        if (containerItems.get(item.getIndex()) != item){
             throw new NoItemFounException(item);
         }
         changeItemQuantity(item, 1);
@@ -69,7 +69,7 @@ public class Order extends Container {
     }
 
     public Map<String, Lot> decreaseItemQuantity(OrderItem item) throws NoItemFounException, NotEnoughItemException {
-        if (containerItems.get(item.getProduct().getItemNumber()) != item) throw new NoItemFounException(item);
+        if (containerItems.get(item.getIndex()) != item) throw new NoItemFounException(item);
         changeItemQuantity(item, -1);
         return containerItems;
     }

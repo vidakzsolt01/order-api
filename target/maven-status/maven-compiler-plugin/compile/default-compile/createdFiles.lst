@@ -1,8 +1,0 @@
-dto\order\OrderItem.class
-Customer.class
-dto\order\Order.class
-dto\stock\Stock.class
-dto\stock\StockItem.class
-dto\Lot.class
-dto\Product.class
-exceptions\NoOrderItemFounInOrdersException.class

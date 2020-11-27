@@ -3,7 +3,6 @@ package dto;
 import Interfaces.ContainerHandler;
 import exceptions.NoItemFounException;
 import exceptions.NotEnoughItemException;
-import order.OrderItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,23 +17,23 @@ public class Container implements ContainerHandler {
 
     public Container(Lot item) {
         this();
-        containerItems.put(item.getProduct().getItemNumber(), item);
+        containerItems.put(item.index, item);
     }
 
     @Override
     public void registerNewItem(Lot item) {
-        if (containerItems.containsKey(item.getProduct().getItemNumber())){
-            Lot itemInOrder = containerItems.get(item.getProduct().getItemNumber());
-            itemInOrder.quantity += item.getQuantity();
+        if (containerItems.containsKey(item.index)){
+            Lot itemInContainer = containerItems.get(item.index);
+            itemInContainer.quantity += item.getQuantity();
         } else {
-            containerItems.put(item.getProduct().getItemNumber(), (OrderItem)item);
+            containerItems.put(item.index, item);
         }
     }
 
     @Override
     public void removeItem(Lot lot) throws NoItemFounException {
-        if (!containerItems.containsKey(lot.getProduct().getItemNumber())) throw new NoItemFounException();
-        containerItems.remove(lot.getProduct().getItemNumber());
+        if (!containerItems.containsKey(lot.index)) throw new NoItemFounException();
+        containerItems.remove(lot.index);
     }
 
     @Override

@@ -15,12 +15,12 @@ public class StockItem extends Lot {
         this.stockInDate = LocalDate.now();
     }
 
-    public Product getProduct() {
-        return product;
+    public String getIndex(){
+        return index;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public Product getProduct() {
+        return product;
     }
 
     public Integer getQuantity() {

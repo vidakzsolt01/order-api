@@ -17,6 +17,10 @@ public class OrderItem extends Lot {
         grossAmount = netAmount + VATAmount;
     }
 
+    public String getIndex(){
+        return index;
+    }
+
     public Product getProduct(){
         return product;
     }
