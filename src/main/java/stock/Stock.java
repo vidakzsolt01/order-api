@@ -25,6 +25,9 @@ public class Stock extends Container {
         return  new OrderItem(item.book(quantity), quantity);
     }
 
+    //TODO Kell egy metódus, ami megmondja egy termékről,
+    //     hogy van-e elegendő belőle
+
     public Map<String, Lot> getItems(){
         return containerItems;
     }

@@ -4,6 +4,7 @@ import baseclasses.Container;
 import baseclasses.Lot;
 import exceptions.NoItemFoundException;
 import exceptions.NotEnoughItemException;
+import stock.Stock;
 
 import java.util.Map;
 
@@ -30,7 +31,10 @@ public class Cart extends Container {
         return containerItems;
     }
 
-    public Order closeCart(){
+    public Order closeCart(Stock stock){
+        //TODO itt kell vizsgálni, hogy a termékösszeválogatás
+        // végeztével van-e elegendő raktárkészlet
+
         return new Order(containerItems);
     }
 
