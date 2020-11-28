@@ -17,6 +17,10 @@ public class OrderItem extends Lot {
         grossAmount = netAmount + VATAmount;
     }
 
+    public OrderItem(Lot item, Integer quantity) {
+        this(item.getProduct(), quantity);
+    }
+
     public String getIndex(){
         return index;
     }

@@ -23,16 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/order/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/ContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Interfaces/ContainerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/baseclasses/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/Lot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/baseclasses/Lot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFounException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFounException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/order/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/order/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFounException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/order/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stock/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/StockItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stock/StockItemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/stock/StockItemTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +43,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -122,6 +121,8 @@
       <workItem from="1606490379674" duration="11936000" />
       <workItem from="1606502947327" duration="144000" />
       <workItem from="1606545240487" duration="6885000" />
+      <workItem from="1606577449226" duration="743000" />
+      <workItem from="1606578209171" duration="9847000" />
     </task>
     <servers />
   </component>
@@ -148,10 +149,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="564" y="157" width="816" height="733" key="#Intentions/0.0.1920.1050@0.0.1920.1050" timestamp="1606499939480" />
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606551027127">
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606589773678">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606551027127" />
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606589773678" />
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479219888" />
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
       <screen x="0" y="-1080" width="1920" height="1080" />
@@ -178,6 +179,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606492619308" />
+    <state x="689" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1606590179345">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="689" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606590179345" />
     <state width="1522" height="280" key="GridCell.Tab.0.bottom" timestamp="1606502534869">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
