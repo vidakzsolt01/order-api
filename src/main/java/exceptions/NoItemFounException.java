@@ -2,7 +2,7 @@ package exceptions;
 
 import baseclasses.Lot;
 
-public class NoItemFounException extends Exception{
+public class NoItemFounException extends RuntimeException{
 
     private static final String DEFAULT_MESSAGE = "A keresett termék nem található.";
 

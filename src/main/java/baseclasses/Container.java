@@ -32,17 +32,24 @@ public class Container implements ContainerHandler {
 
     @Override
     public void removeItem(Lot lot) throws NoItemFounException {
-        if (!containerItems.containsKey(lot.index)) throw new NoItemFounException();
+        findItem(lot);
         containerItems.remove(lot.index);
     }
 
     @Override
+    public void findItem(Lot lot) {
+        if (!containerItems.containsKey(lot.index)) throw new NoItemFounException();
+    }
+
+    @Override
     public void changeItemQuantity(Lot item, Integer quantity) throws NotEnoughItemException {
+        findItem(item);
         item.changeItemQuantity(quantity);
     }
 
     @Override
     public void disposeEmptyItem(Lot item) throws NoItemFounException {
+        findItem(item);
         if (item.getQuantity() == 0) removeItem(item);
     }
 
