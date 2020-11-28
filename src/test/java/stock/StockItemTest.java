@@ -11,15 +11,9 @@ class StockItemTest {
     private static final String ITEM_NAME = "Termék-1";
     private static final Integer UNIT_PRICE = 1200;
     private static final Integer VAT_PERCENT = 27;
+    private static final Integer QUANTITY = 125;
 
-    StockItem stockItem = new StockItem(new Product("111111", "Termék-1", 1200), 125);
-
-/*
-    @BeforeAll
-    void setUp() {
-        stockItem = new StockItem(new Product("111111", "Termék-1", 1200), 125);
-    }
-*/
+    StockItem stockItem = new StockItem(new Product(ITEM_NUMBER, ITEM_NAME, UNIT_PRICE), QUANTITY);
 
     @Test
     void getProduct() {

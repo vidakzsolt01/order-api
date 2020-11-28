@@ -2,8 +2,7 @@ package stock;
 
 import baseclasses.Container;
 import baseclasses.Lot;
-import baseclasses.Product;
-import exceptions.NoItemFounException;
+import exceptions.NoItemFoundException;
 import exceptions.NotEnoughItemException;
 import order.OrderItem;
 
@@ -18,47 +17,12 @@ public class Stock extends Container {
         super(item);
     }
 
-    /*
-        private Map<String, StockItem> stockItems;
+    public OrderItem expendItem(String itemIndex, Integer quantity) throws NoItemFoundException, NotEnoughItemException {
+        StockItem item = (StockItem) findItem(itemIndex);
 
-        @Override
-        public void registerNewItem(Lot itemToStockin) {
-            if (stockItems.containsKey(itemToStockin.getProduct().getItemNumber())){
-                StockItem item = stockItems.get(itemToStockin.getProduct().getItemNumber());
-                item.setQuantity(item.getQuantity() + itemToStockin.getQuantity());
-            } else {
-                stockItems.put(itemToStockin.getProduct().getItemNumber(), (StockItem) itemToStockin);
-            }
-        }
+        //OrderItem result = new OrderItem(item.book(quantity), quantity);
 
-        @Override
-        public void removeItem(Lot item) throws NoItemFounException {
-            if (!stockItems.containsKey(item.getProduct().getItemNumber())) throw new NoItemFounException();
-            stockItems.remove(item.getProduct().getItemNumber());
-        }
-
-        @Override
-        public void changeItemQuantity(Lot item, Integer quantity) throws NotEnoughItemException {
-            item.changeItemQuantity(quantity);
-        }
-
-        @Override
-        public void disposeEmptyItem(Lot item) throws NoItemFounException {
-            if (item.getQuantity() == 0) removeItem(item);
-        }
-
-    */
-    public OrderItem expendItem(StockItem item, Integer quantity) throws NoItemFounException, NotEnoughItemException {
-        if (!containerItems.containsKey(item.getIndex()))
-            throw new NoItemFounException(item);
-
-        StockItem itemInStock = (StockItem) containerItems.get(item.getIndex());
-        if (itemInStock.getQuantity() < quantity)
-            throw new NotEnoughItemException(itemInStock, quantity);
-
-        OrderItem result = new OrderItem(new Product(item.getProduct()), quantity);
-
-        return result;
+        return  new OrderItem(item.book(quantity), quantity);
     }
 
     public Map<String, Lot> getItems(){

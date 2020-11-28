@@ -1,77 +1,88 @@
 package order;
 
 import baseclasses.*;
-import exceptions.NoItemFounException;
+import exceptions.NoItemFoundException;
 import exceptions.NotEnoughItemException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class Order extends Container {
+public class Order {
 
-    private Customer customer = null;
-    private OrderStatusEnum orderStatus = OrderStatusEnum.PENDING;
-    private PaymentModeEnum paymentMode = null;
-    private DeliveryModeEnum deliveryMode = null;
+    private final List<OrderItem> orderItems;
+    private Customer customer;
+    private OrderStatusEnum orderStatus;
+    private PaymentModeEnum paymentMode;
+    private DeliveryModeEnum deliveryMode;
+    private String failureComment;
+    private final Integer netSum;
+    private final Integer VATSum;
+    private final Integer grossSum;
 
-    public Order() {
-        super();
-    }
-
-    public Order(Lot item) {
-        super(item);
-    }
-
-    /*
-    private final Map<String, OrderItem> orderItems;
-
-    public Order() {
-        orderItems = new HashMap<>();
-    }
-
-    public Order(OrderItem item) {
-        this();
-        orderItems.put(item.getProduct().getItemNumber(), item);
-    }
-
-    @Override
-    public void registerNewItem(Lot item) {
-        if (orderItems.containsKey(item.getProduct().getItemNumber())){
-            OrderItem itemInOrder = orderItems.get(item.getProduct().getItemNumber());
-            itemInOrder.setQuantity(itemInOrder.getQuantity() + item.getQuantity());
-        } else {
-            orderItems.put(item.getProduct().getItemNumber(), (OrderItem)item);
+    public Order(Map<String, Lot> orderItemList) {
+        int net = 0;
+        int VAT = 0;
+        int gross = 0;
+        orderItems = new ArrayList<>();
+        for (Map.Entry<String, Lot> element : orderItemList.entrySet()) {
+            OrderItem item = (OrderItem) element.getValue();
+            orderItems.add(item);
+            net += item.getNetAmount();
+            VAT += item.getVATAmount();
+            gross += item.getGrossAmount();
         }
+        netSum = net;
+        VATSum = VAT;
+        grossSum = gross;
+        customer = null;
+        orderStatus = OrderStatusEnum.PENDING;
+        paymentMode = null;
+        deliveryMode = null;
+        failureComment = null;
     }
 
-    @Override
-    public void removeItem(Lot lot) throws NoItemFounException {
-        if (!orderItems.containsKey(lot.getProduct().getItemNumber())) throw new NoItemFounException();
-        orderItems.remove(lot.getProduct().getItemNumber());
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    @Override
-    public void changeItemQuantity(Lot item, Integer quantity) throws NotEnoughItemException {
-        item.changeItemQuantity(quantity);
+    public Customer getCustomer() {
+        return customer;
     }
 
-    @Override
-    public void disposeEmptyItem(Lot item) throws NoItemFounException {
-        if (item.getQuantity() == 0) removeItem(item);
-    }
-*/
-
-    public Map<String, Lot> increaseItemQuantity(OrderItem item) throws NoItemFounException, NotEnoughItemException {
-        if (containerItems.get(item.getIndex()) != item){
-            throw new NoItemFounException(item);
-        }
-        changeItemQuantity(item, 1);
-        return containerItems;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Map<String, Lot> decreaseItemQuantity(OrderItem item) throws NoItemFounException, NotEnoughItemException {
-        if (containerItems.get(item.getIndex()) != item) throw new NoItemFounException(item);
-        changeItemQuantity(item, -1);
-        return containerItems;
+    public OrderStatusEnum getOrderStatus() {
+        return orderStatus;
     }
 
+    public void setOrderStatus(OrderStatusEnum orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public PaymentModeEnum getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(PaymentModeEnum paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
+    public DeliveryModeEnum getDeliveryMode() {
+        return deliveryMode;
+    }
+
+    public void setDeliveryMode(DeliveryModeEnum deliveryMode) {
+        this.deliveryMode = deliveryMode;
+    }
+
+    public String getFailureComment() {
+        return failureComment;
+    }
+
+    public void setFailureComment(String failureComment) {
+        this.failureComment = failureComment;
+    }
 }

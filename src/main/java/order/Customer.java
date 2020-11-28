@@ -1,24 +1,70 @@
 package order;
 
 public class Customer {
-    private final String name;
-    private final String address;
-    private final String phoneNumber;
-    private final String email;
+    private final Long customerID;
+    private String name;
+    private String phoneNumber;
+    private String email;
+    private String deliveryAddress;
+    private String accountAddress;
 
-
-    public Customer(String name, String address, String phoneNumber, String email) {
+    public Customer(Long customerID, String name) {
+        this.customerID = customerID;
         this.name = name;
-        this.address = address;
+        phoneNumber = null;
+        email = null;
+        accountAddress = null;
+        deliveryAddress = null;
+    }
+
+    public Customer(Long customerID, String name, String address, String phoneNumber, String email, String deliveryAddress) {
+        this(customerID, name);
+        this.deliveryAddress = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.deliveryAddress = deliveryAddress;
+        this.accountAddress = deliveryAddress;
     }
+
+    public Customer(Long customerID, String name, String address, String phoneNumber, String email, String deliveryAddress, String accountAddress) {
+        this(customerID, name, address, phoneNumber,email, deliveryAddress);
+        this.accountAddress = accountAddress;
+    }
+
+    public Long getCustomerID() {
+        return customerID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAccountAddress() {
+        return accountAddress;
+    }
+
+    public void setAccountAddress(String accountAddress) {
+        this.accountAddress = accountAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDeliveryAddress() {
+        return deliveryAddress;
     }
 
     public String getPhoneNumber() {

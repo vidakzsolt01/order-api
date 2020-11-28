@@ -1,7 +1,7 @@
 package baseclasses;
 
 import Interfaces.ContainerHandler;
-import exceptions.NoItemFounException;
+import exceptions.NoItemFoundException;
 import exceptions.NotEnoughItemException;
 
 import java.util.HashMap;
@@ -31,19 +31,27 @@ public class Container implements ContainerHandler {
     }
 
     @Override
-    public void removeItem(Lot lot) throws NoItemFounException {
-        if (!containerItems.containsKey(lot.index)) throw new NoItemFounException();
-        containerItems.remove(lot.index);
+    public void removeItem(String itemIndex) throws NoItemFoundException {
+        findItem(itemIndex);
+        containerItems.remove(itemIndex);
     }
 
     @Override
-    public void changeItemQuantity(Lot item, Integer quantity) throws NotEnoughItemException {
-        item.changeItemQuantity(quantity);
+    public Lot findItem(String lotIndex) {
+        if (!containerItems.containsKey(lotIndex)) throw new NoItemFoundException();
+        return containerItems.get(lotIndex);
     }
 
     @Override
-    public void disposeEmptyItem(Lot item) throws NoItemFounException {
-        if (item.getQuantity() == 0) removeItem(item);
+    public void changeItemQuantity(String itemIndex, Integer quantity) throws NotEnoughItemException {
+        Lot foundItem = findItem(itemIndex);
+        foundItem.changeItemQuantity(quantity);
+    }
+
+    @Override
+    public void disposeEmptyItem(String itemIndex) throws NoItemFoundException {
+        Lot foundItem = findItem(itemIndex);
+        if (foundItem.getQuantity() == 0) removeItem(itemIndex);
     }
 
 }

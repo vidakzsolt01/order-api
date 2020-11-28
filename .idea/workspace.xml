@@ -23,31 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/stock/StockItemTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/stock/StockTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/order/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/Lot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Lot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/ContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Interfaces/ContainerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/baseclasses/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFounException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/order/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/order/OrderItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/stock/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/StockItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Customer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dto/Lot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/Lot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dto/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dto/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dto/order/Order.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dto/order/OrderItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dto/stock/Stock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dto/stock/StockItem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/exceptions/NoOrderItemFounInOrdersException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-dto.ProductTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-dto.ProductTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/dto.ProductTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/dto.ProductTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/dto/ProductTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/dto/ProductTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +43,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -113,6 +97,19 @@
       <recent name="" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -122,6 +119,10 @@
       <option name="presentableId" value="Default" />
       <updated>1606403423835</updated>
       <workItem from="1606490379674" duration="11936000" />
+      <workItem from="1606502947327" duration="144000" />
+      <workItem from="1606545240487" duration="6885000" />
+      <workItem from="1606577449226" duration="743000" />
+      <workItem from="1606578209171" duration="9847000" />
     </task>
     <servers />
   </component>
@@ -148,10 +149,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="564" y="157" width="816" height="733" key="#Intentions/0.0.1920.1050@0.0.1920.1050" timestamp="1606499939480" />
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606500466779">
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606589773678">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606500466779" />
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606589773678" />
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479219888" />
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
       <screen x="0" y="-1080" width="1920" height="1080" />
@@ -169,14 +170,19 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1050@0.0.1920.1050" timestamp="1606490455114" />
-    <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606457690689">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state x="624" y="48" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606549857820">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="624" y="48" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606549857820" />
     <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606457690689" />
     <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606492619308">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606492619308" />
+    <state x="689" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1606590179345">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="689" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606590179345" />
     <state width="1522" height="280" key="GridCell.Tab.0.bottom" timestamp="1606502534869">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -210,10 +216,10 @@
     </state>
     <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606499964603" />
     <state x="746" y="-781" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606470155532" />
-    <state x="678" y="99" width="587" height="801" key="find.popup" timestamp="1606502351003">
+    <state x="678" y="99" width="587" height="801" key="find.popup" timestamp="1606547335778">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="678" y="99" width="587" height="801" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1606502351003" />
+    <state x="678" y="99" width="587" height="801" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1606547335778" />
     <state x="811" y="-777" key="refactoring.ChangeSignatureDialog" timestamp="1606458043543">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>

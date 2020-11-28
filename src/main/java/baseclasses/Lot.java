@@ -22,12 +22,12 @@ public class Lot{
         return quantity;
     }
 
-    public void changeItemQuantity(Integer quantity) throws NotEnoughItemException {
-        if (quantity == null || quantity == 0) return;
-        if (this.quantity + quantity < 0){
-            throw new NotEnoughItemException(this, quantity);
+    public void changeItemQuantity(Integer chageQuantity) throws NotEnoughItemException {
+        if (chageQuantity == null || chageQuantity == 0) return;
+        if (this.quantity + chageQuantity < 0){
+            throw new NotEnoughItemException(this, chageQuantity);
         }
-        this.quantity += quantity;
+        quantity += chageQuantity;
     }
 
 }
