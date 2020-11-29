@@ -1,15 +1,14 @@
 package hu.gov.allamkincstar.training.javasebsc.stock;
 
-import hu.gov.allamkincstar.training.javasebsc.baseclasses.Container;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
-import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.order.OrderItem;
 
 import java.util.Map;
 
-public class Stock extends Container {
+public class Stock extends ProductContainer {
 
     public Stock() {
         super();
@@ -30,7 +29,7 @@ public class Stock extends Container {
 
 
     public Map<String, Lot> getItems(){
-        return containerItems;
+        return productItems;
     }
 
     private class StockItem extends Lot {

@@ -25,24 +25,10 @@
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/ContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ContainerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/DeliveryModeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/DeliveryModeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/Lot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Lot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/OrderStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/OrderStatusEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/PaymentModeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/baseclasses/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoItemFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/NoItemFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NotEnoughItemException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/NotEnoughItemException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/order/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stock/StockItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/baseclasses/ProductTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stock/StockItemTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/stock/StockTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +122,7 @@
       <workItem from="1606577449226" duration="743000" />
       <workItem from="1606578209171" duration="9847000" />
       <workItem from="1606591261292" duration="340000" />
-      <workItem from="1606632977694" duration="6219000" />
+      <workItem from="1606632977694" duration="8574000" />
     </task>
     <servers />
   </component>
@@ -184,10 +170,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1050@0.0.1920.1050" timestamp="1606633399799" />
-    <state x="624" y="48" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606549857820">
+    <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606641893275">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="624" y="48" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606549857820" />
+    <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606641893275" />
     <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606457690689" />
     <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606634446743">
       <screen x="0" y="0" width="1920" height="1050" />

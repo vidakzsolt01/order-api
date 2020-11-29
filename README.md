@@ -39,9 +39,17 @@ Attila
 ---------------------------------------------------------------------
 Terv...
 - Alaplényeg a Termék (Product)
-- Kell Terméktétel, mely adott Termékhez nyilvántartja annak darabszámát: Lot(Product, quantity)
-- A raktárkészletet a Raktár-ban (Stock) tároljuk - Raktári tételek indexelt listájában (Map)
-- Egy Raktári tételt (StockItem) a Terméktételből származtatjuk, melynek van pl. összértéke
+- A Termékeket nem önmagukban, hanem mennyiségükkel együtt tároljuk (bármely tárólóban legyenek is), ehhez kell Terméktétel osztály, mely adott Termékhez nyilvántartja annak darabszámát: Lot(Product, quantity)
+- A "vásárláskor az előre definiált termékek köztül a raktáron lévő mennyiség erejéig vásárolhat" nekem azt jelenti, hogy
+  - tárolunk raktárkészletet a Raktár-ban (Stock) - Raktári tételek indexelt listájában (Map)
+  - a raktárkezelés nem része a feladatnak, ezért csak minimális funkcionalitással valósul meg
+    - a Raktárban Raktártételeket (StockItem) tárolunk, melyek olyan Terméktételek, melyeknek van "lefoglalt mennyiség"-ük (bookedQuantity), és tud lefoglalni mennyiségeket (saját magából), meg tudja mondani, hogy menniy foglalható mennyiség van, stb.
+    - a Raktárba be kell tudni tenni Terméktételeket, melynek során hozzáadunk egy Terméktételt Map-hez (ha létezik már adott Terméktétel, akkor csak annak mennyiségét növeljük): deposit(), és
+    - le kell tudni foglalni Terméktételeket a Kosár tartalmának bővítéséhez: book() 
+      - ha nem létezik az adott Termék a Raktár Map-ben, akkor az algoritmushiba (unmanaged exception)
+      - ha nincs a lefoglalni kívánt mennyiség készleten, akkor azt az algoritmusban kezelni kell (managed exception)
+  - a "vásárlás" során gyakorlatilag feltöltünk egy Kosarat (Cart), mely kiválasztott Terméktételeket egy Kosártétel-listában (Map<..., CartItem>) tárolja (a CartItem olyan Lot, amelynek van nettó, ÁFA és bruttó összege)
+  - a Kosár lezárásával készül egy Rendelés (Order) objektum
 - Felhasználó kell majd a rendeléshez (Vevő - Customer)(név, telefonszám, email cím, számlázási cím, szállítási cím)
 - Fizetési mód kell a rendeléhez; elfogadott fizetési módok: CASH, BY_WIRE, CREDIT_CARD
 - Szállítási mód kell a rendeléshez; elfogadott szállítási módok: DIRECT_RECEIPT, DELIVERY_SERVICE

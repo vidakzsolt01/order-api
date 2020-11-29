@@ -1,6 +1,6 @@
 package hu.gov.allamkincstar.training.javasebsc.order;
 
-import hu.gov.allamkincstar.training.javasebsc.baseclasses.Container;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
@@ -8,7 +8,7 @@ import hu.gov.allamkincstar.training.javasebsc.stock.Stock;
 
 import java.util.Map;
 
-public class Cart extends Container {
+public class Cart extends ProductContainer {
 
     public Cart() {
     }
@@ -18,24 +18,24 @@ public class Cart extends Container {
     }
 
     public Map<String, Lot> increaseItemQuantity(OrderItem item) throws NotEnoughItemException {
-        if (containerItems.get(item.getIndex()) != item){
+        if (productItems.get(item.getIndex()) != item){
             throw new NoItemFoundException(item);
         }
         changeItemQuantity(item.getIndex(), 1);
-        return containerItems;
+        return productItems;
     }
 
     public Map<String, Lot> decreaseItemQuantity(OrderItem item) throws NotEnoughItemException {
-        if (containerItems.get(item.getIndex()) != item) throw new NoItemFoundException(item);
+        if (productItems.get(item.getIndex()) != item) throw new NoItemFoundException(item);
         changeItemQuantity(item.getIndex(), -1);
-        return containerItems;
+        return productItems;
     }
 
     public Order closeCart(Stock stock){
         //TODO itt kell vizsgálni, hogy a termékösszeválogatás
         // végeztével van-e elegendő raktárkészlet
 
-        return new Order(containerItems);
+        return new Order(productItems);
     }
 
 }

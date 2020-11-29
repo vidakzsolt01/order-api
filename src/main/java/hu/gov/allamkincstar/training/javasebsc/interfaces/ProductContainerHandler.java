@@ -5,7 +5,7 @@ import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 
-public interface ContainerHandler {
+public interface ProductContainerHandler {
 
     void registerNewItem(Product product, int quantity);
     void removeItem(String lotIndex) throws NoItemFoundException;
