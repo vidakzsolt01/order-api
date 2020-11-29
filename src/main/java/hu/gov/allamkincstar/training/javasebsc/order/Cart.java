@@ -2,6 +2,7 @@ package hu.gov.allamkincstar.training.javasebsc.order;
 
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.ShoppingModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.stock.Stock;
@@ -35,7 +36,7 @@ public class Cart extends ProductContainer {
         //TODO itt kell vizsgálni, hogy a termékösszeválogatás
         // végeztével van-e elegendő raktárkészlet
 
-        return new Order(productItems);
+        return new Order(productItems, new DeliveryParameters(), ShoppingModeEnum.ONLINE);
     }
 
 }

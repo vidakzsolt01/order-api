@@ -14,19 +14,14 @@ public class Stock extends ProductContainer {
         super();
     }
 
-    public Stock(Lot item) {
-        super(item);
-    }
-
     public OrderItem bookProduct(Product product, int quantity) throws NotEnoughItemException {
         StockItem item = (StockItem) findItem(product.getItemNumber());
         return  new OrderItem(item.bookSomeQuantity(quantity), quantity);
     }
 
     public void depositProduct(Product product, int quantity){
-        registerNewItem(product, quantity);
+        registerNewItem(new StockItem(product, quantity));
     }
-
 
     public Map<String, Lot> getItems(){
         return productItems;

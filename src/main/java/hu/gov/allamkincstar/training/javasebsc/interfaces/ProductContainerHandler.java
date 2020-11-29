@@ -7,7 +7,7 @@ import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException
 
 public interface ProductContainerHandler {
 
-    void registerNewItem(Product product, int quantity);
+    void registerNewItem(Lot item);
     void removeItem(String lotIndex) throws NoItemFoundException;
     Lot findItem(String lotIndex);
     boolean isProductExist(String index);

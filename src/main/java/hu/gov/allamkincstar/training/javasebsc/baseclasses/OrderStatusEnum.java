@@ -1,5 +1,5 @@
 package hu.gov.allamkincstar.training.javasebsc.baseclasses;
 
 public enum OrderStatusEnum {
-    PENDING, DELIVERED, BOOKED, IN_PROGRESS, FAILED_DELIVERY;
+    PENDING, BOOKED, IN_PROGRESS, WAITING_FOR_DELIVERY, DELIVERED, FAILED_DELIVERY;
 }

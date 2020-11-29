@@ -38,10 +38,10 @@ Attila
 
 ---------------------------------------------------------------------
 Terv...
-- Alaplényeg a Termék (Product)
-- A Termékeket nem önmagukban, hanem mennyiségükkel együtt tároljuk (bármely tárólóban legyenek is), ehhez kell Terméktétel osztály, mely adott Termékhez nyilvántartja annak darabszámát: Lot(Product, quantity)
+- Alaplényeg a Termék (Product): cikkszám, megnevezés, nettó egységár, ÁFA%
+- A Termékeket nem önmagukban, hanem mennyiségükkel együtt tároljuk (bármely tárólóban legyenek is), ehhez kell Terméktétel osztály, mely adott Termékhez nyilvántartja annak aktuális darabszámát: Lot(Product, quantity)
 - A "vásárláskor az előre definiált termékek köztül a raktáron lévő mennyiség erejéig vásárolhat" nekem azt jelenti, hogy
-  - tárolunk raktárkészletet a Raktár-ban (Stock) - Raktári tételek indexelt listájában (Map)
+  - tárolunk raktárkészletet a Raktár-ban (Stock) - Raktártételek (StocItem <-- Lot), Termék.cikkszámmal indexelt listájában (Map)
   - a raktárkezelés nem része a feladatnak, ezért csak minimális funkcionalitással valósul meg
     - a Raktárban Raktártételeket (StockItem) tárolunk, melyek olyan Terméktételek, melyeknek van "lefoglalt mennyiség"-ük (bookedQuantity), és tud lefoglalni mennyiségeket (saját magából), meg tudja mondani, hogy menniy foglalható mennyiség van, stb.
     - a Raktárba be kell tudni tenni Terméktételeket, melynek során hozzáadunk egy Terméktételt Map-hez (ha létezik már adott Terméktétel, akkor csak annak mennyiségét növeljük): deposit(), és
@@ -49,13 +49,50 @@ Terv...
       - ha nem létezik az adott Termék a Raktár Map-ben, akkor az algoritmushiba (unmanaged exception)
       - ha nincs a lefoglalni kívánt mennyiség készleten, akkor azt az algoritmusban kezelni kell (managed exception)
   - a "vásárlás" során gyakorlatilag feltöltünk egy Kosarat (Cart), mely kiválasztott Terméktételeket egy Kosártétel-listában (Map<..., CartItem>) tárolja (a CartItem olyan Lot, amelynek van nettó, ÁFA és bruttó összege)
-  - a Kosár lezárásával készül egy Rendelés (Order) objektum
-- Felhasználó kell majd a rendeléshez (Vevő - Customer)(név, telefonszám, email cím, számlázási cím, szállítási cím)
-- Fizetési mód kell a rendeléhez; elfogadott fizetési módok: CASH, BY_WIRE, CREDIT_CARD
-- Szállítási mód kell a rendeléshez; elfogadott szállítási módok: DIRECT_RECEIPT, DELIVERY_SERVICE
-- Rendelésben (Order) a rendelt tételeket (OrderItem) a Termék cikkszámával indexelt listában (Map) tartjuk nyilván; további adatok: vásárlási mód, nettó összeg, ÁFA összeg, bruttó összeg, átvételi mód, fizetési mód, szállítási mód, Vevő, állapot, szállítás eredménye, megjegyzés(failure_comment))
-- Rendeléstétel (OrderItem) olyan Terméktétel, amelynek van nettó értéke, ÁFA-értéke, összértéke;
-- Rendelés-állapotok (BOOKED, IN_PROGRESS, DELIVERED, FAILED_DELIVERY)
+  - a Kosár lezárásával készül a Rendelés (Order) objektum
+- Rendelés (Order) 
+  - alapja a Rendeléstételek listája a rendelt tételeket a Kosár elemeiből (CartItems) a Kosár vásárlást záró metódusa hozza létre
+  - Rendeléstétel (OrderItem extends Lot) olyan Terméktétel (Lot), amelynek van (summa) nettó összege, ÁFA összege és bruttó összege
+  - vannak olyan Webshopok, amelyek a rendelés feladása után, útólag is megengedik módosítani a rendelés összetételét, de ez valszeg a rossz programtervezés eredménye (pl. még sincs (elegendő) raktáron a lefoglalt/megrendelt termékből). Itt ezt nem tesszük, ezért Terméklista egy sima List\<OrderItem\> lesz 
+  - további Order-adatok: 
+    - vásárlási mód (Enum(DIRECT, ONLINE))
+    - nettó összeg (netSum)
+    - ÁFA összeg (VATSum)
+    - bruttó összeg (grossSum)
+    - számlaösszeg (billTotal)
+    - állapot (orderStatus; Enum(BOOKED, WAITING_FOR_DELIVERY, IN_PROGRESS, DELIVERED, FAILED_DELIVERY) - default: BOOKED)
+    - átvételi mód (deliveryMode; Enum(DIRECT_RECEIVING, DELIVERY_SERVICE)
+    - fizetési mód (paymentMode; Enum(CASH, BY_WIRE, CREDIT_CARD)) (CASH ONLINE vásárlás esetén "utánvét"-et jelöl)
+    - szállítási paraméterek (DeliveryParameters (szállítási költség (deliveriCharge), összeghatár (limitForFree)) 
+    - Vevő (Customer: név, telefonszám, email cím, számlázási cím, szállítási cím)
+    - megjegyzés (failureComment; FAILED_DELIVERY státusz esetén kötelező))
+  - rendelésfeladás - order(): 
+    - ha vásárlási mód ONLINE, akkor az állapot IN_PROGRESS lesz
+    - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: közvetlen bolti vásárlás esetén nem lehet feladni a rendelést")
+  - fizetés nyugtázása - paymentConfirm():
+    - ha a státusz BOOKED, akkor 
+      - ha a vásárlási mód ONLINE, akkor a státusz WAITING_FOR_DELIVERY lesz
+      - egyébként a státusz DELIVERED lesz
+  - átadás a futárszolgálatnak - passToDeliveryService():
+    - ha a státusz NEM WAITING_FOR_DELIVERY, akkor hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: a rendelés nem kész a futárnak való átadásra")
+    - ha vásárlási mód ONLINE, akkor
+      - ha a fizetési mód BY_WIRE vagy CREDIT_CARD (v. nem CASH)
+        - ha a számla ki van fizetve (Order.paid = true), akkor az állapot IN_PROGRESS lesz
+        - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: nem készpénzes vásrlás esetén amíg a számla nincs kiegyenlítve, nem adható át a futárnak")
+      - egyébként az állapot IN_PROGRESS lesz
+    - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: közvetlen vásárlás esetén nem adható át a futárnak")
+  - szállítás nyugtázása - deliveryConfirm(boolean success, (optional) String failureComment):
+    - ha az állapot IN_PROGRESS, akkor 
+      - ha a szállítás sikeres (success == true) az állapot DELIVERED lesz
+      - egyébként
+        - ha kaptunk failureComment-et, akkor 
+          - az állapot FAILED_DELIVERY lesz
+          - beállítjuk az Order.failureComment-et
+        - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: sikertelen átvétel esetén a sikertelenség oka nélkül a szállítás nem nyugtázható")  
+    - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: nem kiszállítás alatt lévő megrendelés szállítása nem nyugtázható")
+  - rendelés lezárása - orderClose():
+    - ha a státusz DELIVERED vagy FAILED_DELIVERY, akkor véglegesítjük a raktárkészlet-változást
+    - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: nem véglegesített rendelés nem zárható le.")
 ------
 
 Implementáció

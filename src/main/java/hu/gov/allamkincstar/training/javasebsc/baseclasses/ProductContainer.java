@@ -21,13 +21,12 @@ public class ProductContainer implements ProductContainerHandler {
     }
 
     @Override
-    public void registerNewItem(Product product, int quantity) {
-        if (productItems.containsKey(product.itemNumber)){
-            Lot itemInContainer = productItems.get(product.itemNumber);
-            itemInContainer.quantity += quantity;
+    public void registerNewItem(Lot item) {
+        if (productItems.containsKey(item.index)){
+            Lot itemInContainer = productItems.get(item.index);
+            itemInContainer.quantity += item.quantity;
         } else {
-            Lot iteNew = new Lot(product, quantity);
-            productItems.put(iteNew.getIndex(), iteNew);
+            productItems.put(item.index, item);
         }
     }
 
