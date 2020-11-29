@@ -1,8 +1,8 @@
-package baseclasses;
+package hu.gov.allamkincstar.training.javasebsc.baseclasses;
 
-import Interfaces.ContainerHandler;
-import exceptions.NoItemFoundException;
-import exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.interfaces.ContainerHandler;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,12 +21,13 @@ public class Container implements ContainerHandler {
     }
 
     @Override
-    public void registerNewItem(Lot item) {
-        if (containerItems.containsKey(item.index)){
-            Lot itemInContainer = containerItems.get(item.index);
-            itemInContainer.quantity += item.getQuantity();
+    public void registerNewItem(Product product, int quantity) {
+        if (containerItems.containsKey(product.itemNumber)){
+            Lot itemInContainer = containerItems.get(product.itemNumber);
+            itemInContainer.quantity += quantity;
         } else {
-            containerItems.put(item.index, item);
+            Lot iteNew = new Lot(product, quantity);
+            containerItems.put(iteNew.getIndex(), iteNew);
         }
     }
 
@@ -40,6 +41,11 @@ public class Container implements ContainerHandler {
     public Lot findItem(String lotIndex) {
         if (!containerItems.containsKey(lotIndex)) throw new NoItemFoundException();
         return containerItems.get(lotIndex);
+    }
+
+    @Override
+    public boolean isProductExist(String index) {
+        return containerItems.containsKey(index);
     }
 
     @Override

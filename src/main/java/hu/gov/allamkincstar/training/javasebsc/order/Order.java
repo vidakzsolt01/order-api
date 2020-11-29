@@ -1,8 +1,6 @@
-package order;
+package hu.gov.allamkincstar.training.javasebsc.order;
 
-import baseclasses.*;
-import exceptions.NoItemFoundException;
-import exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.*;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package exceptions;
+package hu.gov.allamkincstar.training.javasebsc.exceptions;
 
-import baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 
 public class NoItemFoundException extends RuntimeException{
 

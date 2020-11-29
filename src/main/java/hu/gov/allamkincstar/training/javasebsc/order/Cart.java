@@ -1,10 +1,10 @@
-package order;
+package hu.gov.allamkincstar.training.javasebsc.order;
 
-import baseclasses.Container;
-import baseclasses.Lot;
-import exceptions.NoItemFoundException;
-import exceptions.NotEnoughItemException;
-import stock.Stock;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.Container;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.stock.Stock;
 
 import java.util.Map;
 

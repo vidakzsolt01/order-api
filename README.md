@@ -1,4 +1,4 @@
-# order-api
+# hu.gov.allamkincstar.training.javasebsc.order-api
 webshop orders' lifecycle support
 
 Feladat
@@ -12,7 +12,7 @@ Készíts el az alábbi funkcionalitást lehetővé tevő API-t!
 
 - A rendszer segít a megrendelt termékek életciklusának követésében.
 - A felhasználó megvásárolhat termékeket az alkalmazáson keresztül. A vásárláskor
-az előre definiált termékek köztül a raktáron lévő mennyiség erejéig vásárolhat. A vásárlás befejezése egy order, magyarul
+az előre definiált termékek köztül a raktáron lévő mennyiség erejéig vásárolhat. A vásárlás befejezése egy hu.gov.allamkincstar.training.javasebsc.order, magyarul
 rendelés formájában manifesztálódik.
 - A vásárláskor kiválaszthatja a kézbesítési módot, a fizetési módot, illetve természetesen meg kell
 adja a vevő elérhetőségeit: lackím, telefonszám, név, email cím.

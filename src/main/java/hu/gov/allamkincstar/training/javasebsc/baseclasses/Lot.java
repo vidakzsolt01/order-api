@@ -1,6 +1,6 @@
-package baseclasses;
+package hu.gov.allamkincstar.training.javasebsc.baseclasses;
 
-import exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 
 public class Lot{
 
@@ -14,12 +14,18 @@ public class Lot{
         index = product.itemNumber;
     }
 
-    public Product getProduct() {
-        return product;
-    }
+    public Product getProduct() {return product;    }
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getIndex() {
+        return index;
     }
 
     public void changeItemQuantity(Integer chageQuantity) throws NotEnoughItemException {
