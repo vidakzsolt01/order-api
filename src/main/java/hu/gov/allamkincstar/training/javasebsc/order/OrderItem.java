@@ -1,7 +1,7 @@
-package order;
+package hu.gov.allamkincstar.training.javasebsc.order;
 
-import baseclasses.Lot;
-import baseclasses.Product;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
 
 public class OrderItem extends Lot {
 

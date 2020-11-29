@@ -1,4 +1,4 @@
-package order;
+package hu.gov.allamkincstar.training.javasebsc.order;
 
 public class Customer {
     private final Long customerID;

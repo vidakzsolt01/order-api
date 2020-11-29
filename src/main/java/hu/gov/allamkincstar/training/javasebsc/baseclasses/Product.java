@@ -1,4 +1,4 @@
-package baseclasses;
+package hu.gov.allamkincstar.training.javasebsc.baseclasses;
 
 public class Product {
 
