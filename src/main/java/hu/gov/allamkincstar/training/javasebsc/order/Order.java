@@ -9,20 +9,24 @@ import java.util.Map;
 public class Order {
 
     private final List<OrderItem> orderItems;
-    private Customer customer;
-    private OrderStatusEnum orderStatus;
-    private PaymentModeEnum paymentMode;
-    private DeliveryModeEnum deliveryMode;
-    private String failureComment;
+    private Customer customer = null;
+    private DeliveryParameters deliveryParameters;
+    private Integer billTotal;
+    private OrderStatusEnum orderStatus = OrderStatusEnum.PENDING;
+    private PaymentModeEnum paymentMode = null;
+    private DeliveryModeEnum deliveryMode = null;
+    private String failureComment = null;
     private final Integer netSum;
     private final Integer VATSum;
     private final Integer grossSum;
+    private final ShoppingModeEnum shoppingMode;
+    private Boolean paid = Boolean.FALSE;
 
-    public Order(Map<String, Lot> orderItemList) {
+    public Order(Map<String, Lot> orderItemList, DeliveryParameters deliveryParameters, ShoppingModeEnum shoppingMode) {
         int net = 0;
         int VAT = 0;
         int gross = 0;
-        orderItems = new ArrayList<>();
+        this.orderItems = new ArrayList<>();
         for (Map.Entry<String, Lot> element : orderItemList.entrySet()) {
             OrderItem item = (OrderItem) element.getValue();
             orderItems.add(item);
@@ -33,11 +37,11 @@ public class Order {
         netSum = net;
         VATSum = VAT;
         grossSum = gross;
-        customer = null;
-        orderStatus = OrderStatusEnum.PENDING;
-        paymentMode = null;
-        deliveryMode = null;
-        failureComment = null;
+        this.deliveryParameters = deliveryParameters;
+        this.shoppingMode = shoppingMode;
+        this.billTotal = grossSum;
+        if (shoppingMode == ShoppingModeEnum.ONLINE && this.grossSum < deliveryParameters.getLimitForFree())
+            billTotal = grossSum + deliveryParameters.getDeliveryCharge();
     }
 
     public List<OrderItem> getOrderItems() {

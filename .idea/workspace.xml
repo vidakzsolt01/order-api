@@ -23,11 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ShoppingModeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/InvalidOrderOperationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/DeliveryParameters.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/OrderStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/OrderStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +47,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -77,10 +84,12 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="java.awt.Container" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
       <recent name="stock" />
       <recent name="dto" />
     </key>
@@ -96,13 +105,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -123,6 +134,7 @@
       <workItem from="1606578209171" duration="9847000" />
       <workItem from="1606591261292" duration="340000" />
       <workItem from="1606632977694" duration="8574000" />
+      <workItem from="1606660360116" duration="11282000" />
     </task>
     <servers />
   </component>
@@ -149,10 +161,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="564" y="157" width="816" height="733" key="#Intentions/0.0.1920.1050@0.0.1920.1050" timestamp="1606499939480" />
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606639774018">
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606665679198">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606639774018" />
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606665679198" />
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479219888" />
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
       <screen x="0" y="-1080" width="1920" height="1080" />
@@ -170,10 +182,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1050@0.0.1920.1050" timestamp="1606633399799" />
-    <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606641893275">
+    <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606667297611">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606641893275" />
+    <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606667297611" />
     <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606457690689" />
     <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606634446743">
       <screen x="0" y="0" width="1920" height="1050" />
@@ -211,18 +223,19 @@
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="621" y="-914" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606404554365" />
-    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1606499964603">
+    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1606671653438">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606499964603" />
+    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606671653438" />
     <state x="746" y="-781" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606470155532" />
     <state x="678" y="99" width="587" height="801" key="find.popup" timestamp="1606547335778">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="678" y="99" width="587" height="801" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1606547335778" />
-    <state x="811" y="-777" key="refactoring.ChangeSignatureDialog" timestamp="1606458043543">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state x="811" y="295" key="refactoring.ChangeSignatureDialog" timestamp="1606672412270">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="811" y="295" key="refactoring.ChangeSignatureDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606672412270" />
     <state x="811" y="-777" key="refactoring.ChangeSignatureDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606458043543" />
     <state x="671" y="-279" key="run.anything.popup" timestamp="1606477111963">
       <screen x="0" y="-1080" width="1920" height="1080" />
