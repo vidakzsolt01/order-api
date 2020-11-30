@@ -23,10 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/ImmutableList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/ImmutableList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/ImmutableList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" afterDir="false" />
     </list>
@@ -56,7 +61,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.4\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -153,11 +158,11 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="564" y="157" width="816" height="733" key="#Intentions/0.0.1920.1050@0.0.1920.1050" timestamp="1606499939480" />
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606714049592">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606737662066">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606714049592" />
-    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479219888" />
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606737662066" />
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
@@ -187,26 +192,26 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="689" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606590179345" />
-    <state width="1522" height="280" key="GridCell.Tab.0.bottom" timestamp="1606502534869">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="204" key="GridCell.Tab.0.bottom" timestamp="1606740525245">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1522" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534869" />
-    <state width="1692" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
-    <state width="1522" height="280" key="GridCell.Tab.0.center" timestamp="1606502534868">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="204" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606740525245" />
+    <state width="1692" height="204" key="GridCell.Tab.0.center" timestamp="1606740525245">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1522" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534868" />
-    <state width="1692" height="187" key="GridCell.Tab.0.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
-    <state width="1522" height="280" key="GridCell.Tab.0.left" timestamp="1606502534868">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="204" key="GridCell.Tab.0.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606740525245" />
+    <state width="1692" height="204" key="GridCell.Tab.0.left" timestamp="1606740525244">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1522" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534868" />
-    <state width="1692" height="187" key="GridCell.Tab.0.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
-    <state width="1522" height="280" key="GridCell.Tab.0.right" timestamp="1606502534868">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="204" key="GridCell.Tab.0.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606740525244" />
+    <state width="1692" height="204" key="GridCell.Tab.0.right" timestamp="1606740525245">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1522" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534868" />
-    <state width="1692" height="187" key="GridCell.Tab.0.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606479273929" />
+    <state width="1692" height="204" key="GridCell.Tab.0.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606740525245" />
     <state x="564" y="231" key="Vcs.Push.Dialog.v2" timestamp="1606490955072">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

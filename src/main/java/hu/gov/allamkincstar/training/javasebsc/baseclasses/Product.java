@@ -46,6 +46,10 @@ public class Product {
         this.netUntiPrice = netUntiPrice;
     }
 
+    public void setVATPercent(Integer VATPercent) {
+        this.VATPercent = VATPercent;
+    }
+
     public Integer getVATPercent() {
         return VATPercent;
     }

@@ -20,16 +20,13 @@ public class Stock extends ProductContainer {
     }
 
     public OrderItem bookProduct(Product product, int quantity) throws NotEnoughItemException {
-        StockItem item = (StockItem) findItem(product.getItemNumber());
-        return  new OrderItem(item.bookSomeQuantity(quantity), quantity);
+        StockItem stockItem = (StockItem) findItem(product.getItemNumber());
+        return  new OrderItem(stockItem.bookSomeQuantity(quantity), quantity);
     }
 
     public void depositProduct(Product product, int quantity){
         registerNewItem(new StockItem(product, quantity));
-    }
 
-    public Map<String, Lot> getItems(){
-        return productItems;
     }
 
     private class StockItem extends Lot {
@@ -38,6 +35,7 @@ public class Stock extends ProductContainer {
 
         private StockItem(Product product, Integer quantity) {
             super(product, quantity);
+            this.bookedQuantity = quantity;
         }
 
         private StockItem bookSomeQuantity(Integer quantityToBook) throws NotEnoughItemException {
