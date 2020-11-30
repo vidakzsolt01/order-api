@@ -8,7 +8,8 @@ import java.util.Map;
 
 public class Order {
 
-    private final List<OrderItem> orderItems;
+    //private final List<OrderItem> orderItems;
+    private final ImmutableList orderItems;
     private Customer customer = null;
     private DeliveryParameters deliveryParameters;
     private Integer billTotal;
@@ -26,6 +27,8 @@ public class Order {
         int net = 0;
         int VAT = 0;
         int gross = 0;
+        orderItems = new ImmutableList(orderItemList);
+/*
         this.orderItems = new ArrayList<>();
         for (Map.Entry<String, Lot> element : orderItemList.entrySet()) {
             OrderItem item = (OrderItem) element.getValue();
@@ -34,6 +37,7 @@ public class Order {
             VAT += item.getVATAmount();
             gross += item.getGrossAmount();
         }
+*/
         netSum = net;
         VATSum = VAT;
         grossSum = gross;
