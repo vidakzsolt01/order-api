@@ -12,7 +12,7 @@ Készíts el az alábbi funkcionalitást lehetővé tevő API-t!
 
 - A rendszer segít a megrendelt termékek életciklusának követésében.
 - A felhasználó megvásárolhat termékeket az alkalmazáson keresztül. A vásárláskor
-az előre definiált termékek köztül a raktáron lévő mennyiség erejéig vásárolhat. A vásárlás befejezése egy hu.gov.allamkincstar.training.javasebsc.order, magyarul
+az előre definiált termékek köztül a raktáron lévő mennyiség erejéig vásárolhat. A vásárlás befejezése egy order, magyarul
 rendelés formájában manifesztálódik.
 - A vásárláskor kiválaszthatja a kézbesítési módot, a fizetési módot, illetve természetesen meg kell
 adja a vevő elérhetőségeit: lackím, telefonszám, név, email cím.
@@ -67,7 +67,7 @@ Terv...
     - Vevő (Customer: név, telefonszám, email cím, számlázási cím, szállítási cím)
     - megjegyzés (failureComment; FAILED_DELIVERY státusz esetén kötelező))
   - rendelésfeladás - order(): 
-    - ha vásárlási mód ONLINE, akkor az állapot IN_PROGRESS lesz
+    - ha vásárlási mód ONLINE, akkor az állapot BOOKED lesz
     - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: közvetlen bolti vásárlás esetén nem lehet feladni a rendelést")
   - fizetés nyugtázása - paymentConfirm():
     - ha a státusz BOOKED, akkor 
@@ -93,46 +93,61 @@ Terv...
   - rendelés lezárása - orderClose():
     - ha a státusz DELIVERED vagy FAILED_DELIVERY, akkor véglegesítjük a raktárkészlet-változást
     - egyébként hiba: InvalidOrderOperationException (managed exception: "Érvénytelen művelet: nem véglegesített rendelés nem zárható le.")
+- A Stock-ban StockItem-eket (Raktártétel-ek)) tárolunk, mely a Lot-ból (Terméktétel) származnak: a StockItem olyan Lot, 
+  - melynek van "lefoglalt mennyiség" (bookedQuantity) property-je, és
+  - tud mennyiségeket lefoglalni, felszabadítani
+- Azt mondom, a StockItem a Stock teljes magánügye, nem akarom, hogy lehessen önállóan, a Stock-on kívül implementálni, ezért a Stoc inner class-a lesz
+- Elviekben - a StocItem mintájára - a Cart CartItemeket, az Order pedig OrterItemeket tartalmaz, de... Miután - a "közös" Lot-hoz képest - mindkettő ugyanolyan "saját" tulajdoságokkal bír (nettó összeg, ÁFA összeg, bruttó összeg), eltekintek két külön osztály implementációjától, s mind a Cart-ban, mind az Order-ben ugyanazt az OrderItem típust fogom tárolni
+- A Cart és a Stock - miután mindkettő módosítható, Lot-okat tároló elem (container) - sok hasonló tevékenységgel bírnak, 
+  - célszerűnek látszik egy interfac-szel (ProductContainerHandler) előírni a közös műveleteiket, és
+  - deklarálni egy közös szülő osztályt (ProductContainer)
+- Elsőre az Order is ProductContainer, de valójában itt nem akarom (nem engedem) módosítani a tárolt elemeket, elegendő lesz csak List, és nem szükséges (tehát: nem szabad) a ProductContainer-ből leszáraznia
+- Nem akarom, hogy az Order-ben tárolt OrderItem-listát (pontosan: sem a listát, sem a lista bármely elemét (OrderItem)) módosítani lehessen "kívülről", ezért csinálok egy ImmutableList osztályt, mely
+  - csak egy List<OrderItem>  private property-tés egy get() és egy size() public metódust tartalmaz, és
+  - a get() NEM az eredeti OrderItem-referenciát adja vissza, hanem csak egy másolatot (new OrderItem(OrderItem)) az eredeti objektumról
 ------
 
 Implementáció
-- Raktártételek és Rendeléstételek voltaképpen Terméktételek - további property-kkel
-- Raktár és Rendelés viselkedése sok részben hasonló (tétel felvétele, kiadás(kivétel), terméktétel mennyiségének módosítása, stb), ezért alkalmazunk a közös műveletek előírásához egy Interface-t (ContainerHandler)
-- Raktár és Rendelés szerkezete is hasonló (indexelt lista a tárolt tételekről), ezért deklarálunk egy szülő osztályt (Container), melyből mindkettőt származtatjuk majd
-- A fizetési és szállítási módok és a rendelés-állapotok Enum-ok  
+- A fizetési és szállítási módok, a vásárlási módok és a rendelés-állapotok Enum-ok
+- Interface: miután nem akarom, hogy a ProductContainer-ből leszármazott objektumpéldányokból az ős metódusai közvetlenül hívhatók legyenek DE/ÉS az interface metódusait CSAK public-ként tudtam implementálni, az interface használata megbukott, el kell tekintenem tőle   
 Osztályok:
 - Product (Termék)
   - properties:
     - cikkszám (itemNumber), final String
     - megnevezés (itemName), final String
     - nettó egységár (netUnitPrice), Integer
-    - ÁFA%, Integer
-  - metódusok: -
+    - ÁFA% (VATPercent), Integer
+  - metódusok: - (csak getterek, setterek)
 - Lot (Terméktétel)
   - properties:
-    - Termék, final Product 
+    - Termék (product), final Product 
     - mennyiség (quantity), Integer 
     - index, final String (miután a terméklistákban a termék cikkszáma az index, ezt ide kiemeljük a termékből (Product.itemNumber)
   - metódusok:
-    - mennyiség módosítása, void changeItemQuantity(Integer ) throws NotEnoughItemException (Exception)
-- ContainerHandler (Interface)
+    - mennyiség módosítása, void changeItemQuantity(Integer ) throws NotEnoughItemException (managed exception)
+- ProductContainer (ős osztály a Cart-hoz és a Stock-hoz)
+  - properties
+    - terméklista, final Map<String, Lot> containerItems
   - metódusok
     - új terméktétel felvétele, void registerNewItem(Lot item)
     - tétel keresése, void findItem(Lot lot)  throws NoItemFounException (RuntimeException)
     - terméktétel törlése, void removeItem(Lot lot) throws NoItemFounException (RuntimeException)
     - terméktétel mennyiségének módosítása, void changeItemQuantity(Lot item, Integer quantity) throws NotEnoughItemException (RuntimeException)
     - "elfogyott" terméktétel kitakarítása,  void disposeEmptyItem(Lot item) throws NoItemFounException (RuntimeException)
-- Container (implements ContainerHandler)
-  - properties
-    - terméklista, final Map<String, Lot> containerItems
-  - metódusok
-    - lásd ContanerHandler Interface
 - DeliveryModeEnum (Enum)
   - DIRECT_RECEIVING, DELIVERY_SERVICE
 - OrderStatusEnum (Enum)
   - PENDING, DELIVERED, BOOKED, IN_PROGRESS, FAILED_DELIVERY
 - PaymentModeEnum (Enum)
   - CASH, CREDIT_CARD
+- ShoppingModeEnum (Enum)
+  - DIRECT, ONLINE
+- Cart (extends ProductContainer)
+  - properties: - (lásd ProductContainer)
+  - metódusok
+    - tételmennyiség növelése eggyel, increaseItemQuantity((OrderItem item) throws NotEnoughItemException (managed exception)
+    - tételmennyiség csökkentése eggyel, decreaseItemQuantity((OrderItem item) throws NotEnoughItemException (managed exception)
+    - kosár lezárása, closeCart(Stock stock); Order objektummal tér vissza
 - Customer
   - properties
     - azonosító (customerID), final Long 
