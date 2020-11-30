@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: hu.gov.allamkincstar.training.javasebsc.stock.StockTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.082 s <<< FAILURE! - in hu.gov.allamkincstar.training.javasebsc.stock.StockTest
-findItem  Time elapsed: 0.017 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
-	at hu.gov.allamkincstar.training.javasebsc.stock.StockTest.findItem(StockTest.java:62)
-
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s - in hu.gov.allamkincstar.training.javasebsc.stock.StockTest

@@ -2,6 +2,7 @@ package hu.gov.allamkincstar.training.javasebsc.stock;
 
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.InvalidBookArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 import org.junit.jupiter.api.AfterEach;
@@ -45,18 +46,35 @@ class StockTest extends Container {
         String message = "A keresett termék nem található.";
         String realMessage = exception.getMessage();
         assertTrue(message.equals(realMessage));
+
+        // 10 darabnak kellene lennie prod1-ből
+        assertEquals(10, stock.getBookableQuantity(prod1));
+        // 0 darab foglaltnak kellene lennie prod1-ből
+        assertEquals(0, stock.getBookedQuantity(prod1));
+
         boolean error = false;
         try {
-            stock.bookProduct(prod1, 30);
-        } catch (NotEnoughItemException e) {
+            stock.bookProduct(prod1, 11);
+        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
             error = true;
         }
         assertTrue(error);
 
         try {
-            stock.bookProduct(prod1, 9);
+            stock.bookProduct(prod1, 10);
             error = false;
-        } catch (NotEnoughItemException e) {
+        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
+            error = true;
+        }
+        assertFalse(error);
+
+        stock.depositProduct(prod1, 100);
+        assertEquals(100, stock.getBookableQuantity(prod1));
+
+        try {
+            stock.bookProduct(prod1, 10);
+            error = false;
+        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
             error = true;
         }
         assertFalse(error);
@@ -64,18 +82,20 @@ class StockTest extends Container {
 
     @Test
     void isProductExist() {
-    }
-
-    @Test
-    void changeItemQuantity() {
-    }
-
-    @Test
-    void disposeEmptyItem() {
+        assertTrue(stock.isProductExist(prod1));
+        assertFalse(stock.isProductExist(prod2));
     }
 
     @Test
     void bookProduct() {
+        boolean error = false;
+        try {
+            stock.bookProduct(prod1, -1);
+        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
+            error = true;
+        }
+        assertTrue(error);
+
     }
 
     @Test

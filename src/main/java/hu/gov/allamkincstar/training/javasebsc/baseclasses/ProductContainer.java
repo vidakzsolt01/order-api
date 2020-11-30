@@ -44,8 +44,8 @@ public class ProductContainer {
         return productItems.get(lotIndex);
     }
 
-    protected boolean isProductExist(String index) {
-        return productItems.containsKey(index);
+    public boolean isProductExist(Product product) {
+        return productItems.containsKey(product.getItemNumber());
     }
 
     protected void changeItemQuantity(String itemIndex, Integer quantity) throws NotEnoughItemException {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.082" tests="9" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.063" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="15"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="HU"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-15.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\vidakzs\AppData\Local\Temp\surefire16068683259777549163\surefirebooter8193283940689251623.jar C:\Users\vidakzs\AppData\Local\Temp\surefire16068683259777549163 2020-11-30T13-48-51_450-jvmRun1 surefire7370763261815391088tmp surefire_013022820711410729726tmp"/>
+    <property name="sun.java.command" value="C:\Users\vidakzs\AppData\Local\Temp\surefire4903574795189049550\surefirebooter15449178872570470829.jar C:\Users\vidakzs\AppData\Local\Temp\surefire4903574795189049550 2020-11-30T16-27-33_340-jvmRun1 surefire12058764462408016186tmp surefire_09160421319944481861tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\Development\Java\Tanfolyam-Java SE Basics\Feladat - modellezes\order-api\target\test-classes;D:\Development\Java\Tanfolyam-Java SE Basics\Feladat - modellezes\order-api\target\classes;C:\Users\vidakzs\.m2\repository\org\junit\jupiter\junit-jupiter\5.7.0\junit-jupiter-5.7.0.jar;C:\Users\vidakzs\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\vidakzs\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\vidakzs\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\vidakzs\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\vidakzs\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.0\junit-jupiter-params-5.7.0.jar;C:\Users\vidakzs\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\vidakzs\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\vidakzs\AppData\Local\Temp\surefire16068683259777549163\surefirebooter8193283940689251623.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\vidakzs\AppData\Local\Temp\surefire4903574795189049550\surefirebooter15449178872570470829.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="15.0.1+9-18"/>
@@ -56,17 +56,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="59.0"/>
   </properties>
-  <testcase name="disposeEmptyItem" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.004"/>
-  <testcase name="changeItemQuantity" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.002"/>
-  <testcase name="findItem" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.017">
-    <failure message="expected: &lt;false&gt; but was: &lt;true&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
-	at hu.gov.allamkincstar.training.javasebsc.stock.StockTest.findItem(StockTest.java:62)
-]]></failure>
-  </testcase>
+  <testcase name="disposeEmptyItem" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.003"/>
+  <testcase name="changeItemQuantity" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.001"/>
+  <testcase name="findItem" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.007"/>
   <testcase name="bookProduct" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.001"/>
   <testcase name="isProductExist" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.001"/>
   <testcase name="depositProduct" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.001"/>
-  <testcase name="removeItem" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.002"/>
+  <testcase name="removeItem" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.001"/>
   <testcase name="registerNewItem" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.001"/>
   <testcase name="getItems" classname="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" time="0.001"/>
 </testsuite>

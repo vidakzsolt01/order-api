@@ -12,6 +12,7 @@ hu\gov\allamkincstar\training\javasebsc\exceptions\NoItemFoundException.class
 hu\gov\allamkincstar\training\javasebsc\baseclasses\PaymentModeEnum.class
 hu\gov\allamkincstar\training\javasebsc\interfaces\ProductContainerHandler.class
 hu\gov\allamkincstar\training\javasebsc\baseclasses\Lot.class
+hu\gov\allamkincstar\training\javasebsc\exceptions\InvalidBookArgumentException.class
 hu\gov\allamkincstar\training\javasebsc\stock\Stock.class
 hu\gov\allamkincstar\training\javasebsc\order\Order.class
 hu\gov\allamkincstar\training\javasebsc\baseclasses\Product.class

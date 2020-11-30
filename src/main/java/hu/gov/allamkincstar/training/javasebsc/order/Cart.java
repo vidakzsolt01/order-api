@@ -4,6 +4,7 @@ import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.ShoppingModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.InvalidBookArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.stock.Stock;
@@ -21,7 +22,7 @@ public class Cart extends ProductContainer {
         super(item);
     }
 
-    public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException {
+    public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
         return stock.bookProduct(product, quantity);
     }
 
@@ -29,15 +30,15 @@ public class Cart extends ProductContainer {
         removeItem(item);
     }
 
-    public void increaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException {
+    public void increaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
         modifyQuantity(item, stock, 1);
     }
 
-    public void decreaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException {
+    public void decreaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
         modifyQuantity(item, stock, -1);
     }
 
-    private void modifyQuantity(OrderItem item, Stock stock, int quantity) throws NotEnoughItemException {
+    private void modifyQuantity(OrderItem item, Stock stock, int quantity) throws NotEnoughItemException, InvalidBookArgumentException {
         stock.bookProduct(item.getProduct(), quantity);
         if (findItem(item.getIndex()) != item) throw new NoItemFoundException(item);
         changeItemQuantity(item.getIndex(), -1);
