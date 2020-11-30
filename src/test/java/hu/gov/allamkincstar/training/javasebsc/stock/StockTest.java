@@ -2,6 +2,7 @@ package hu.gov.allamkincstar.training.javasebsc.stock;
 
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ class StockTest extends Container {
 
     @BeforeEach
     void setUp() {
-        stock = new Stock(new Lot(new Product("111111", "Termék-1", 1000, 27), 10));
+        stock = new Stock(new Product("111111", "Termék-1", 1000, 27), 10);
     }
 
     @AfterEach
@@ -25,7 +26,7 @@ class StockTest extends Container {
 
     @Test
     void registerNewItem() {
-        stock.registerNewItem(new  Lot(new Product("222222", "Termék-2", 2000, 5), 10));
+        stock.depositProduct(new Product("222222", "Termék-2", 2000, 5), 10);
         assertEquals(2, stock.getItems().size());
     }
 

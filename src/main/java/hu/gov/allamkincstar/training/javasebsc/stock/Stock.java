@@ -14,6 +14,11 @@ public class Stock extends ProductContainer {
         super();
     }
 
+    public Stock(Product product, int quantity) {
+        super();
+        registerNewItem(new StockItem(product, quantity));
+    }
+
     public OrderItem bookProduct(Product product, int quantity) throws NotEnoughItemException {
         StockItem item = (StockItem) findItem(product.getItemNumber());
         return  new OrderItem(item.bookSomeQuantity(quantity), quantity);
