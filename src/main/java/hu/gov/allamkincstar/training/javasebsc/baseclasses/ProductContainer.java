@@ -1,5 +1,6 @@
 package hu.gov.allamkincstar.training.javasebsc.baseclasses;
 
+import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEmptyItemException;
 import hu.gov.allamkincstar.training.javasebsc.interfaces.ProductContainerHandler;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
@@ -7,8 +8,7 @@ import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException
 import java.util.HashMap;
 import java.util.Map;
 
-//public class ProductContainer implements ProductContainerHandler {
-public class ProductContainer {
+public class ProductContainer implements ProductContainerHandler {
 
     private final Map<String, Lot> productItems;
 
@@ -25,7 +25,8 @@ public class ProductContainer {
         return productItems;
     }
 
-    protected void registerNewItem(Lot item) {
+    @Override
+    public void registerNewItem(Lot item) {
         if (productItems.containsKey(item.index)){
             Lot itemInContainer = productItems.get(item.index);
             itemInContainer.quantity += item.quantity;
@@ -34,28 +35,42 @@ public class ProductContainer {
         }
     }
 
-    protected void removeItem(String itemIndex) throws NoItemFoundException {
+    @Override
+    public void removeItem(String itemIndex) {
         findItem(itemIndex);
         productItems.remove(itemIndex);
     }
 
-    protected Lot findItem(String lotIndex) {
+    @Override
+    public Lot findItem(String lotIndex) {
         if (!productItems.containsKey(lotIndex)) throw new NoItemFoundException();
         return productItems.get(lotIndex);
     }
 
-    public boolean isProductExist(Product product) {
-        return productItems.containsKey(product.getItemNumber());
-    }
-
-    protected void changeItemQuantity(String itemIndex, Integer quantity) throws NotEnoughItemException {
+    @Override
+    public void changeItemQuantity(String itemIndex, Integer quantity) throws NotEnoughItemException {
         Lot foundItem = findItem(itemIndex);
         foundItem.changeItemQuantity(quantity);
     }
 
-    protected void disposeEmptyItem(String itemIndex) throws NoItemFoundException {
-        Lot foundItem = findItem(itemIndex);
-        if (foundItem.getQuantity() == 0) removeItem(itemIndex);
+    @Override
+    public void disposeEmptyItem(Lot item) throws NoItemFoundException, NotEmptyItemException {
+        Lot foundItem = findItem(item.index);
+        if (foundItem.getQuantity() != 0) throw new NotEmptyItemException(item);
+        removeItem(item.index);
+    }
+
+    @Override
+    public boolean isProductExist(Product product) {
+        return productItems.containsKey(product.getItemNumber());
+    }
+
+    public boolean isProductExist(String itemNumber) {
+        return productItems.containsKey(itemNumber);
+    }
+
+    public boolean isProductExist(Lot item) {
+        return productItems.containsKey(item.index);
     }
 
 }

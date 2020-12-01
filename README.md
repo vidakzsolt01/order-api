@@ -105,11 +105,10 @@ Terv...
 - Nem akarom, hogy az Order-ben tárolt OrderItem-listát (pontosan: sem a listát, sem a lista bármely elemét (OrderItem)) módosítani lehessen "kívülről", ezért csinálok egy ImmutableList osztályt, mely
   - csak egy List<OrderItem>  private property-tés egy get() és egy size() public metódust tartalmaz, és
   - a get() NEM az eredeti OrderItem-referenciát adja vissza, hanem csak egy másolatot (new OrderItem(OrderItem)) az eredeti objektumról
+- A fizetési és szállítási módok, a vásárlási módok és a rendelés-állapotok Enum-ok
 ------
 
 Implementáció
-- A fizetési és szállítási módok, a vásárlási módok és a rendelés-állapotok Enum-ok
-- Interface: miután nem akarom, hogy a ProductContainer-ből leszármazott objektumpéldányokból az ős metódusai közvetlenül hívhatók legyenek DE/ÉS az interface metódusait CSAK public-ként tudtam implementálni, az interface használata megbukott, el kell tekintenem tőle   
 Osztályok:
 - Product (Termék)
   - properties:
