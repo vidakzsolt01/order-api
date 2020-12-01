@@ -3,13 +3,13 @@ package hu.gov.allamkincstar.training.javasebsc.exceptions;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 
 public class InvalidOrderOperationException extends Exception{
-    private static final String DEFAULT_MESSAGE = "Érvénytelen rendelés-tevékenység.";
+    private static final String DEFAULT_MESSAGE = "Érvénytelen tevékenység.";
 
     public InvalidOrderOperationException(Lot item, Integer quantity) {
         this(DEFAULT_MESSAGE);
     }
 
     public InvalidOrderOperationException(String message) {
-        super(message);
+        super(DEFAULT_MESSAGE + " " +message);
     }
 }
