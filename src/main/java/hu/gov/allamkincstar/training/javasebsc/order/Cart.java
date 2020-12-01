@@ -14,10 +14,6 @@ public class Cart extends ProductContainer {
     public Cart() {
     }
 
-    public Cart(OrderItem item) {
-        super(item);
-    }
-
     public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
         return stock.bookProduct(product, quantity);
     }

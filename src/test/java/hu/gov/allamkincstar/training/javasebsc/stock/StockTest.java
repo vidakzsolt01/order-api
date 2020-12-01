@@ -2,9 +2,8 @@ package hu.gov.allamkincstar.training.javasebsc.stock;
 
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
-import hu.gov.allamkincstar.training.javasebsc.exceptions.InvalidBookArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
-import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductContainer;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,23 +14,32 @@ import java.lang.reflect.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StockTest extends Container {
+class StockTest extends ProductContainer {
 
-    Product prod1 = new Product("111111", "Termék-1", 1000, 27);
-    Product prod2 = new Product("222222", "Termék-2", 2000, 5);
-    Stock stock = new Stock(prod1, 10);
+    static Product prod1 = new Product("111111", "Termék-1", 1000, 27);
+    static Product prod2 = new Product("222222", "Termék-2", 2000, 5);
+    static Stock stock = new Stock();
 
-    @AfterEach
-    void tearDown() {
+    @BeforeAll
+    static void prolog() {
+        try {
+            stock.depositProduct(prod1, 10);
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     void registerNewItem() {
-        stock.registerNewItem(new Lot(prod2, 10));
-        assertEquals(2, stock.getProductItems().size());
-        assertEquals(10, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
-        stock.registerNewItem(new Lot(prod1, 10));
-        assertEquals(20, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+        try {
+            stock.registerNewItem(new Lot(prod2, 10));
+            assertEquals(2, stock.getProductItems().size());
+            assertEquals(10, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+            stock.registerNewItem(new Lot(prod1, 10));
+            assertEquals(20, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -93,8 +101,12 @@ class StockTest extends Container {
         }
         assertFalse(error);
 
-        stock.depositProduct(prod1, 100);
-        assertEquals(100, stock.getBookableQuantity(prod1));
+        try {
+            stock.depositProduct(prod1, 100);
+            assertEquals(100, stock.getBookableQuantity(prod1));
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+            e.printStackTrace();
+        }
 
         try {
             stock.bookProduct(prod1, 10);
@@ -107,11 +119,15 @@ class StockTest extends Container {
 
     @Test
     void depositProduct() {
-        stock.depositProduct(prod2, 10);
-        assertEquals(2, stock.getProductItems().size());
-        assertEquals(10, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
-        stock.depositProduct(prod1, 10);
-        assertEquals(20, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+        try {
+            stock.depositProduct(prod2, 10);
+            assertEquals(2, stock.getProductItems().size());
+            assertEquals(10, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+            stock.depositProduct(prod1, 10);
+            assertEquals(20, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

@@ -4,18 +4,23 @@ import hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.InvalidBookArgumentException;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.ItemExistsWithItemNumberException;
+import hu.gov.allamkincstar.training.javasebsc.exceptions.ItemExistsWithNameException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.order.OrderItem;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Stock extends ProductContainer {
+
+    private Map<String, Integer> controlHeap = new HashMap<>();
 
     public Stock() {
         super();
     }
 
-    public Stock(Product product, int quantity) {
+    public Stock(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException {
         super();
         registerNewItem(new StockItem(product, quantity));
     }
@@ -26,9 +31,8 @@ public class Stock extends ProductContainer {
         return  new OrderItem(stockItem.bookSomeQuantity(quantity), quantity);
     }
 
-    public void depositProduct(Product product, int quantity){
+    public void depositProduct(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException {
         registerNewItem(new StockItem(product, quantity));
-
     }
 
     public int getBookedQuantity(Product product){

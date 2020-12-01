@@ -22,22 +22,32 @@ public class OrderOnline extends Order{
             billTotal = grossSum + deliveryParameters.getDeliveryCharge();
     }
 
-    //TODO implementálni: rendelésfeladás - order()
-    public void doOrder(){
+    public void doOrder() throws InvalidOrderOperationException {
+        if (customer == null){
+            throw new InvalidOrderOperationException("Vásárló-adatok nélkül a rendelés nem adható fel.");
+        }
+        if (isInvalid(customer.getName()) ||
+            isInvalid(customer.getName()) ||
+            isInvalid(customer.getDeliveryAddress()) ||
+            isInvalid(customer.getPhoneNumber())){
+            throw new InvalidOrderOperationException("Vásárló-adatok hiányosak, a rendelés így nem adható fel.");
+        }
         orderStatus = OrderStatusEnum.BOOKED;
-    };
+    }
 
-    //TODO implementálni: fizetés nyugtázása - paymentConfirm()
+    private boolean isInvalid(String any){
+        return (any == null || any.isBlank());
+    }
+
     public void confirmPayment(){
         if (orderStatus == OrderStatusEnum.BOOKED){
             orderStatus = OrderStatusEnum.WAITING_FOR_DELIVERY;
         }
-    };
+    }
 
-    //TODO implementálni: átadás a futárszolgálatnak - passToDeliveryService()
     public void passToDeliveryService() throws InvalidOrderOperationException {
         if (orderStatus != OrderStatusEnum.WAITING_FOR_DELIVERY){
-            throw new InvalidOrderOperationException("A rendelés nem kész a futárnak való átadásra");
+            throw new InvalidOrderOperationException("A rendelés nem kész a futárnak való átadásra.");
         }
         if (paymentMode != PaymentModeOnlineEnum.ADDITIONAL){
             if (paid){
@@ -50,7 +60,6 @@ public class OrderOnline extends Order{
         }
     }
 
-    //TODO implementálni: szállítás nyugtázása - deliveryConfirm(boolean success, (optional) String failureComment)
     public void deliveryConfirm(boolean deliverySuccess, String failureComment) throws InvalidOrderOperationException {
         if (orderStatus != OrderStatusEnum.IN_PROGRESS){
             throw new InvalidOrderOperationException("Nem kiszállítás alatt lévő megrendelés szállítása nem nyugtázható");
@@ -67,7 +76,6 @@ public class OrderOnline extends Order{
         }
     }
 
-    //TODO implementálni: rendelés lezárása - orderClose()
     public void orderClose() throws InvalidOrderOperationException {
         if (!(orderStatus == OrderStatusEnum.DELIVERED || orderStatus == OrderStatusEnum.FAILED_DELIVERY)){
             throw new InvalidOrderOperationException("Nem véglegesített rendelés nem zárható le.");
