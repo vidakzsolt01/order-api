@@ -23,36 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/NotEmptyItemException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/order/CartTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeDirectEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderDirect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderOnline.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/stock/Stock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/stock/Stock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-20-38_316.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-24-19_081.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-25-20_609.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-30-31_049.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T12-25-53_313.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T12-58-07_561.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-02-40_312.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-04-15_430.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-05-45_539.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-09-09_042.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-48-51_450.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.stock.StockTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.stock.StockTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/hu.gov.allamkincstar.training.javasebsc.stock.StockTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/hu.gov.allamkincstar.training.javasebsc.stock.StockTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeOnlineEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/InvalidOrderOperationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/InvalidOrderOperationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +59,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.4\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -114,6 +93,9 @@
       <recent name="hu.gov.allamkincstar.training.javasebsc" />
       <recent name="dto" />
       <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.baseclasses" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="java.awt.Container" />
@@ -218,11 +200,11 @@
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="199" y="-927" width="1552" height="777" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606747225278" />
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606799837088">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606826687248">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606799837088" />
-    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606737662066" />
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606826687248" />
     <state x="705" y="-751" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1606746067363">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
@@ -310,26 +292,26 @@
     </state>
     <state x="678" y="99" width="587" height="801" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1606547335778" />
     <state x="678" y="-978" width="587" height="824" key="find.popup/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606746633045" />
-    <state x="811" y="295" key="refactoring.ChangeSignatureDialog" timestamp="1606672412270">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="811" y="-777" key="refactoring.ChangeSignatureDialog" timestamp="1606829060435">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="811" y="295" key="refactoring.ChangeSignatureDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606672412270" />
-    <state x="811" y="-777" key="refactoring.ChangeSignatureDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606458043543" />
+    <state x="811" y="-777" key="refactoring.ChangeSignatureDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606829060435" />
     <state x="671" y="-279" key="run.anything.popup" timestamp="1606477111963">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="671" y="-279" key="run.anything.popup/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606477111963" />
-    <state x="638" y="-814" width="672" height="678" key="search.everywhere.popup" timestamp="1606750023950">
+    <state x="638" y="-814" width="672" height="678" key="search.everywhere.popup" timestamp="1606811226329">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="638" y="-814" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606750023950" />
+    <state x="638" y="-814" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606811226329" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java</url>
-          <line>28</line>
+          <line>26</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

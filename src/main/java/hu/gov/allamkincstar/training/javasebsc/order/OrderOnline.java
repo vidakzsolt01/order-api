@@ -5,82 +5,55 @@ import hu.gov.allamkincstar.training.javasebsc.exceptions.InvalidOrderOperationE
 
 import java.util.Map;
 
-public class Order {
+public class OrderOnline extends Order{
 
-    //private final List<OrderItem> orderItems;
     private final ImmutableList orderItems;
-    private Customer customer = null;
+    private PaymentModeOnlineEnum paymentMode = null;
     private final DeliveryParameters deliveryParameters;
-    private Integer billTotal;
     private OrderStatusEnum orderStatus = OrderStatusEnum.PENDING;
-    private PaymentModeEnum paymentMode = null;
     private DeliveryModeEnum deliveryMode = null;
     private String failureComment = null;
-    private final Integer netSum;
-    private final Integer VATSum;
-    private final Integer grossSum;
-    private final ShoppingModeEnum shoppingMode;
-    private Boolean paid = Boolean.FALSE;
 
-    public Order(Map<String, Lot> orderItemList, DeliveryParameters deliveryParameters, ShoppingModeEnum shoppingMode) {
-        int net = 0;
-        int VAT = 0;
-        int gross = 0;
+    public OrderOnline(Map<String, Lot> orderItemList, DeliveryParameters deliveryParameters) {
+        super(orderItemList);
         orderItems = new ImmutableList(orderItemList);
-        netSum = net;
-        VATSum = VAT;
-        grossSum = gross;
         this.deliveryParameters = deliveryParameters;
-        this.shoppingMode = shoppingMode;
-        this.billTotal = grossSum;
-        if (shoppingMode == ShoppingModeEnum.ONLINE && this.grossSum < deliveryParameters.getLimitForFree())
+        if (this.grossSum < deliveryParameters.getLimitForFree())
             billTotal = grossSum + deliveryParameters.getDeliveryCharge();
     }
 
     //TODO implementálni: rendelésfeladás - order()
-    public void doOrder() throws InvalidOrderOperationException {
-        if (shoppingMode == ShoppingModeEnum.ONLINE){
-            orderStatus = OrderStatusEnum.BOOKED;
-        } else {
-            throw new InvalidOrderOperationException("Érvénytelen művelet: közvetlen bolti vásárlás esetén nem lehet feladni a rendelést");
-        }
+    public void doOrder(){
+        orderStatus = OrderStatusEnum.BOOKED;
     };
 
     //TODO implementálni: fizetés nyugtázása - paymentConfirm()
     public void confirmPayment(){
         if (orderStatus == OrderStatusEnum.BOOKED){
-            if (shoppingMode == ShoppingModeEnum.ONLINE){
-                orderStatus = OrderStatusEnum.WAITING_FOR_DELIVERY;
-            } else {
-                orderStatus = OrderStatusEnum.DELIVERED;
-            }
+            orderStatus = OrderStatusEnum.WAITING_FOR_DELIVERY;
         }
     };
 
     //TODO implementálni: átadás a futárszolgálatnak - passToDeliveryService()
     public void passToDeliveryService() throws InvalidOrderOperationException {
         if (orderStatus != OrderStatusEnum.WAITING_FOR_DELIVERY){
-            throw new InvalidOrderOperationException("Érvénytelen művelet: a rendelés nem kész a futárnak való átadásra");
+            throw new InvalidOrderOperationException("A rendelés nem kész a futárnak való átadásra");
         }
-        if (shoppingMode == ShoppingModeEnum.ONLINE){
-            if (paymentMode != PaymentModeEnum.CASH){
-                if (paid){
-                    orderStatus = OrderStatusEnum.IN_PROGRESS;
-                } else {
-                    throw new InvalidOrderOperationException("Érvénytelen művelet: nem készpénzes vásrlás esetén amíg a számla nincs kiegyenlítve, nem adható át a futárnak");
-                }
-            } else {
+        if (paymentMode != PaymentModeOnlineEnum.ADDITIONAL){
+            if (paid){
                 orderStatus = OrderStatusEnum.IN_PROGRESS;
+            } else {
+                throw new InvalidOrderOperationException("Utalás vagy bankkártyás fizetés esetén a csomag nem adható át a futárnak, amíg a számla nincs kiegyenlítve.");
             }
         } else {
-            throw new InvalidOrderOperationException("Érvénytelen művelet: közvetlen vásárlás esetén a rendelés nem adható át a futárnak");
+            orderStatus = OrderStatusEnum.IN_PROGRESS;
         }
     }
 
     //TODO implementálni: szállítás nyugtázása - deliveryConfirm(boolean success, (optional) String failureComment)
     public void deliveryConfirm(boolean deliverySuccess, String failureComment) throws InvalidOrderOperationException {
         if (orderStatus != OrderStatusEnum.IN_PROGRESS){
-            throw new InvalidOrderOperationException("Érvénytelen művelet: nem kiszállítás alatt lévő megrendelés szállítása nem nyugtázható");
+            throw new InvalidOrderOperationException("Nem kiszállítás alatt lévő megrendelés szállítása nem nyugtázható");
         }
         if (deliverySuccess){
             orderStatus = OrderStatusEnum.DELIVERED;
@@ -89,7 +62,7 @@ public class Order {
                 this.failureComment = failureComment;
                 orderStatus = OrderStatusEnum.FAILED_DELIVERY;
             } else {
-                throw new InvalidOrderOperationException("Érvénytelen művelet: sikertelen átvétel esetén a sikertelenség oka nélkül a szállítás nem nyugtázható");
+                throw new InvalidOrderOperationException("Sikertelen átvétel esetén a sikertelenség okát fel kell tüntetni");
             }
         }
     }
@@ -97,10 +70,10 @@ public class Order {
     //TODO implementálni: rendelés lezárása - orderClose()
     public void orderClose() throws InvalidOrderOperationException {
         if (!(orderStatus == OrderStatusEnum.DELIVERED || orderStatus == OrderStatusEnum.FAILED_DELIVERY)){
-            throw new InvalidOrderOperationException("Érvénytelen művelet: nem véglegesített rendelés nem zárható le.");
+            throw new InvalidOrderOperationException("Nem véglegesített rendelés nem zárható le.");
         }
         //TODO implementálni és meghívni a metódust, mely véglegesíti a
-        // raktárkészleten a rendelésben lefoglalt mennyiségeket
+        // raktárkészleten a rendeléssel kiment mennyiségeket
 
     }
 
@@ -124,11 +97,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public PaymentModeEnum getPaymentMode() {
+    public PaymentModeOnlineEnum getPaymentMode() {
         return paymentMode;
     }
 
-    public void setPaymentMode(PaymentModeEnum paymentMode) {
+    public void setPaymentMode(PaymentModeOnlineEnum paymentMode) {
         this.paymentMode = paymentMode;
     }
 

@@ -1,17 +1,13 @@
 package hu.gov.allamkincstar.training.javasebsc.order;
 
+import hu.gov.allamkincstar.training.javasebsc.baseclasses.Order;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductContainer;
-import hu.gov.allamkincstar.training.javasebsc.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.baseclasses.ShoppingModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.InvalidBookArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.stock.Stock;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class Cart extends ProductContainer {
 
@@ -44,8 +40,8 @@ public class Cart extends ProductContainer {
         changeItemQuantity(item.getIndex(), -1);
     }
 
-    public Order closeCart(){
-        return new Order(getProductItems(), new DeliveryParameters(), ShoppingModeEnum.ONLINE);
+    public Order closeCart(ShoppingModeEnum shoppingMode){
+        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(getProductItems()) : new OrderOnline(getProductItems(), new DeliveryParameters());
     }
 
 }
