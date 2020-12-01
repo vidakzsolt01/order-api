@@ -27,10 +27,10 @@ class StockTest extends Container {
 
     @Test
     void registerNewItem() {
-        stock.depositProduct(prod2, 10);
+        stock.registerNewItem(new Lot(prod2, 10));
         assertEquals(2, stock.getProductItems().size());
         assertEquals(10, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
-        stock.depositProduct(prod1, 10);
+        stock.registerNewItem(new Lot(prod1, 10));
         assertEquals(20, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
     }
 
@@ -42,6 +42,31 @@ class StockTest extends Container {
 
     @Test
     void findItem() {
+        Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.findItem(prod2.getItemNumber()));
+        String message = "A keresett termék nem található.";
+        String realMessage = exception.getMessage();
+        assertTrue(message.equals(realMessage));
+
+        boolean error = false;
+        try {
+            stock.bookProduct(prod1, -1);
+        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
+            error = true;
+        }
+        assertTrue(error);
+
+    }
+
+    @Test
+    void isProductExist() {
+        assertTrue(stock.isProductExist(prod1));
+        assertFalse(stock.isProductExist(prod2));
+        assertTrue(stock.isProductExist(prod1.getItemNumber()));
+        assertFalse(stock.isProductExist(prod2.getItemNumber()));
+    }
+
+    @Test
+    void bookProduct() {
         Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.bookProduct(prod2, 20));
         String message = "A keresett termék nem található.";
         String realMessage = exception.getMessage();
@@ -81,25 +106,12 @@ class StockTest extends Container {
     }
 
     @Test
-    void isProductExist() {
-        assertTrue(stock.isProductExist(prod1));
-        assertFalse(stock.isProductExist(prod2));
-    }
-
-    @Test
-    void bookProduct() {
-        boolean error = false;
-        try {
-            stock.bookProduct(prod1, -1);
-        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
-            error = true;
-        }
-        assertTrue(error);
-
-    }
-
-    @Test
     void depositProduct() {
+        stock.depositProduct(prod2, 10);
+        assertEquals(2, stock.getProductItems().size());
+        assertEquals(10, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+        stock.depositProduct(prod1, 10);
+        assertEquals(20, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
     }
 
     @Test

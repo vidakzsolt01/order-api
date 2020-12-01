@@ -23,17 +23,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/InvalidBookArgumentException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/NotEmptyItemException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/order/CartTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/order/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/order/Cart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/stock/Stock$StockItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/stock/Stock$StockItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/stock/Stock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hu/gov/allamkincstar/training/javasebsc/stock/Stock.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-20-38_316.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-24-19_081.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-25-20_609.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T11-30-31_049.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T12-25-53_313.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T12-58-07_561.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-02-40_312.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-04-15_430.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-05-45_539.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-09-09_042.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2020-11-30T13-48-51_450.dumpstream" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.stock.StockTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-hu.gov.allamkincstar.training.javasebsc.stock.StockTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/hu.gov.allamkincstar.training.javasebsc.baseclasses.ProductTest.txt" afterDir="false" />
@@ -66,7 +80,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.4\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -87,11 +101,11 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="java.awt.Container" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
       <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
       <recent name="stock" />
       <recent name="dto" />
@@ -107,14 +121,16 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.StockTest.depositProduct">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,6 +144,22 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StockTest.depositProduct" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="order-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hu.gov.allamkincstar.training.javasebsc.stock.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.stock" />
+      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" />
+      <option name="METHOD_NAME" value="depositProduct" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -150,6 +182,7 @@
       <workItem from="1606632977694" duration="8574000" />
       <workItem from="1606660360116" duration="11282000" />
       <workItem from="1606713016984" duration="1323000" />
+      <workItem from="1606799528041" duration="1784000" />
     </task>
     <servers />
   </component>
@@ -176,18 +209,19 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="564" y="157" width="816" height="733" key="#Intentions/0.0.1920.1050@0.0.1920.1050" timestamp="1606499939480" />
-    <state x="429" y="-884" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606746155079">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state x="429" y="191" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606800384692">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="429" y="191" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606800384692" />
     <state x="429" y="-884" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606746155079" />
     <state x="199" y="-927" width="1552" height="777" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1606747225278">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="199" y="-927" width="1552" height="777" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606747225278" />
-    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606737662066">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606799837088">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606714049592" />
+    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606799837088" />
     <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606737662066" />
     <state x="705" y="-751" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1606746067363">
       <screen x="0" y="-1080" width="1920" height="1080" />
@@ -222,25 +256,25 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="689" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606590179345" />
-    <state width="1692" height="319" key="GridCell.Tab.0.bottom" timestamp="1606750355719">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state width="1785" height="171" key="GridCell.Tab.0.bottom" timestamp="1606801313151">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1522" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534869" />
+    <state width="1785" height="171" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1606801313151" />
     <state width="1692" height="319" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606750355719" />
-    <state width="1692" height="319" key="GridCell.Tab.0.center" timestamp="1606750355719">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state width="1785" height="171" key="GridCell.Tab.0.center" timestamp="1606801313151">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1522" height="280" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534868" />
+    <state width="1785" height="171" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1606801313151" />
     <state width="1692" height="319" key="GridCell.Tab.0.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606750355719" />
-    <state width="1692" height="319" key="GridCell.Tab.0.left" timestamp="1606750355719">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state width="1785" height="171" key="GridCell.Tab.0.left" timestamp="1606801313151">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1522" height="280" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534868" />
+    <state width="1785" height="171" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1606801313151" />
     <state width="1692" height="319" key="GridCell.Tab.0.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606750355719" />
-    <state width="1692" height="319" key="GridCell.Tab.0.right" timestamp="1606750355719">
-      <screen x="0" y="-1080" width="1920" height="1080" />
+    <state width="1785" height="171" key="GridCell.Tab.0.right" timestamp="1606801313151">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1522" height="280" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1606502534868" />
+    <state width="1785" height="171" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1606801313151" />
     <state width="1692" height="319" key="GridCell.Tab.0.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606750355719" />
     <state width="1692" height="319" key="GridCell.Tab.1.bottom" timestamp="1606750355720">
       <screen x="0" y="-1080" width="1920" height="1080" />
@@ -266,10 +300,10 @@
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="621" y="-914" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606404554365" />
-    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1606671653438">
+    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1606800587852">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606671653438" />
+    <state x="746" y="291" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606800587852" />
     <state x="746" y="-781" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606470155532" />
     <state x="678" y="-978" width="587" height="824" key="find.popup" timestamp="1606746633045">
       <screen x="0" y="-1080" width="1920" height="1080" />
@@ -295,7 +329,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java</url>
-          <line>24</line>
+          <line>28</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
