@@ -1,4 +1,4 @@
-# hu.gov.allamkincstar.training.javasebsc.order-api
+# hu.gov.allamkincstar.training.javasebsc.orderapi.order-api
 webshop orders' lifecycle support
 
 Feladat
