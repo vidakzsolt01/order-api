@@ -22,6 +22,10 @@ public class ProductContainer implements ProductContainerHandler {
         this.controlHeap.put(productItem.product.getItemName(), productItem.product.itemNumber);
     }
 
+    public Lot getItem(String itemNumber){
+        return searchItem(itemNumber);
+    }
+
     public Map<String, Lot> getProductItems() {
         return productItems;
     }
@@ -59,6 +63,11 @@ public class ProductContainer implements ProductContainerHandler {
     @Override
     public Lot findItem(String lotIndex) {
         if (!productItems.containsKey(lotIndex)) throw new NoItemFoundException();
+        return productItems.get(lotIndex);
+    }
+
+    @Override
+    public Lot searchItem(String lotIndex) {
         return productItems.get(lotIndex);
     }
 
