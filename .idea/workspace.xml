@@ -23,10 +23,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/PaymentModeDirectEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ShoppingModeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/interfaces/ProductContainerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/DeliveryModeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/DeliveryModeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Lot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Lot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/OrderStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/OrderStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeDirectEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/PaymentModeOnlineEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/PaymentModeOnlineEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ShoppingModeEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/InvalidBookArgumentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/InvalidBookArgumentException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/InvalidOrderOperationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/InvalidOrderOperationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/ItemExistsWithItemNumberException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/ItemExistsWithItemNumberException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/ItemExistsWithNameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/ItemExistsWithNameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/NoItemFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/NoItemFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/NotEmptyItemException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/NotEmptyItemException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/exceptions/NotEnoughItemException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/NotEnoughItemException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/interfaces/ProductContainerHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/DeliveryParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/DeliveryParameters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/ImmutableList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/ImmutableList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderDirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderOnline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/baseclasses/ProductTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/order/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +84,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.4\plugins\maven\lib\maven3" />
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -75,7 +105,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="java.awt.Container" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order-api" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -85,6 +115,7 @@
       <recent name="dto" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi" />
       <recent name="hu.gov.allamkincstar.training.javasebsc" />
       <recent name="dto" />
       <recent name="" />
@@ -98,7 +129,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Debug JUnit">
+  <component name="RunManager" selected="JUnit.Whole project">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -110,10 +141,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Debug JUnit" type="JUnit" factoryName="JUnit">
+    <configuration name="Debug JUnit" type="JUnit" factoryName="JUnit" show_console_on_std_err="true" show_console_on_std_out="true">
       <useClassPathOnly />
       <extension name="coverage" sample_coverage="false" />
-      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.stock" />
+      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -125,25 +156,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StockTest.depositProduct" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="order-api" />
+    <configuration name="Whole project" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <useClassPathOnly />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="hu.gov.allamkincstar.training.javasebsc.stock.*" />
+          <option name="PATTERN" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.stock" />
-      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.stock.StockTest" />
-      <option name="METHOD_NAME" value="depositProduct" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="PARAMETERS" value="" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="JUnit.Debug JUnit" />
-      <item itemvalue="JUnit.StockTest.depositProduct" />
+      <item itemvalue="JUnit.Whole project" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -192,45 +227,51 @@
     </state>
     <state x="564" y="157" width="816" height="733" key="#Intentions/0.0.1920.1050@0.0.1920.1050" timestamp="1606499939480" />
     <state x="564" y="-919" width="816" height="799" key="#Intentions/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606835497266" />
-    <state x="429" y="-884" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606836568251">
+    <state x="429" y="-884" width="1092" height="739" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606891720772">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="429" y="191" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606800384692" />
-    <state x="429" y="-884" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836568251" />
-    <state x="199" y="-927" width="1552" height="777" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1606747225278">
+    <state x="429" y="-884" width="1092" height="739" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606891720772" />
+    <state x="199" y="-927" width="1552" height="777" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1606890789449">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="199" y="-927" width="1552" height="777" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606747225278" />
-    <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser" timestamp="1606886096846">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="199" y="-927" width="1552" height="777" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606890789449" />
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser" timestamp="1606889994639">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="820" y="264" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1606886096846" />
-    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606826687248" />
-    <state x="705" y="-751" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1606746067363">
+    <state x="820" y="-808" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606889994639" />
+    <state x="705" y="-751" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1606891693746">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="705" y="-751" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606746067363" />
+    <state x="705" y="-751" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606891693746" />
+    <state x="704" y="-737" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1606891449322">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="704" y="-737" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606891449322" />
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1606469019073">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="679" y="-762" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606469019073" />
-    <state x="596" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1606633396064">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="596" y="-619" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1606891391332">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="596" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606633396064" />
+    <state x="596" y="-619" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606891391332" />
     <state x="755" y="367" width="433" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1606497597212">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="755" y="367" width="433" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1050@0.0.1920.1050" timestamp="1606497597212" />
-    <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1606633399799">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="756" y="-663" width="826" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1606891394396">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="756" y="405" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1050@0.0.1920.1050" timestamp="1606633399799" />
-    <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606667297611">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="756" y="-663" width="826" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606891394396" />
+    <state x="624" y="-1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1606890112010">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="624" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606667297611" />
-    <state x="624" y="-1031" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606457690689" />
+    <state x="624" y="-1080" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606890112010" />
     <state x="702" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606634446743">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -239,46 +280,50 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="689" y="311" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1606590179345" />
-    <state width="1785" height="307" key="GridCell.Tab.0.bottom" timestamp="1606887161367">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="1015" y="-784" key="FileChooserDialogImpl" timestamp="1606891232885">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="1015" y="-784" key="FileChooserDialogImpl/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606891232885" />
+    <state width="1692" height="228" key="GridCell.Tab.0.bottom" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161367" />
-    <state width="1692" height="319" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683312" />
-    <state width="1785" height="307" key="GridCell.Tab.0.center" timestamp="1606887161367">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="228" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
+    <state width="1692" height="228" key="GridCell.Tab.0.center" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161367" />
-    <state width="1692" height="319" key="GridCell.Tab.0.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683311" />
-    <state width="1785" height="307" key="GridCell.Tab.0.left" timestamp="1606887161366">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="228" key="GridCell.Tab.0.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
+    <state width="1692" height="228" key="GridCell.Tab.0.left" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161366" />
-    <state width="1692" height="319" key="GridCell.Tab.0.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683311" />
-    <state width="1785" height="307" key="GridCell.Tab.0.right" timestamp="1606887161367">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="228" key="GridCell.Tab.0.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
+    <state width="1692" height="228" key="GridCell.Tab.0.right" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161367" />
-    <state width="1692" height="319" key="GridCell.Tab.0.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683312" />
-    <state width="1785" height="307" key="GridCell.Tab.1.bottom" timestamp="1606887161368">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="228" key="GridCell.Tab.0.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
+    <state width="1692" height="228" key="GridCell.Tab.1.bottom" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161368" />
-    <state width="1692" height="319" key="GridCell.Tab.1.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683313" />
-    <state width="1785" height="307" key="GridCell.Tab.1.center" timestamp="1606887161367">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="228" key="GridCell.Tab.1.bottom/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
+    <state width="1692" height="228" key="GridCell.Tab.1.center" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161367" />
-    <state width="1692" height="319" key="GridCell.Tab.1.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683313" />
-    <state width="1785" height="307" key="GridCell.Tab.1.left" timestamp="1606887161367">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="228" key="GridCell.Tab.1.center/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
+    <state width="1692" height="228" key="GridCell.Tab.1.left" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161367" />
-    <state width="1692" height="319" key="GridCell.Tab.1.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683313" />
-    <state width="1785" height="307" key="GridCell.Tab.1.right" timestamp="1606887161368">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1692" height="228" key="GridCell.Tab.1.left/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
+    <state width="1692" height="228" key="GridCell.Tab.1.right" timestamp="1606893587002">
+      <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state width="1785" height="307" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1606887161368" />
-    <state width="1692" height="319" key="GridCell.Tab.1.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606836683313" />
+    <state width="1692" height="228" key="GridCell.Tab.1.right/0.0.1920.1080/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1606893587002" />
     <state x="564" y="231" key="Vcs.Push.Dialog.v2" timestamp="1606490955072">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -315,20 +360,24 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/OrderItem.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderItem.java</url>
           <line>24</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order/Cart.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java</url>
           <line>17</line>
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/order/CartTest.java</url>
-          <line>18</line>
-          <properties field="prod2" class="hu.gov.allamkincstar.training.javasebsc.order.CartTest" />
-          <option name="timeStamp" value="8" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/Stock.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductContainer.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
