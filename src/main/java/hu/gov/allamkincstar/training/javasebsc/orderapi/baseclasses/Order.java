@@ -31,6 +31,8 @@ public abstract class Order {
 
     public abstract void doOrder(Customer customer, PaymentModeDirectEnum paymentMode) throws InvalidOrderOperationException;
 
+    public abstract void doOrder(Customer customer, PaymentModeOnlineEnum paymentMode) throws InvalidOrderOperationException;
+
     public abstract void confirmPayment() throws InvalidOrderOperationException;
 
     public Customer getCustomer() {
