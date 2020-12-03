@@ -1,11 +1,11 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions;
 
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 
 public class InvalidOrderOperationException extends Exception{
     private static final String DEFAULT_MESSAGE = "Érvénytelen tevékenység.";
 
-    public InvalidOrderOperationException(Lot item, Integer quantity) {
+    public InvalidOrderOperationException(ProductItem item, Integer quantity) {
         this(DEFAULT_MESSAGE);
     }
 

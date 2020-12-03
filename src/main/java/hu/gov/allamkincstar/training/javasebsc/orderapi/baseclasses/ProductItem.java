@@ -2,13 +2,13 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
 
-public class Lot{
+public abstract class ProductItem {
 
     protected final Product product;
     protected Integer quantity;
     protected final String index;
 
-    public Lot(Product product, Integer quantity) {
+    public ProductItem(Product product, Integer quantity) {
         this.product = product;
         this.quantity = quantity;
         index = product.itemNumber;
@@ -18,10 +18,6 @@ public class Lot{
 
     public Integer getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public String getIndex() {
@@ -36,4 +32,11 @@ public class Lot{
         quantity += chageQuantity;
     }
 
+    public void increaseQuantity(int quantity){
+        this.quantity += quantity;
+    }
+
+    public void decreaseQuantity(int quantity) throws NotEnoughItemException {
+        if (this.quantity < quantity) throw new NotEnoughItemException(this, quantity);
+    }
 }

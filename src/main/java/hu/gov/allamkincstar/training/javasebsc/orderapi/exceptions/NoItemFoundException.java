@@ -1,6 +1,6 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions;
 
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 
 public class NoItemFoundException extends RuntimeException{
 
@@ -10,11 +10,11 @@ public class NoItemFoundException extends RuntimeException{
         super(DEFAULT_MESSAGE);
     }
 
-    public NoItemFoundException(String message, Lot item) {
+    public NoItemFoundException(String message, ProductItem item) {
         super(message+" Termék: "+item.getProduct().getItemName());
     }
 
-    public NoItemFoundException(Lot item) {
+    public NoItemFoundException(ProductItem item) {
         this(DEFAULT_MESSAGE, item);
     }
 

@@ -1,6 +1,6 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions;
 
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 
 public class NotEmptyItemException extends Exception{
 
@@ -10,11 +10,11 @@ public class NotEmptyItemException extends Exception{
         super(DEFAULT_MESSAGE);
     }
 
-    public NotEmptyItemException(String message, Lot item) {
+    public NotEmptyItemException(String message, ProductItem item) {
         super(message+" Termék: "+item.getProduct().getItemName());
     }
 
-    public NotEmptyItemException(Lot item) {
+    public NotEmptyItemException(ProductItem item) {
         this(DEFAULT_MESSAGE, item);
     }
 

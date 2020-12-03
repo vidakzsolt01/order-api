@@ -16,9 +16,8 @@ public abstract class Order {
     protected Integer grossSum;
     protected Integer billTotal;
     protected Boolean paid = Boolean.FALSE;
-    protected OrderStatusEnum orderStatus = OrderStatusEnum.PENDING;
 
-    public Order(Map<String, Lot> ordeItems) {
+    public Order(Map<String, ProductItem> ordeItems) {
         netSum = 0;
         VATSum = 0;
         this.orderItems = new ImmutableList(ordeItems);
@@ -30,7 +29,7 @@ public abstract class Order {
         grossSum = netSum + VATSum;
     }
 
-    public abstract void doOrder() throws InvalidOrderOperationException;
+    public abstract void doOrder(Customer customer, PaymentModeDirectEnum paymentMode) throws InvalidOrderOperationException;
 
     public abstract void confirmPayment() throws InvalidOrderOperationException;
 
@@ -40,14 +39,6 @@ public abstract class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public OrderStatusEnum getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatusEnum orderStatus) {
-        this.orderStatus = orderStatus;
     }
 
 }
