@@ -32,6 +32,11 @@ public class OrderDirect extends Order {
         }
     }
 
+    @Override
+    public void doOrder(Customer customer, PaymentModeOnlineEnum paymentMode) throws InvalidOrderOperationException {
+        throw new RuntimeException("This methode doesn't belong to this class");
+    }
+
     //TODO implementálni: fizetés nyugtázása - paymentConfirm()
     public void confirmPayment() throws InvalidOrderOperationException {
         switch (orderStatus){

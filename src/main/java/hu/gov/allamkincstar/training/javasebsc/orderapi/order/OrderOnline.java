@@ -24,6 +24,12 @@ public class OrderOnline extends Order{
             billTotal = grossSum + deliveryParameters.getDeliveryCharge();
     }
 
+    @Override
+    public void doOrder(Customer customer, PaymentModeDirectEnum paymentMode) throws InvalidOrderOperationException {
+        throw new RuntimeException("This methode doesn't belong to this class");
+    }
+
+    @Override
     public void doOrder(Customer customer, PaymentModeOnlineEnum paymentMode) throws InvalidOrderOperationException {
         validCustomer();
         orderStatus = OrderStatusOnlineEnum.BOOKED;
@@ -42,11 +48,6 @@ public class OrderOnline extends Order{
     }
     private boolean isInvalid(String any){
         return (any == null || any.isBlank());
-    }
-
-    @Override
-    public void doOrder(Customer customer, PaymentModeDirectEnum paymentMode) throws InvalidOrderOperationException {
-
     }
 
     public void confirmPayment(){
