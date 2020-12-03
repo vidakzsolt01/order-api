@@ -1,7 +1,7 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.stock;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Lot;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidBookArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.ItemExistsWithItemNumberException;
@@ -45,7 +45,12 @@ public class Stock extends ProductContainer {
         return stockItem.getBookableQuantity();
     }
 
-    private class StockItem extends Lot {
+    public void finishBook(Product product, int quantity) throws NotEnoughItemException {
+        StockItem stockItem = (StockItem) findItem(product.getItemNumber());
+        stockItem.finishBook(quantity);
+    }
+
+    private class StockItem extends ProductItem {
 
         private Integer bookedQuantity;
 
@@ -77,6 +82,15 @@ public class Stock extends ProductContainer {
 
         private int getBookableQuantity(){
             return quantity - bookedQuantity;
+        }
+
+        private void  finishBook(int quantityToFinish) throws NotEnoughItemException {
+            if (quantityToFinish > quantity)
+                throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez", this, quantity);
+            if (quantityToFinish > bookedQuantity)
+                throw new NotEnoughItemException("Nincs akkora lefoglalt mennyiség ami a raktárkészlet véglegesítéshez kellene", this, quantity);
+            quantity -= quantityToFinish;
+            bookedQuantity -= quantityToFinish;
         }
     }
 }

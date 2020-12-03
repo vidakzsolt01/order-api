@@ -1,6 +1,5 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.stock;
 
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Lot;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
@@ -20,19 +19,6 @@ class StockTest extends ProductContainer {
     static void prolog() {
         try {
             stock.depositProduct(prod1, 10);
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    void registerNewItem() {
-        try {
-            stock.registerNewItem(new Lot(prod2, 10));
-            assertEquals(2, stock.getProductItems().size());
-            assertEquals(10, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
-            stock.registerNewItem(new Lot(prod1, 10));
-            assertEquals(20, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
         } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
         }
