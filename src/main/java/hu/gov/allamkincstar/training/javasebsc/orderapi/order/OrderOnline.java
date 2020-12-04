@@ -3,6 +3,7 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 
+import java.util.List;
 import java.util.Map;
 
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.PENDING;
@@ -16,7 +17,7 @@ public class OrderOnline extends Order{
     private DeliveryModeEnum deliveryMode = null;
     private String failureComment = null;
 
-    public OrderOnline(Map<String, ProductItem> orderItemList, DeliveryParameters deliveryParameters) {
+    public OrderOnline(List<ProductItem> orderItemList, DeliveryParameters deliveryParameters) {
         super(orderItemList);
         orderItems = new ImmutableList(orderItemList);
         this.deliveryParameters = deliveryParameters;

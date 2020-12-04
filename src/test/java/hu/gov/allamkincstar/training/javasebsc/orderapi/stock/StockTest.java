@@ -19,7 +19,7 @@ class StockTest extends ProductContainer {
     static void prolog() {
         try {
             stock.depositProduct(prod1, 10);
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
             e.printStackTrace();
         }
     }
@@ -35,16 +35,15 @@ class StockTest extends ProductContainer {
         Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.findItem(prod2.getItemNumber()));
         String message = "A keresett termék nem található.";
         String realMessage = exception.getMessage();
-        assertTrue(message.equals(realMessage));
+        assertEquals(realMessage, message);
 
         boolean error = false;
         try {
-            stock.bookProduct(prod1, -1);
+            stock.bookProduct(prod1.getItemNumber(), -1);
         } catch (NotEnoughItemException | InvalidBookArgumentException e) {
             error = true;
         }
         assertTrue(error);
-
     }
 
     @Test
@@ -57,26 +56,26 @@ class StockTest extends ProductContainer {
 
     @Test
     void bookProduct() {
-        Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.bookProduct(prod2, 20));
+        Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.bookProduct(prod2.getItemNumber(), 20));
         String message = "A keresett termék nem található.";
         String realMessage = exception.getMessage();
-        assertTrue(message.equals(realMessage));
+        assertEquals(realMessage, message);
 
         // 10 darabnak kellene lennie prod1-ből
-        assertEquals(10, stock.getBookableQuantity(prod1));
+        assertEquals(10, stock.getBookableQuantity(prod1.getItemNumber()));
         // 0 darab foglaltnak kellene lennie prod1-ből
-        assertEquals(0, stock.getBookedQuantity(prod1));
+        assertEquals(0, stock.getBookedQuantity(prod1.getItemNumber()));
 
         boolean error = false;
         try {
-            stock.bookProduct(prod1, 11);
+            stock.bookProduct(prod1.getItemNumber(), 11);
         } catch (NotEnoughItemException | InvalidBookArgumentException e) {
             error = true;
         }
         assertTrue(error);
 
         try {
-            stock.bookProduct(prod1, 10);
+            stock.bookProduct(prod1.getItemNumber(), 10);
             error = false;
         } catch (NotEnoughItemException | InvalidBookArgumentException e) {
             error = true;
@@ -85,13 +84,13 @@ class StockTest extends ProductContainer {
 
         try {
             stock.depositProduct(prod1, 100);
-            assertEquals(100, stock.getBookableQuantity(prod1));
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+            assertEquals(100, stock.getBookableQuantity(prod1.getItemNumber()));
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
             e.printStackTrace();
         }
 
         try {
-            stock.bookProduct(prod1, 10);
+            stock.bookProduct(prod1.getItemNumber(), 10);
             error = false;
         } catch (NotEnoughItemException | InvalidBookArgumentException e) {
             error = true;
@@ -102,19 +101,24 @@ class StockTest extends ProductContainer {
     @Test
     void depositProduct() {
         String message = "nincshiba";
-        // prod1 count: 110 (see above: bookProduct())
         try {
+            stock = new Stock(prod1, 100);
+            assertEquals(1, stock.getProductItems().size());
             stock.depositProduct(prod2, 10);
             assertEquals(2, stock.getProductItems().size());
-            assertEquals(110, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+            assertEquals(100, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
             stock.depositProduct(prod1, 10);
-            assertEquals(120, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+            assertEquals(110, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
             stock.depositProduct(prodNameWrong, 10);
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
             message = e.getMessage();
         }
         assertEquals(2, stock.getProductItems().size());
         assertTrue(message.startsWith("Ez a termék már létezik másik cikkszámmal."));
     }
 
+    @Test
+    void getBookableQuantity() throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
+        stock = new Stock(prod1, 10);
+    }
 }
