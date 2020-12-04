@@ -35,18 +35,18 @@ public class ProductContainer implements ProductContainerHandler {
     }
 
     @Override
-    public void registerNewItem(ProductItem itemToStore) throws ItemExistsWithNameException, ItemExistsWithItemNumberException {
+    public void registerNewItem(ProductItem itemToStore) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
         if (productItems.containsKey(itemToStore.index)){
             ProductItem itemInContainer = productItems.get(itemToStore.index);
             checkItemInContaner(itemInContainer, itemToStore);
-            itemInContainer.quantity += itemToStore.quantity;
+            itemInContainer.increaseQuantity(itemToStore.getQuantity());
         } else {
             putItemToContainer(itemToStore);
         }
     }
 
     @Override
-    public void addItem(String itemNumber, int quantity) {
+    public void addItem(String itemNumber, int quantity) throws InvalidIncreaseArgumentException {
         ProductItem item;
         if ((item = searchItem(itemNumber)) == null){
             throw new NoItemFoundException();
@@ -85,9 +85,10 @@ public class ProductContainer implements ProductContainerHandler {
     }
 
     @Override
-    public void changeItemQuantity(String itemIndex, Integer quantity) throws NotEnoughItemException {
+    public void changeItemQuantity(String itemIndex, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException {
         ProductItem foundItem = findItem(itemIndex);
-        foundItem.changeItemQuantity(quantity);
+        if (quantity < 0) foundItem.decreaseQuantity(quantity);
+        else foundItem.increaseQuantity(quantity);
     }
 
     @Override

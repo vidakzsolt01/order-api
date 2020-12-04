@@ -1,14 +1,15 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidIncreaseArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
 
 public abstract class ProductItem {
 
     protected final Product product;
-    protected Integer quantity;
+    private Integer quantity;
     protected final String index;
 
-    public ProductItem(Product product, Integer quantity) {
+    public ProductItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
         index = product.itemNumber;
@@ -24,19 +25,14 @@ public abstract class ProductItem {
         return index;
     }
 
-    public void changeItemQuantity(Integer chageQuantity) throws NotEnoughItemException {
-        if (chageQuantity == null || chageQuantity == 0) return;
-        if (this.quantity + chageQuantity < 0){
-            throw new NotEnoughItemException(this, chageQuantity);
-        }
-        quantity += chageQuantity;
+    public void increaseQuantity(int quantityToAdd) throws InvalidIncreaseArgumentException {
+        if (quantityToAdd < 0) throw  new InvalidIncreaseArgumentException(quantityToAdd);
+        quantity += quantityToAdd;
     }
 
-    public void increaseQuantity(int quantity){
-        this.quantity += quantity;
-    }
-
-    public void decreaseQuantity(int quantity) throws NotEnoughItemException {
-        if (this.quantity < quantity) throw new NotEnoughItemException(this, quantity);
+    public void decreaseQuantity(int quantityToSubtract) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+        if (quantityToSubtract < 0) throw  new InvalidIncreaseArgumentException(quantityToSubtract);
+        if (this.quantity < quantityToSubtract) throw new NotEnoughItemException(this, quantityToSubtract);
+        quantity -= quantityToSubtract;
     }
 }
