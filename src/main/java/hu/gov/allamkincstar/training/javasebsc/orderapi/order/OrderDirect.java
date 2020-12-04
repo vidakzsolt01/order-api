@@ -3,6 +3,7 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 
+import java.util.List;
 import java.util.Map;
 
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.DELIVERED;
@@ -13,7 +14,7 @@ public class OrderDirect extends Order {
     private PaymentModeOnlineEnum paymentMode = null;
     protected OrderStatusDirectEnum orderStatus = PENDING;
 
-    public OrderDirect(Map<String, ProductItem> ordeItems) {
+    public OrderDirect(List<ProductItem> ordeItems) {
         super(ordeItems);
     }
 

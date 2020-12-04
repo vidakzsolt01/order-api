@@ -3,13 +3,14 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.interfaces.ProductContainerHandler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductContainer implements ProductContainerHandler {
 
     private final Map<String, ProductItem> productItems;
-
     private final Map<String, String> controlHeap = new HashMap<>();
 
     public ProductContainer() {
@@ -26,12 +27,10 @@ public class ProductContainer implements ProductContainerHandler {
         controlHeap.put(productItem.product.getItemName(), productItem.product.itemNumber);
     }
 
-    public ProductItem getItem(String itemNumber){
-        return searchItem(itemNumber);
-    }
-
-    public Map<String, ProductItem> getProductItems() {
-        return productItems;
+    public List<ProductItem> getProductItems() {
+        List<ProductItem> itemList = new ArrayList<>();
+        productItems.entrySet().forEach( item -> itemList.add(item.getValue()));
+        return itemList;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class ProductContainer implements ProductContainerHandler {
     }
 
     @Override
-    public void addItem(String itemNumber, int quantity) throws InvalidIncreaseArgumentException {
+    public void addSomeMoreQuantity(String itemNumber, int quantity) throws InvalidIncreaseArgumentException {
         ProductItem item;
         if ((item = searchItem(itemNumber)) == null){
             throw new NoItemFoundException();
@@ -85,8 +84,8 @@ public class ProductContainer implements ProductContainerHandler {
     }
 
     @Override
-    public void changeItemQuantity(String itemIndex, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException {
-        ProductItem foundItem = findItem(itemIndex);
+    public void changeItemQuantity(String itemNumber, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+        ProductItem foundItem = findItem(itemNumber);
         if (quantity < 0) foundItem.decreaseQuantity(quantity);
         else foundItem.increaseQuantity(quantity);
     }

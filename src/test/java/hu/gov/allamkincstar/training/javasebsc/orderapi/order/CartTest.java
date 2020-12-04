@@ -1,10 +1,7 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidBookArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.ItemExistsWithItemNumberException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.ItemExistsWithNameException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -29,7 +26,7 @@ class CartTest extends Container {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 20);
             stock.depositProduct(prod3, 30);
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
             e.printStackTrace();
         }
     }
@@ -44,14 +41,12 @@ class CartTest extends Container {
             cart.addNewProduct(prod1, 5, stock);
             assertEquals(2, cart.getProductItems().size());
             cart.addNewProduct(prodFailName, 5, stock);
-        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
+        } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException | ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
         }
         try {
             cart.addNewProduct(prodFailNumber, 5, stock);
-        } catch (NotEnoughItemException e) {
-            e.printStackTrace();
-        } catch (InvalidBookArgumentException e) {
+        } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException | ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
         }
         assertEquals(2, cart.getProductItems().size());

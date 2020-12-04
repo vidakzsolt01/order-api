@@ -11,8 +11,6 @@ import java.util.Map;
 
 public class Stock extends ProductContainer {
 
-    private Map<String, Integer> controlHeap = new HashMap<>();
-
     public Stock() {
         super();
     }
@@ -26,32 +24,30 @@ public class Stock extends ProductContainer {
         registerNewItem(new StockItem(product, quantity));
     }
 
-    public OrderItem bookProduct(Product product, int quantity) throws NotEnoughItemException, InvalidBookArgumentException {
-        if (quantity <= 0) throw new InvalidBookArgumentException(product, quantity);
-        StockItem stockItem = (StockItem) findItem(product.getItemNumber());
+    public OrderItem bookProduct(String itemNumber, int quantity) throws NotEnoughItemException, InvalidBookArgumentException {
+        if (quantity <= 0) throw new InvalidBookArgumentException(quantity);
+        StockItem stockItem = (StockItem) findItem(itemNumber);
         return  new OrderItem(stockItem.bookSomeQuantity(quantity), quantity);
     }
 
-    private void releaseBookedQuantity(Product product, int quantityToRelease){
-        ((StockItem) findItem(product.getItemNumber())).releaseBookedQuantity(quantityToRelease);
+    public void releaseBookedQuantity(String itemNumber, int quantityToRelease){
+        ((StockItem) findItem(itemNumber)).releaseBookedQuantity(quantityToRelease);
     }
 
-    public int getBookedQuantity(Product product){
-        StockItem stockItem = (StockItem) findItem(product.getItemNumber());
-        return stockItem.bookedQuantity;
+    public int getBookedQuantity(String itemNumber){
+        return ((StockItem) findItem(itemNumber)).bookedQuantity;
     }
 
-    public int getBookableQuantity(Product product){
-        StockItem stockItem = (StockItem) findItem(product.getItemNumber());
+    public int getBookableQuantity(String itemNumber){
+        StockItem stockItem = (StockItem) findItem(itemNumber);
         return stockItem.getBookableQuantity();
     }
 
-    public void finishBook(Product product, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException {
-        StockItem stockItem = (StockItem) findItem(product.getItemNumber());
-        stockItem.finishBook(quantity);
+    public void finishItemBook(String itemNumber, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+        ((StockItem) findItem(itemNumber)).finishBook(quantity);
     }
 
-    private class StockItem extends ProductItem {
+    private static class StockItem extends ProductItem {
 
         private Integer bookedQuantity;
 
@@ -67,9 +63,8 @@ public class Stock extends ProductContainer {
             return this;
         }
 
-        private StockItem releaseBookedQuantity(int quantityToRelease){
+        private void releaseBookedQuantity(int quantityToRelease){
             bookedQuantity -= quantityToRelease;
-            return this;
         }
 
         private StockItem expendBookedQuantity(int quantityToExpend) throws NotEnoughItemException, InvalidIncreaseArgumentException {

@@ -9,11 +9,9 @@ import java.util.Map;
 public class ImmutableList {
     private List<OrderItem> list;
 
-    public ImmutableList(Map<String, ProductItem> orderItemList) {
+    public ImmutableList(List<ProductItem> orderItemList) {
         this.list = new ArrayList<>();
-        for (Map.Entry<String, ProductItem> element : orderItemList.entrySet()) {
-            this.list.add(new OrderItem(element.getValue()));
-        }
+        orderItemList.forEach(item -> this.list.add(new OrderItem(item)));
     }
 
     public OrderItem get(int index){

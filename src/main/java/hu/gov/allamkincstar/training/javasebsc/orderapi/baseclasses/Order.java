@@ -5,7 +5,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.order.Customer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.ImmutableList;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 
-import java.util.Map;
+import java.util.List;
 
 public abstract class Order {
 
@@ -17,12 +17,12 @@ public abstract class Order {
     protected Integer billTotal;
     protected Boolean paid = Boolean.FALSE;
 
-    public Order(Map<String, ProductItem> ordeItems) {
+    public Order(List<ProductItem> ordeItems) {
         netSum = 0;
         VATSum = 0;
         this.orderItems = new ImmutableList(ordeItems);
-        ordeItems.entrySet().forEach( item -> {
-            OrderItem orderItem = new OrderItem(item.getValue());
+        ordeItems.forEach( item -> {
+            OrderItem orderItem = new OrderItem(item);
             netSum += orderItem.getNetAmount();
             VATSum += orderItem.getVATAmount();
         });

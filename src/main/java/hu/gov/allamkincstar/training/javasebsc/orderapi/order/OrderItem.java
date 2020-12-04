@@ -32,11 +32,7 @@ public class OrderItem extends ProductItem {
     }
 
     public Integer getQuantity(){
-        return quantity;
-    }
-
-    public void  setQuantity(Integer quantity){
-        super.quantity = quantity;
+        return getQuantity();
     }
 
     public Integer getNetAmount() {
