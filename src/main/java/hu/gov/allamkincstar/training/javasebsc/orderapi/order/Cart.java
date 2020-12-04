@@ -5,6 +5,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ShoppingModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidBookArgumentException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidIncreaseArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NoItemFoundException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
@@ -26,14 +27,17 @@ public class Cart extends ProductContainer {
         modifyQuantity(item, stock, 1);
     }
 
-    public void decreaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
+    public void decreaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException {
         modifyQuantity(item, stock, -1);
     }
 
-    private void modifyQuantity(OrderItem item, Stock stock, int quantity) throws NotEnoughItemException, InvalidBookArgumentException {
+    private void modifyQuantity(OrderItem item, Stock stock, int quantity) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException {
+        if (item.getQuantity() < 0){
+            stock.re
+        }
         stock.bookProduct(item.getProduct(), quantity);
         if (findItem(item.getIndex()) != item) throw new NoItemFoundException(item);
-        changeItemQuantity(item.getIndex(), -1);
+        changeItemQuantity(item.getIndex(), quantity);
     }
 
     public Order closeCart(ShoppingModeEnum shoppingMode){

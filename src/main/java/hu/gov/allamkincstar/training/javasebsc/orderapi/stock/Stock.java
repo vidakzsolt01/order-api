@@ -3,10 +3,7 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.stock;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidBookArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.ItemExistsWithItemNumberException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.ItemExistsWithNameException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 
 import java.util.HashMap;
@@ -20,8 +17,12 @@ public class Stock extends ProductContainer {
         super();
     }
 
-    public Stock(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException {
+    public Stock(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
         super();
+        registerNewItem(new StockItem(product, quantity));
+    }
+
+    public void depositProduct(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
         registerNewItem(new StockItem(product, quantity));
     }
 
@@ -31,8 +32,8 @@ public class Stock extends ProductContainer {
         return  new OrderItem(stockItem.bookSomeQuantity(quantity), quantity);
     }
 
-    public void depositProduct(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException {
-        registerNewItem(new StockItem(product, quantity));
+    private void releaseBookedQuantity(Product product, int quantityToRelease){
+        ((StockItem) findItem(product.getItemNumber())).releaseBookedQuantity(quantityToRelease);
     }
 
     public int getBookedQuantity(Product product){
@@ -45,7 +46,7 @@ public class Stock extends ProductContainer {
         return stockItem.getBookableQuantity();
     }
 
-    public void finishBook(Product product, int quantity) throws NotEnoughItemException {
+    public void finishBook(Product product, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException {
         StockItem stockItem = (StockItem) findItem(product.getItemNumber());
         stockItem.finishBook(quantity);
     }
@@ -71,8 +72,8 @@ public class Stock extends ProductContainer {
             return this;
         }
 
-        private StockItem expendBookedQuantity(int quantityToExpend){
-            quantity -= quantityToExpend;
+        private StockItem expendBookedQuantity(int quantityToExpend) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+            decreaseQuantity(quantityToExpend);
             return this;
         }
 
@@ -81,15 +82,15 @@ public class Stock extends ProductContainer {
         }
 
         private int getBookableQuantity(){
-            return quantity - bookedQuantity;
+            return getQuantity() - bookedQuantity;
         }
 
-        private void  finishBook(int quantityToFinish) throws NotEnoughItemException {
-            if (quantityToFinish > quantity)
-                throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez", this, quantity);
+        private void  finishBook(int quantityToFinish) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+            if (quantityToFinish > getQuantity())
+                throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez", this, getQuantity());
             if (quantityToFinish > bookedQuantity)
-                throw new NotEnoughItemException("Nincs akkora lefoglalt mennyiség ami a raktárkészlet véglegesítéshez kellene", this, quantity);
-            quantity -= quantityToFinish;
+                throw new NotEnoughItemException("Nincs akkora lefoglalt mennyiség ami a raktárkészlet véglegesítéshez kellene", this, getQuantity());
+            decreaseQuantity(quantityToFinish);
             bookedQuantity -= quantityToFinish;
         }
     }
