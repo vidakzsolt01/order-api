@@ -7,7 +7,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart extends ProductContainer {
+public final class Cart extends ProductContainer {
 
     public Cart() {
     }
@@ -20,7 +20,7 @@ public class Cart extends ProductContainer {
     }
 
     public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException, ItemExistsWithNameException, ItemExistsWithItemNumberException {
-        OrderItem item = new OrderItem( stock.bookProduct(product.getItemNumber(), quantity));
+        OrderItem item = new OrderItem(stock.bookProduct(product.getItemNumber(), quantity));
         registerNewItem(item);
         return item;
     }
@@ -43,8 +43,7 @@ public class Cart extends ProductContainer {
     }
 
     public Order closeCart(ShoppingModeEnum shoppingMode){
-
-        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(this.productItemList(), ) : new OrderOnline(this.productItemList(), new DeliveryParameters());
+        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(this.productItemList()) : new OrderOnline(this.productItemList(), new DeliveryParameters());
     }
 
 }

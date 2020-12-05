@@ -2,6 +2,7 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.interfaces.ProductContainerHandler;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.order.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,9 +12,9 @@ import java.util.Map;
 public abstract class ProductContainer implements ProductContainerHandler {
 
     protected final Map<String, ProductItem> productItems;
-    private final Map<String, String> controlHeap = new HashMap<>();
+    private final Map<String, String>        controlHeapByName = new HashMap<>();
 
-    public ProductContainer() {
+    public ProductContainer(){
         productItems = new HashMap<>();
     }
 
@@ -24,7 +25,7 @@ public abstract class ProductContainer implements ProductContainerHandler {
 
     private void putItemToContainer(ProductItem productItem){
         productItems.put(productItem.index, productItem);
-        controlHeap.put(productItem.product.getItemName(), productItem.product.itemNumber);
+        controlHeapByName.put(productItem.product.getItemName(), productItem.product.itemNumber);
     }
 
     @Override
@@ -52,8 +53,8 @@ public abstract class ProductContainer implements ProductContainerHandler {
         if (!itemInContainer.getProduct().itemName.equals(itemToStore.product.itemName))
             throw new ItemExistsWithItemNumberException(itemInContainer.product);
         // if any product already exists with new one's name
-        if (controlHeap.containsKey(itemToStore.product.getItemName())){
-            String itemNumber = controlHeap.get(itemToStore.product.getItemName());
+        if (controlHeapByName.containsKey(itemToStore.product.getItemName())){
+            String itemNumber = controlHeapByName.get(itemToStore.product.getItemName());
             if (!itemNumber.equals(itemInContainer.product.itemNumber)){
                 throw new ItemExistsWithNameException(itemInContainer.product);
             }
@@ -91,6 +92,14 @@ public abstract class ProductContainer implements ProductContainerHandler {
         removeItem(item.index);
     }
 
+    /**
+     * A productItems közvetlen "külső" hozzáférését le akarom tiltani (tehát
+     * még getter-t sem adok hozzá), viszont a benne lévó tételeket látni kell engedni.
+     * Ezért ez a metódus egy olyan listát ad vissza, amely az eredeti ProductItem-ek
+     * <i>másolatát</i> tartalmazza csupán
+     *
+     * @return
+     */
     @Override
     public abstract List<ProductItem> productItemList();
 

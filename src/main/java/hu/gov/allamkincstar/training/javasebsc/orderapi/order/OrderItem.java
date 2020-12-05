@@ -31,10 +31,6 @@ public class OrderItem extends ProductItem {
         return product;
     }
 
-    public Integer getQuantity(){
-        return getQuantity();
-    }
-
     public Integer getNetAmount() {
         return netAmount;
     }

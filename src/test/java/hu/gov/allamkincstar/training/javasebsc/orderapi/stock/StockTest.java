@@ -30,7 +30,7 @@ class StockTest extends ProductContainer {
     @Test
     void removeItem() {
         // ilyen nincs a Stock-nak (nem része a feladatnak)
-        assertEquals(1, stock.productItemList().size());
+        assertEquals(3, stock.productItemList().size());
     }
 
     @Test

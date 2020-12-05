@@ -37,7 +37,8 @@ Köszi,
 Attila
 
 ---------------------------------------------------------------------
-Terv...
+Terv
+-
 - Az Order alapja a Product: cikkszám (unique ID), megnevezés, nettó egységár, ÁFA%
 - Ha Product-ot tárolunk, azt nem önmagában, hanem mennyiségével együtt tároljuk (bármely tárólóban (Stock (Raktár), Cart (Kosár), Order(Rendelés)) legyen is), ez lesz a ProducItem (TermékTétel) osztály, mely 
   - az adott Product-hoz - természetesen - nyilvántartja saját aktuális darabszámát: quantity,
@@ -53,8 +54,10 @@ Terv...
       - ha nem létezik az adott Product a Stock Map-ben, akkor az algoritmushiba (unmanaged exception kell)
       - ha nincs a lefoglalni kívánt mennyiség készleten, akkor azt az algoritmusban kezelni kell (managed exception kell)
   - a "vásárlás" során feltöltjük - a Stock-hoz lényegileg nagyon hasonlító - Cart osztály specializált ProductItem-eket (CartItem) tartalmazó CartItem-listáját (Map<..., CartItem>) (a CartItem olyan ProductItem, amelynek van nettó és ÁFA összege). Feltöltéskor technikailag a Stock-ból lefoglalt (book) StockItem-eket (ProductItem) hozzáadjuk a Cart CartItem-eihez (ProductItem)
-  - a Cart lezárásával (a "vásárlás" lezárásával) (Cart.closeCart()) készül az Order objektum 
-- Order 
+  - a Cart lezárásával (a "vásárlás" lezárásával) (Cart.closeCart()) készül az Order objektum
+  
+- Order
+  -
   - alapja az OrderItem-ek listája a rendelt tételeket a Cart elemeiből (CartItems) a Cart vásárlást záró metódusa (closeCart()) hozza létre
   -egy OrderItem olyan ProductItem, amelynek van nettó összege és ÁFA összege (vagyis gyakorlatilag ugyanaz, mint a CartItem) 
   - vannak olyan Webshopok, amelyek a rendelés feladása után, útólag is megengedik módosítani a rendelés összetételét, de ez valszeg a rossz programtervezés eredménye (pl. a rendelés feladásakor derül ki, hogy még sincs (elegendő) raktáron a lefoglalt/megrendelt termékből). Itt ezt nem tesszük, ezért az Order OrderItem-listása egy sima List\<OrderItem\> lesz 
@@ -122,9 +125,10 @@ Terv...
 - A Cart és a Stock - miután mindkettő módosítható, ProductItem-okat tároló elem (container) - sok hasonló tevékenységgel bírnak, 
   - célszerűnek látszik egy interfac-szel (ProductContainerHandler) előírni a közös műveleteiket, és
   - deklarálni egy közös szülő osztályt (ProductContainer)
+- A tárolókban (Stock, Cart) elérhetők az ősosztály azon mezői, amelyeket a tárolókon keresztül nem módosítok közvetlenül, és nem akarom, hogy ezt az API-t használó (kliens) megtehesse egy leszármazáson keresztül, ezért a tárolók <b>final</b> osztályok
 - Elsőre az Order is ProductContainer, de valójában itt nem akarom (nem engedem) módosítani a tárolt elemeket, elegendő lesz csak List, és nem szükséges (tehát: nem szabad) a ProductContainer-ből leszáraznia
-- Nem akarom, hogy az Order-ben tárolt OrderItem-listát (pontosan: sem a listát, sem a lista bármely elemét (OrderItem)) módosítani lehessen "kívülről", ezért csinálok egy ImmutableList osztályt, mely
-  - csak egy List<OrderItem>  private property-tés egy get() és egy size() public metódust tartalmaz, és
+- Nem akarom, hogy az Order-ben tárolt OrderItem-listát (pontosan: sem a listát, sem a lista bármely elemét (OrderItem)) módosítani lehessen <i>kívülről</i>, ezért csinálok egy ImmutableList osztályt, mely
+  - csak egy List<OrderItem> private property-t valamint egy get() és egy size() public metódust tartalmaz, és
   - a get() NEM az eredeti OrderItem-referenciát adja vissza, hanem csak egy másolatot (new OrderItem(OrderItem)) az eredeti objektumról
 - A fizetési és szállítási módok, a vásárlási módok és a rendelés-állapotok Enum-ok
 ------

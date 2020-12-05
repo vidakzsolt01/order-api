@@ -9,7 +9,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stock extends ProductContainer {
+public final class Stock extends ProductContainer {
 
     public Stock() {
         super();
