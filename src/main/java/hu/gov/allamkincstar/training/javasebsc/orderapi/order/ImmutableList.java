@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ImmutableList {
-    private List<OrderItem> list;
+    private List<ProductItem> list;
 
     public ImmutableList(List<ProductItem> orderItemList) {
         this.list = new ArrayList<>();
@@ -15,7 +15,7 @@ public class ImmutableList {
     }
 
     public OrderItem get(int index){
-        return list.get(index);
+        return (OrderItem) list.get(index);
     }
 
     public int size(){

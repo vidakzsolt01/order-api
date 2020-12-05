@@ -2,9 +2,12 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.stock;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +30,7 @@ class StockTest extends ProductContainer {
     @Test
     void removeItem() {
         // ilyen nincs a Stock-nak (nem része a feladatnak)
-        assertEquals(1, stock.getProductItems().size());
+        assertEquals(1, stock.productItemList().size());
     }
 
     @Test
@@ -103,22 +106,55 @@ class StockTest extends ProductContainer {
         String message = "nincshiba";
         try {
             stock = new Stock(prod1, 100);
-            assertEquals(1, stock.getProductItems().size());
+            assertEquals(1, stock.productItemList().size());
             stock.depositProduct(prod2, 10);
-            assertEquals(2, stock.getProductItems().size());
-            assertEquals(100, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+            assertEquals(2, stock.productItemList().size());
+            assertEquals(100, stock.findItem(prod1.getItemNumber()).getQuantity());
             stock.depositProduct(prod1, 10);
-            assertEquals(110, stock.getProductItems().get(prod1.getItemNumber()).getQuantity());
+            assertEquals(110, stock.findItem(prod1.getItemNumber()).getQuantity());
             stock.depositProduct(prodNameWrong, 10);
         } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
             message = e.getMessage();
         }
-        assertEquals(2, stock.getProductItems().size());
+        assertEquals(2, stock.productItemList().size());
         assertTrue(message.startsWith("Ez a termék már létezik másik cikkszámmal."));
     }
 
     @Test
     void getBookableQuantity() throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
         stock = new Stock(prod1, 10);
+    }
+
+    @Test
+    void testProductItemList(){
+    }
+
+    @Test
+    void testDepositProduct(){
+    }
+
+    @Test
+    void testBookProduct(){
+    }
+
+    @Test
+    void releaseBookedQuantity(){
+    }
+
+    @Test
+    void getBookedQuantity(){
+    }
+
+    @Test
+    void testGetBookableQuantity(){
+    }
+
+    @Test
+    void finishItemBook(){
+    }
+
+    @Override
+    public List<ProductItem> productItemList(){
+        return null;
     }
 }

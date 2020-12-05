@@ -4,6 +4,8 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 
+import java.util.List;
+
 public interface ProductContainerHandler {
 
     void registerNewItem(ProductItem item) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException;
@@ -14,5 +16,6 @@ public interface ProductContainerHandler {
     boolean isProductExist(Product product);
     void changeItemQuantity(String itemNumber, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException;
     void disposeEmptyItem(ProductItem productItem) throws NoItemFoundException, NotEmptyItemException;
+    List<ProductItem> productItemList();
 
 }

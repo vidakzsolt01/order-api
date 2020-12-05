@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductContainer implements ProductContainerHandler {
+public abstract class ProductContainer implements ProductContainerHandler {
 
-    private final Map<String, ProductItem> productItems;
+    protected final Map<String, ProductItem> productItems;
     private final Map<String, String> controlHeap = new HashMap<>();
 
     public ProductContainer() {
@@ -25,12 +25,6 @@ public class ProductContainer implements ProductContainerHandler {
     private void putItemToContainer(ProductItem productItem){
         productItems.put(productItem.index, productItem);
         controlHeap.put(productItem.product.getItemName(), productItem.product.itemNumber);
-    }
-
-    public List<ProductItem> getProductItems() {
-        List<ProductItem> itemList = new ArrayList<>();
-        productItems.entrySet().forEach( item -> itemList.add(item.getValue()));
-        return itemList;
     }
 
     @Override
@@ -96,6 +90,9 @@ public class ProductContainer implements ProductContainerHandler {
         if (foundItem.getQuantity() != 0) throw new NotEmptyItemException(item);
         removeItem(item.index);
     }
+
+    @Override
+    public abstract List<ProductItem> productItemList();
 
     @Override
     public boolean isProductExist(Product product) {

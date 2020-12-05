@@ -4,19 +4,20 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 
 import java.util.List;
-import java.util.Map;
 
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.DELIVERED;
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.PENDING;
 
 public class OrderDirect extends Order {
 
-    private PaymentModeOnlineEnum paymentMode = null;
+    private final PaymentModeDirectEnum paymentMode;
     protected OrderStatusDirectEnum orderStatus = PENDING;
 
-    public OrderDirect(List<ProductItem> ordeItems) {
+    public OrderDirect(List<ProductItem> ordeItems, PaymentModeDirectEnum paymentMode) {
         super(ordeItems);
+        this.paymentMode = paymentMode;
     }
+
 
     @Override
     public void doOrder(Customer customer, PaymentModeDirectEnum paymentMode) throws InvalidOrderOperationException {
@@ -70,11 +71,12 @@ public class OrderDirect extends Order {
         this.customer = customer;
     }
 
-    public PaymentModeOnlineEnum getPaymentMode() {
+    public PaymentModeDirectEnum getPaymentMode() {
         return paymentMode;
     }
 
     public OrderStatusDirectEnum getOrderStatus() {
         return orderStatus;
     }
+
 }

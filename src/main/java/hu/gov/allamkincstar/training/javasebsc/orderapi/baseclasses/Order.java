@@ -5,11 +5,14 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.order.Customer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.ImmutableList;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Order {
 
     protected final ImmutableList orderItems;
+    //protected final List<OrderItem> orderItems;
     protected Customer customer = null;
     protected Integer netSum;
     protected Integer VATSum;
@@ -21,6 +24,7 @@ public abstract class Order {
         netSum = 0;
         VATSum = 0;
         this.orderItems = new ImmutableList(ordeItems);
+        //this.orderItems = ordeItems;
         ordeItems.forEach( item -> {
             OrderItem orderItem = new OrderItem(item);
             netSum += orderItem.getNetAmount();

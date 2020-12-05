@@ -1,18 +1,25 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.stock;
 
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Stock extends ProductContainer {
 
     public Stock() {
         super();
+    }
+
+    @Override
+    public List<ProductItem> productItemList(){
+        List<ProductItem> itemList = new ArrayList<>();
+        productItems.forEach((key, value) -> itemList.add(new StockItem(value)));
+        return itemList;
     }
 
     public Stock(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
@@ -54,6 +61,10 @@ public class Stock extends ProductContainer {
         private StockItem(Product product, int quantity) {
             super(product, quantity);
             this.bookedQuantity = 0;
+        }
+
+        public StockItem(ProductItem value){
+            super(value.getProduct(), value.getQuantity());
         }
 
         private StockItem bookSomeQuantity(int quantityToBook) throws NotEnoughItemException {

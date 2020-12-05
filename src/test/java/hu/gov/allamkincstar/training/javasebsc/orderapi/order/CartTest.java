@@ -32,14 +32,18 @@ class CartTest extends Container {
     }
 
     @Test
-    void addNewProduct() {
+    void productItemList(){
+    }
+
+    @Test
+    void testAddNewProduct(){
         try {
             cart.addNewProduct(prod1, 5, stock);
-            assertEquals(1, cart.getProductItems().size());
+            assertEquals(1, cart.productItemList().size());
             cart.addNewProduct(prod2, 10, stock);
-            assertEquals(2, cart.getProductItems().size());
+            assertEquals(2, cart.productItemList().size());
             cart.addNewProduct(prod1, 5, stock);
-            assertEquals(2, cart.getProductItems().size());
+            assertEquals(2, cart.productItemList().size());
             cart.addNewProduct(prodFailName, 5, stock);
         } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException | ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
@@ -49,22 +53,22 @@ class CartTest extends Container {
         } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException | ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
         }
-        assertEquals(2, cart.getProductItems().size());
+        assertEquals(2, cart.productItemList().size());
     }
 
     @Test
-    void removeItem() {
+    void removeProduct(){
     }
 
     @Test
-    void increaseItemQuantity() {
+    void testIncreaseItemQuantity(){
     }
 
     @Test
-    void decreaseItemQuantity() {
+    void testDecreaseItemQuantity(){
     }
 
     @Test
-    void closeCart() {
+    void testCloseCart(){
     }
 }
