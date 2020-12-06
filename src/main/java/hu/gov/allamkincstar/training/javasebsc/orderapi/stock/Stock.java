@@ -42,7 +42,7 @@ public final class Stock extends ProductContainer {
     }
 
     public int getBookedQuantity(String itemNumber){
-        return ((StockItem) findItem(itemNumber)).bookedQuantity;
+        return ((StockItem) findItem(itemNumber)).getBookedQuantity();
     }
 
     public int getBookableQuantity(String itemNumber){
@@ -54,50 +54,4 @@ public final class Stock extends ProductContainer {
         ((StockItem) findItem(itemNumber)).finishBook(quantity);
     }
 
-    private static class StockItem extends ProductItem {
-
-        private Integer bookedQuantity;
-
-        private StockItem(Product product, int quantity) {
-            super(product, quantity);
-            this.bookedQuantity = 0;
-        }
-
-        public StockItem(ProductItem value){
-            super(value.getProduct(), value.getQuantity());
-        }
-
-        private StockItem bookSomeQuantity(int quantityToBook) throws NotEnoughItemException {
-            if (!isBookable(quantityToBook))
-                throw new NotEnoughItemException("Nem foglalható le a kívánt mennyiség a termékből", this, quantityToBook);
-            bookedQuantity += quantityToBook;
-            return this;
-        }
-
-        private void releaseBookedQuantity(int quantityToRelease){
-            bookedQuantity -= quantityToRelease;
-        }
-
-        private StockItem expendBookedQuantity(int quantityToExpend) throws NotEnoughItemException, InvalidIncreaseArgumentException {
-            decreaseQuantity(quantityToExpend);
-            return this;
-        }
-
-        private boolean isBookable(int quantityToBook){
-            return (getBookableQuantity() >= quantityToBook);
-        }
-
-        private int getBookableQuantity(){
-            return getQuantity() - bookedQuantity;
-        }
-
-        private void  finishBook(int quantityToFinish) throws NotEnoughItemException, InvalidIncreaseArgumentException {
-            if (quantityToFinish > getQuantity())
-                throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez", this, getQuantity());
-            if (quantityToFinish > bookedQuantity)
-                throw new NotEnoughItemException("Nincs akkora lefoglalt mennyiség ami a raktárkészlet véglegesítéshez kellene", this, getQuantity());
-            decreaseQuantity(quantityToFinish);
-            bookedQuantity -= quantityToFinish;
-        }
-    }
 }

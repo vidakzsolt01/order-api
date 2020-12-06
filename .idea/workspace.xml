@@ -23,21 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/InvalidPaymentModeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/PaymentModeDirectEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/PaymentModeOnlineEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/PaymentModeEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/interfaces/ProductContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/interfaces/ProductContainerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,11 +75,10 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order-api" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
-      <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
-      <recent name="stock" />
-      <recent name="dto" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="java.awt.Container" />
+      <recent name="dto.Container" />
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi" />
@@ -96,25 +86,27 @@
       <recent name="dto" />
       <recent name="" />
     </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
+      <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
+      <recent name="stock" />
+      <recent name="dto" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="hu.gov.allamkincstar.training.javasebsc.baseclasses" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="java.awt.Container" />
-      <recent name="dto.Container" />
-      <recent name="" />
-    </key>
   </component>
-  <component name="RunManager" selected="JUnit.Whole project">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.StockTest.depositProduct">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -207,6 +199,8 @@
       <workItem from="1607099018195" duration="7024000" />
       <workItem from="1607151665827" duration="8036000" />
       <workItem from="1607182987191" duration="10500000" />
+      <workItem from="1607193636278" duration="146000" />
+      <workItem from="1607237291018" duration="5818000" />
     </task>
     <servers />
   </component>
@@ -218,7 +212,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -233,8 +239,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="1" />
+          <line>115</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

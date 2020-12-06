@@ -2,9 +2,7 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.interfaces.ProductContainerHandler;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.order.ImmutableList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +33,7 @@ public abstract class ProductContainer implements ProductContainerHandler {
             checkItemInContaner(itemInContainer, itemToStore);
             itemInContainer.increaseQuantity(itemToStore.getQuantity());
         } else {
+            checkItemInContaner(itemToStore, itemToStore);
             putItemToContainer(itemToStore);
         }
     }
@@ -96,9 +95,10 @@ public abstract class ProductContainer implements ProductContainerHandler {
      * A productItems közvetlen "külső" hozzáférését le akarom tiltani (tehát
      * még getter-t sem adok hozzá), viszont a benne lévó tételeket látni kell engedni.
      * Ezért ez a metódus egy olyan listát ad vissza, amely az eredeti ProductItem-ek
-     * <i>másolatát</i> tartalmazza csupán
+     * <i>másolatát</i> tartalmazza csupán.
+     * Miután
      *
-     * @return
+     * @return a
      */
     @Override
     public abstract List<ProductItem> productItemList();

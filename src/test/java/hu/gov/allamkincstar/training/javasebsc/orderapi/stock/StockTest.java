@@ -15,7 +15,8 @@ class StockTest extends ProductContainer {
 
     static Product prod1 = new Product("111111", "Termék-1", 1000, 27);
     static Product prod2 = new Product("222222", "Termék-2", 2000, 5);
-    static Product prodNameWrong = new Product("333333", "Termék-2", 2500, 5);
+    static Product prodFailName = new Product("444444", "Termék-2", 2000, 12);
+    static Product prodFailNumber = new Product("333333", "Termék-2", 2000, 12);
     static Stock stock = new Stock();
 
     @BeforeAll
@@ -112,12 +113,20 @@ class StockTest extends ProductContainer {
             assertEquals(100, stock.findItem(prod1.getItemNumber()).getQuantity());
             stock.depositProduct(prod1, 10);
             assertEquals(110, stock.findItem(prod1.getItemNumber()).getQuantity());
-            stock.depositProduct(prodNameWrong, 10);
+            stock.depositProduct(prodFailName, 5);
         } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
             message = e.getMessage();
         }
         assertEquals(2, stock.productItemList().size());
-        assertTrue(message.startsWith("Ez a termék már létezik másik cikkszámmal."));
+        assertTrue(message.startsWith("Ez a termék már létezik másik cikkszámmal"));
+
+        try {
+            stock.depositProduct(prodFailNumber, 5);
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
+            e.printStackTrace();
+        }
+        assertEquals(2, stock.productItemList().size());
+        assertTrue(message.startsWith("Ezzel a cikkszámmal  már létezik másik termék"));
     }
 
     @Test
