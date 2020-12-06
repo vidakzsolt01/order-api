@@ -15,6 +15,12 @@ public class OrderItem extends ProductItem {
         VATAmount = Math.round(netAmount * VAT);
     }
 
+    public OrderItem(OrderItem orderItem){
+        super(orderItem.getProduct(), orderItem.getQuantity());
+        netAmount = orderItem.netAmount;
+        VATAmount = orderItem.VATAmount;
+    }
+
     public OrderItem(ProductItem productItem) {
         this(productItem.getProduct(), productItem.getQuantity());
     }
@@ -29,10 +35,6 @@ public class OrderItem extends ProductItem {
 
     public Product getProduct(){
         return product;
-    }
-
-    public Integer getQuantity(){
-        return getQuantity();
     }
 
     public Integer getNetAmount() {

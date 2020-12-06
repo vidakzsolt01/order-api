@@ -1,18 +1,25 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.stock;
 
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Stock extends ProductContainer {
+public final class Stock extends ProductContainer {
 
     public Stock() {
         super();
+    }
+
+    @Override
+    public ArrayList productItemList(){
+        ArrayList itemList = new ArrayList<StockItem>();
+        productItems.forEach((key, value) -> itemList.add(new StockItem((StockItem) value)));
+        return itemList;
     }
 
     public Stock(Product product, int quantity) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
@@ -35,7 +42,7 @@ public class Stock extends ProductContainer {
     }
 
     public int getBookedQuantity(String itemNumber){
-        return ((StockItem) findItem(itemNumber)).bookedQuantity;
+        return ((StockItem) findItem(itemNumber)).getBookedQuantity();
     }
 
     public int getBookableQuantity(String itemNumber){
@@ -47,46 +54,4 @@ public class Stock extends ProductContainer {
         ((StockItem) findItem(itemNumber)).finishBook(quantity);
     }
 
-    private static class StockItem extends ProductItem {
-
-        private Integer bookedQuantity;
-
-        private StockItem(Product product, int quantity) {
-            super(product, quantity);
-            this.bookedQuantity = 0;
-        }
-
-        private StockItem bookSomeQuantity(int quantityToBook) throws NotEnoughItemException {
-            if (!isBookable(quantityToBook))
-                throw new NotEnoughItemException("Nem foglalható le a kívánt mennyiség a termékből", this, quantityToBook);
-            bookedQuantity += quantityToBook;
-            return this;
-        }
-
-        private void releaseBookedQuantity(int quantityToRelease){
-            bookedQuantity -= quantityToRelease;
-        }
-
-        private StockItem expendBookedQuantity(int quantityToExpend) throws NotEnoughItemException, InvalidIncreaseArgumentException {
-            decreaseQuantity(quantityToExpend);
-            return this;
-        }
-
-        private boolean isBookable(int quantityToBook){
-            return (getBookableQuantity() >= quantityToBook);
-        }
-
-        private int getBookableQuantity(){
-            return getQuantity() - bookedQuantity;
-        }
-
-        private void  finishBook(int quantityToFinish) throws NotEnoughItemException, InvalidIncreaseArgumentException {
-            if (quantityToFinish > getQuantity())
-                throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez", this, getQuantity());
-            if (quantityToFinish > bookedQuantity)
-                throw new NotEnoughItemException("Nincs akkora lefoglalt mennyiség ami a raktárkészlet véglegesítéshez kellene", this, getQuantity());
-            decreaseQuantity(quantityToFinish);
-            bookedQuantity -= quantityToFinish;
-        }
-    }
 }

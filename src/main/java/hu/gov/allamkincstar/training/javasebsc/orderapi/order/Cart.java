@@ -1,19 +1,26 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Order;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ShoppingModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
-public class Cart extends ProductContainer {
+import java.util.ArrayList;
+import java.util.List;
+
+public final class Cart extends ProductContainer {
 
     public Cart() {
     }
 
+    @Override
+    public ArrayList productItemList() {
+        ArrayList itemList = new ArrayList<OrderItem>();
+        productItems.forEach( (key, value) -> itemList.add(new OrderItem(value)));
+        return itemList;
+    }
+
     public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException, ItemExistsWithNameException, ItemExistsWithItemNumberException {
-        OrderItem item = new OrderItem( stock.bookProduct(product.getItemNumber(), quantity));
+        OrderItem item = new OrderItem(stock.bookProduct(product.getItemNumber(), quantity));
         registerNewItem(item);
         return item;
     }
@@ -36,7 +43,7 @@ public class Cart extends ProductContainer {
     }
 
     public Order closeCart(ShoppingModeEnum shoppingMode){
-        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(getProductItems()) : new OrderOnline(getProductItems(), new DeliveryParameters());
+        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(this.productItemList()) : new OrderOnline(this.productItemList(), new DeliveryParameters());
     }
 
 }

@@ -26,15 +26,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/InvalidBookArgumentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/InvalidBookArgumentException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/ItemExistsWithItemNumberException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/ItemExistsWithItemNumberException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/ItemExistsWithNameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/ItemExistsWithNameException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/interfaces/ProductContainerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/interfaces/ProductContainerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/ImmutableList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/ImmutableList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/ImmutableList.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,11 +82,10 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order-api" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
-      <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
-      <recent name="stock" />
-      <recent name="dto" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="java.awt.Container" />
+      <recent name="dto.Container" />
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi" />
@@ -93,25 +93,27 @@
       <recent name="dto" />
       <recent name="" />
     </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
+      <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
+      <recent name="stock" />
+      <recent name="dto" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="hu.gov.allamkincstar.training.javasebsc.baseclasses" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="java.awt.Container" />
-      <recent name="dto.Container" />
-      <recent name="" />
-    </key>
   </component>
-  <component name="RunManager" selected="JUnit.StockTest.depositProduct">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.StockTest.testProductItemList">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -131,17 +133,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StockTest.depositProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StockTest.testProductItemList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="order-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
       <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock.StockTest" />
-      <option name="METHOD_NAME" value="depositProduct" />
+      <option name="METHOD_NAME" value="testProductItemList" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -170,11 +166,11 @@
     <list>
       <item itemvalue="JUnit.Debug JUnit" />
       <item itemvalue="JUnit.Whole project" />
-      <item itemvalue="JUnit.StockTest.depositProduct" />
+      <item itemvalue="JUnit.StockTest.testProductItemList" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StockTest.depositProduct" />
+        <item itemvalue="JUnit.StockTest.testProductItemList" />
       </list>
     </recent_temporary>
   </component>
@@ -202,6 +198,12 @@
       <workItem from="1607019219482" duration="277000" />
       <workItem from="1607058497917" duration="1763000" />
       <workItem from="1607099018195" duration="7024000" />
+      <workItem from="1607151665827" duration="8036000" />
+      <workItem from="1607182987191" duration="10500000" />
+      <workItem from="1607193636278" duration="146000" />
+      <workItem from="1607237291018" duration="5818000" />
+      <workItem from="1607245162552" duration="70000" />
+      <workItem from="1607266838844" duration="7353000" />
     </task>
     <servers />
   </component>
@@ -213,7 +215,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="develop" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -222,6 +236,22 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/order_api$Debug_JUnit.ic" NAME="Debug JUnit Coverage Results" MODIFIED="1606887025183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" />

@@ -1,8 +1,10 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.interfaces;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductContainerHandler {
 
@@ -11,8 +13,9 @@ public interface ProductContainerHandler {
     void removeItem(String itemNumber);
     ProductItem findItem(String itemNumber);
     ProductItem searchItem(String itemNumber);
-    boolean isProductExist(Product product);
+    boolean isProductExist(String itemNumber);
     void changeItemQuantity(String itemNumber, int quantity) throws NotEnoughItemException, InvalidIncreaseArgumentException;
     void disposeEmptyItem(ProductItem productItem) throws NoItemFoundException, NotEmptyItemException;
+    ArrayList productItemList();
 
 }

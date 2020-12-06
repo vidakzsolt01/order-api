@@ -15,8 +15,6 @@ class CartTest extends Container {
     static Product prod1 = new Product("111111", "Termék-1", 1000, 27);
     static Product prod2 = new Product("222222", "Termék-2", 2000, 5);
     static Product prod3 = new Product("333333", "Termék-3", 2000, 12);
-    static Product prodFailName = new Product("444444", "Termék-2", 2000, 12);
-    static Product prodFailNumber = new Product("333333", "Termék-2", 2000, 12);
     static Stock stock = new Stock();
     Cart cart = new Cart();
 
@@ -32,39 +30,37 @@ class CartTest extends Container {
     }
 
     @Test
-    void addNewProduct() {
+    void productItemList(){
+    }
+
+    @Test
+    void testAddNewProduct(){
         try {
             cart.addNewProduct(prod1, 5, stock);
-            assertEquals(1, cart.getProductItems().size());
+            assertEquals(1, cart.productItemList().size());
             cart.addNewProduct(prod2, 10, stock);
-            assertEquals(2, cart.getProductItems().size());
+            assertEquals(2, cart.productItemList().size());
             cart.addNewProduct(prod1, 5, stock);
-            assertEquals(2, cart.getProductItems().size());
-            cart.addNewProduct(prodFailName, 5, stock);
+            assertEquals(2, cart.productItemList().size());
         } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException | ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
         }
-        try {
-            cart.addNewProduct(prodFailNumber, 5, stock);
-        } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException | ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
-            e.printStackTrace();
-        }
-        assertEquals(2, cart.getProductItems().size());
+        assertEquals(2, cart.productItemList().size());
     }
 
     @Test
-    void removeItem() {
+    void removeProduct(){
     }
 
     @Test
-    void increaseItemQuantity() {
+    void testIncreaseItemQuantity(){
     }
 
     @Test
-    void decreaseItemQuantity() {
+    void testDecreaseItemQuantity(){
     }
 
     @Test
-    void closeCart() {
+    void testCloseCart(){
     }
 }

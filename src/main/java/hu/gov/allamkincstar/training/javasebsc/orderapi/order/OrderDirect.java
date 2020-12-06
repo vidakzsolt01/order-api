@@ -2,24 +2,30 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.DELIVERED;
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.PENDING;
 
-public class OrderDirect extends Order {
+public final class OrderDirect extends Order {
 
-    private PaymentModeOnlineEnum paymentMode = null;
     protected OrderStatusDirectEnum orderStatus = PENDING;
+    private Customer customer;
+    private PaymentModeEnum paymentMode;
 
-    public OrderDirect(List<ProductItem> ordeItems) {
+    public OrderDirect(ArrayList<OrderItem> ordeItems) {
         super(ordeItems);
     }
 
+
     @Override
-    public void doOrder(Customer customer, PaymentModeDirectEnum paymentMode) throws InvalidOrderOperationException {
+    public void doOrder(Customer customer,
+                        PaymentModeEnum paymentMode) throws InvalidOrderOperationException {
+        this.customer    = customer;
+        this.paymentMode = paymentMode;
         switch (orderStatus){
             case PENDING:
                 orderStatus = OrderStatusDirectEnum.BOOKED;
@@ -34,8 +40,9 @@ public class OrderDirect extends Order {
     }
 
     @Override
-    public void doOrder(Customer customer, PaymentModeOnlineEnum paymentMode) throws InvalidOrderOperationException {
-        throw new RuntimeException("This methode doesn't belong to this class");
+    public void validatePaymentModeToSet() throws InvalidPaymentModeException{
+        if (paymentMode == PaymentModeEnum.BY_WIRE || paymentMode == PaymentModeEnum.ADDITIONAL)
+            throw new InvalidPaymentModeException(paymentMode);
     }
 
     //TODO implementálni: fizetés nyugtázása - paymentConfirm()
@@ -60,21 +67,30 @@ public class OrderDirect extends Order {
         }
         //TODO implementálni és meghívni a metódust, mely véglegesíti a
         // raktárkészleten a rendelésben lefoglalt mennyiségeket
-
     }
+
+    @Override
     public Customer getCustomer() {
         return customer;
     }
 
+    @Override
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public PaymentModeOnlineEnum getPaymentMode() {
+    @Override
+    public PaymentModeEnum getPaymentMode() {
         return paymentMode;
+    }
+
+    @Override
+    public void setPaymentMode(PaymentModeEnum paymentMode) throws InvalidPaymentModeException{
+        this.paymentMode = paymentMode;
     }
 
     public OrderStatusDirectEnum getOrderStatus() {
         return orderStatus;
     }
+
 }
