@@ -3,15 +3,15 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.Customer;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.order.ImmutableList;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Order {
 
-    protected final ImmutableList orderItems;
-    protected PaymentModeEnum paymentMode = null;
+    protected final ArrayList<OrderItem> orderItems;
+    protected     PaymentModeEnum                   paymentMode = null;
     protected Customer customer;
     protected Integer netSum;
     protected Integer VATSum;
@@ -19,9 +19,9 @@ public abstract class Order {
     protected Integer billTotal;
     protected Boolean paid = Boolean.FALSE;
 
-    public Order(List<ProductItem> ordeItems) {
+    public Order(ArrayList<OrderItem> ordeItems) {
         this.customer = customer;
-        this.orderItems = new ImmutableList(ordeItems);
+        this.orderItems = ordeItems;
         //this.orderItems = ordeItems;
         netSum = 0;
         VATSum = 0;
@@ -62,5 +62,15 @@ public abstract class Order {
     public abstract Customer getCustomer();
 
     public abstract void setCustomer(Customer customer);
+
+    public List<OrderItem> productItems(){
+        List<OrderItem> result = new ArrayList<>();
+        orderItems.forEach( orderItem -> result.add(new OrderItem(orderItem)));
+        return result;
+    }
+
+    public ArrayList<OrderItem> getOrderItems(){
+        return orderItems;
+    }
 
 }

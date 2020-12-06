@@ -3,6 +3,7 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.interfaces.ProductContainerHandler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +31,10 @@ public abstract class ProductContainer implements ProductContainerHandler {
     public void registerNewItem(ProductItem itemToStore) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
         if (productItems.containsKey(itemToStore.index)){
             ProductItem itemInContainer = productItems.get(itemToStore.index);
-            checkItemInContaner(itemInContainer, itemToStore);
+            checkForNameNotMatch(itemInContainer, itemToStore);
             itemInContainer.increaseQuantity(itemToStore.getQuantity());
         } else {
-            checkItemInContaner(itemToStore, itemToStore);
+            checkForNameAlredyExists(itemToStore);
             putItemToContainer(itemToStore);
         }
     }
@@ -47,15 +48,18 @@ public abstract class ProductContainer implements ProductContainerHandler {
         item.increaseQuantity(quantity);
     }
 
-    private void checkItemInContaner(ProductItem itemInContainer, ProductItem itemToStore) throws ItemExistsWithNameException, ItemExistsWithItemNumberException {
+    private void checkForNameNotMatch(ProductItem itemInContainer, ProductItem itemToStore) throws ItemExistsWithItemNumberException {
         // If product exists with this item number and it's name not match with the new one's
         if (!itemInContainer.getProduct().itemName.equals(itemToStore.product.itemName))
             throw new ItemExistsWithItemNumberException(itemInContainer.product);
-        // if any product already exists with new one's name
+    }
+
+    private void checkForNameAlredyExists(ProductItem itemToStore) throws ItemExistsWithNameException {
+        // if a product already exists with the new one's name
         if (controlHeapByName.containsKey(itemToStore.product.getItemName())){
-            String itemNumber = controlHeapByName.get(itemToStore.product.getItemName());
-            if (!itemNumber.equals(itemInContainer.product.itemNumber)){
-                throw new ItemExistsWithNameException(itemInContainer.product);
+            String itemNumberExisting = controlHeapByName.get(itemToStore.product.getItemName());
+            if (!itemNumberExisting.equals(itemToStore.product.itemNumber)){
+                throw new ItemExistsWithNameException(itemNumberExisting);
             }
         }
     }
@@ -96,24 +100,17 @@ public abstract class ProductContainer implements ProductContainerHandler {
      * még getter-t sem adok hozzá), viszont a benne lévó tételeket látni kell engedni.
      * Ezért ez a metódus egy olyan listát ad vissza, amely az eredeti ProductItem-ek
      * <i>másolatát</i> tartalmazza csupán.
-     * Miután
+     * Miután a különböző tárolókban más-más típust kell visszaadni (OrderItem, StocItem),
+     * itt csak "előírom" a metódust
      *
-     * @return a
+     * @return az eredeti terméklista másolata egy List<>-ként implementálva
      */
     @Override
-    public abstract List<ProductItem> productItemList();
+    public abstract ArrayList productItemList();
 
     @Override
-    public boolean isProductExist(Product product) {
-        return productItems.containsKey(product.getItemNumber());
-    }
-
     public boolean isProductExist(String itemNumber) {
         return productItems.containsKey(itemNumber);
-    }
-
-    public boolean isProductExist(ProductItem item) {
-        return productItems.containsKey(item.index);
     }
 
 }

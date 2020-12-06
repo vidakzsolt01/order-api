@@ -13,8 +13,8 @@ public final class Cart extends ProductContainer {
     }
 
     @Override
-    public List<ProductItem> productItemList() {
-        List<ProductItem> itemList = new ArrayList<>();
+    public ArrayList productItemList() {
+        ArrayList itemList = new ArrayList<OrderItem>();
         productItems.forEach( (key, value) -> itemList.add(new OrderItem(value)));
         return itemList;
     }

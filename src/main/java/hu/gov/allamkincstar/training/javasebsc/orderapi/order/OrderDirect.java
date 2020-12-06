@@ -4,6 +4,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.DELIVERED;
@@ -15,7 +16,7 @@ public final class OrderDirect extends Order {
     private Customer customer;
     private PaymentModeEnum paymentMode;
 
-    public OrderDirect(List<ProductItem> ordeItems) {
+    public OrderDirect(ArrayList<OrderItem> ordeItems) {
         super(ordeItems);
     }
 

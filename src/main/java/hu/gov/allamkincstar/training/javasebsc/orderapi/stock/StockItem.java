@@ -14,8 +14,9 @@ public class StockItem extends ProductItem{
         this.bookedQuantity = 0;
     }
 
-    public StockItem(ProductItem value){
-        super(value.getProduct(), value.getQuantity());
+    public StockItem(StockItem productItem){
+        super(productItem.getProduct(), productItem.getQuantity());
+        this.bookedQuantity = productItem.bookedQuantity;
     }
 
     public StockItem bookSomeQuantity(int quantityToBook) throws NotEnoughItemException{

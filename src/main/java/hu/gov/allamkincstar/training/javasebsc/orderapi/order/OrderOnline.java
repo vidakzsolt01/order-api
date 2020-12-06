@@ -4,19 +4,17 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public final class OrderOnline extends Order{
 
-    private final ImmutableList         orderItems;
     private final DeliveryParameters    deliveryParameters;
     private       OrderStatusOnlineEnum orderStatus    = OrderStatusOnlineEnum.PENDING;
     private       DeliveryModeEnum      deliveryMode   = null;
     private       String                failureComment = null;
 
-    public OrderOnline(List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
+    public OrderOnline(ArrayList<OrderItem> orderItemList, DeliveryParameters deliveryParameters){
         super(orderItemList);
-        orderItems              = new ImmutableList(orderItemList);
         this.deliveryParameters = deliveryParameters;
         if (this.grossSum < deliveryParameters.getLimitForFree())
             billTotal = grossSum + deliveryParameters.getDeliveryCharge();
@@ -102,10 +100,6 @@ public final class OrderOnline extends Order{
             //TODO itt lehet implementálni/meghívni a metódust, mely véglegesíti a
             // raktárkészleten a rendeléssel kiment mennyiségeket
         }
-    }
-
-    public ImmutableList getOrderItems(){
-        return orderItems;
     }
 
     public OrderStatusOnlineEnum getOrderStatus(){

@@ -16,9 +16,9 @@ public final class Stock extends ProductContainer {
     }
 
     @Override
-    public List<ProductItem> productItemList(){
-        List<ProductItem> itemList = new ArrayList<>();
-        productItems.forEach((key, value) -> itemList.add(new StockItem(value)));
+    public ArrayList productItemList(){
+        ArrayList itemList = new ArrayList<StockItem>();
+        productItems.forEach((key, value) -> itemList.add(new StockItem((StockItem) value)));
         return itemList;
     }
 
