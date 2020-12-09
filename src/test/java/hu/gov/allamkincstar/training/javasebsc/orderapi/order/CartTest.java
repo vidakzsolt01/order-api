@@ -30,6 +30,20 @@ class CartTest extends Container {
         }
     }
 
+    /**
+     * Azt akarom igazolni, hogy a Cart-ból megszerzett terméklista
+     * nem módosítható:
+     * <ul>
+     *     <li>kinyerem a listát, </li>
+     *     <li>hozzáadok egy elemet, majd</li>
+     * </ul>
+     * újra kinyerve a listát, az elemszám nem változhatott
+     * <ul>
+     *     <li>kinyerem a listát, </li>
+     *     <li>módosítok egy elemet (0.), majd</li>
+     * </ul>
+     * újra kinyerve a listát a 0. elem nem változhatott
+     */
     @Test
     void productItemList(){
         // 0 termék van a listában
@@ -47,17 +61,14 @@ class CartTest extends Container {
             cart.addNewProduct(prod1, 5, stock);
             // továbbra is 2 termék van a listában
             assertEquals(2, cart.productItemList().size());
-            cart.addNewProduct(prod3, 10, stock);
+            // hozzáadok egy elemet
+            cart.productItemList().add(new OrderItem(prod1, 10));
+            assertEquals(2, cart.productItemList().size());
             // az 1. termékből 10 van a kosárlistában
             assertEquals(10, ((OrderItem)cart.productItemList().get(0)).getQuantity());
-            stock.depositProduct(prod4,120);
-            cart.addNewProduct(prod4, 10, stock);
-            assertEquals(4, cart.productItemList().size());
-            cart.productItemList().add(new OrderItem(prod1, 10));
-            assertEquals(4, cart.productItemList().size());
-            assertEquals(10, ((OrderItem)cart.productItemList().get(3)).getQuantity());
-            ((OrderItem)cart.productItemList().get(3)).increaseQuantity(10);
-            assertEquals(10, ((OrderItem)cart.productItemList().get(3)).getQuantity());
+            ((OrderItem) cart.productItemList().get(0)).increaseQuantity(10);
+            // még mindig 10 van a 0.-ból
+            assertEquals(10, ((OrderItem)cart.productItemList().get(0)).getQuantity());
         } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException | ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
         }
