@@ -24,6 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,11 +77,10 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/order-api" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
-      <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
-      <recent name="stock" />
-      <recent name="dto" />
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="java.awt.Container" />
+      <recent name="dto.Container" />
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi" />
@@ -88,27 +88,20 @@
       <recent name="dto" />
       <recent name="" />
     </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
+      <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
+      <recent name="stock" />
+      <recent name="dto" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="hu.gov.allamkincstar.training.javasebsc.baseclasses" />
     </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="java.awt.Container" />
-      <recent name="dto.Container" />
-      <recent name="" />
-    </key>
   </component>
-  <component name="RunManager" selected="JUnit.Whole project">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.StockTest.testProductItemList">
     <configuration name="Debug JUnit" type="JUnit" factoryName="JUnit" show_console_on_std_err="true" show_console_on_std_out="true">
       <useClassPathOnly />
       <extension name="coverage" sample_coverage="false" />
@@ -120,6 +113,16 @@
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="wholeProject" />
       </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StockTest.testProductItemList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-api" />
+      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
+      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock.StockTest" />
+      <option name="METHOD_NAME" value="testProductItemList" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -147,7 +150,13 @@
     <list>
       <item itemvalue="JUnit.Debug JUnit" />
       <item itemvalue="JUnit.Whole project" />
+      <item itemvalue="JUnit.StockTest.testProductItemList" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.StockTest.testProductItemList" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -172,6 +181,17 @@
       <workItem from="1607010401474" duration="8025000" />
       <workItem from="1607019219482" duration="277000" />
       <workItem from="1607058497917" duration="1763000" />
+      <workItem from="1607099018195" duration="7024000" />
+      <workItem from="1607151665827" duration="8036000" />
+      <workItem from="1607182987191" duration="10500000" />
+      <workItem from="1607193636278" duration="146000" />
+      <workItem from="1607237291018" duration="5818000" />
+      <workItem from="1607245162552" duration="70000" />
+      <workItem from="1607266838844" duration="7353000" />
+      <workItem from="1607317979325" duration="1042000" />
+      <workItem from="1607319071814" duration="44000" />
+      <workItem from="1607404870593" duration="617000" />
+      <workItem from="1607491114564" duration="738000" />
     </task>
     <servers />
   </component>
@@ -183,7 +203,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="develop" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -203,19 +235,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/Stock.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/ProductContainer.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

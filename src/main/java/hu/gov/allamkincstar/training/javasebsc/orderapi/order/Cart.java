@@ -1,47 +1,49 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Order;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductContainer;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ShoppingModeEnum;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidBookArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidIncreaseArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NoItemFoundException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
-public class Cart extends ProductContainer {
+import java.util.ArrayList;
+import java.util.List;
+
+public final class Cart extends ProductContainer {
 
     public Cart() {
     }
 
-    public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
-        return stock.bookProduct(product, quantity);
+    @Override
+    public ArrayList productItemList() {
+        ArrayList itemList = new ArrayList<OrderItem>();
+        productItems.forEach( (key, value) -> itemList.add(new OrderItem(value)));
+        return itemList;
     }
 
-    public void removeItem(OrderItem item){
-        removeItem(item);
+    public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException, ItemExistsWithNameException, ItemExistsWithItemNumberException {
+        OrderItem item = new OrderItem(stock.bookProduct(product.getItemNumber(), quantity));
+        registerNewItem(item);
+        return item;
     }
 
-    public void increaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
-        modifyQuantity(item, stock, 1);
+    public void removeProduct(String itemNumber, Stock stock){
+        OrderItem item = (OrderItem) findItem(itemNumber);
+        stock.releaseBookedQuantity(itemNumber, item.getQuantity());
     }
 
-    public void decreaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException {
-        modifyQuantity(item, stock, -1);
+    public OrderItem increaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException {
+        stock.bookProduct(item.getProduct().getItemNumber(), 1);
+        item.increaseQuantity(1);
+        return item;
     }
 
-    private void modifyQuantity(OrderItem item, Stock stock, int quantity) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException {
-        if (item.getQuantity() < 0){
-            stock.re
-        }
-        stock.bookProduct(item.getProduct(), quantity);
-        if (findItem(item.getIndex()) != item) throw new NoItemFoundException(item);
-        changeItemQuantity(item.getIndex(), quantity);
+    public void decreaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+        stock.releaseBookedQuantity(item.getProduct().getItemNumber(), 1);
+        item.decreaseQuantity(1);
+        if (item.getQuantity() == 0) removeItem(item.getProduct().getItemNumber());
     }
 
     public Order closeCart(ShoppingModeEnum shoppingMode){
-        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(getProductItems()) : new OrderOnline(getProductItems(), new DeliveryParameters());
+        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(this.productItemList()) : new OrderOnline(this.productItemList(), new DeliveryParameters());
     }
 
 }

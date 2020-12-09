@@ -35,4 +35,5 @@ public abstract class ProductItem {
         if (this.quantity < quantityToSubtract) throw new NotEnoughItemException(this, quantityToSubtract);
         quantity -= quantityToSubtract;
     }
+
 }
