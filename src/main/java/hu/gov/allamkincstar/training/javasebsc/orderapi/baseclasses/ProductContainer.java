@@ -28,7 +28,7 @@ public abstract class ProductContainer implements ProductContainerHandler {
     }
 
     @Override
-    public void registerNewItem(ProductItem itemToStore) throws ItemExistsWithNameException, ItemExistsWithItemNumberException, InvalidIncreaseArgumentException {
+    public void registerNewItem(ProductItem itemToStore) throws InvalidIncreaseArgumentException {
         if (productItems.containsKey(itemToStore.index)){
             ProductItem itemInContainer = productItems.get(itemToStore.index);
             checkForNameNotMatch(itemInContainer, itemToStore);

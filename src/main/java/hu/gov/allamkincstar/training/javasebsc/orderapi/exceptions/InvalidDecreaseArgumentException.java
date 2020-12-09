@@ -1,6 +1,9 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions;
 
-public class InvalidDecreaseArgumentException extends Exception{
+/**
+ * hibás program okozhatja: RuntimeException lesz
+ */
+public class InvalidDecreaseArgumentException extends RuntimeException{
     private static final String DEFAULT_MESSAGE = "Érvénytelen érték a mennyiség csökkentéséhez";
 
     public InvalidDecreaseArgumentException(int quantity) {

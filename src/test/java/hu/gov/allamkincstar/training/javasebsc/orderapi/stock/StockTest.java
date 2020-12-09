@@ -21,29 +21,35 @@ class StockTest extends ProductContainer {
     static Product prodFailName = new Product("222222", "Termék-3", 2000, 12);
     static Stock stock = new Stock();
 
-    @BeforeAll
-    static void prolog() {
-        try {
-            stock.depositProduct(prod1, 10);
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Arra vagyok kiváncsi, hogy
+     * <ul>
+     *     <li>a létező terméket megtaláljuk-e, és</li>
+     *     <li>a neml étező termékre RuntimeException-t dobunk-e</li>
+     * </ul>
+     */
     @Test
     void findItem() {
-        Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.findItem(prod2.getItemNumber()));
+        // raktározok pár terméket
+        stock = new Stock();
+        stock.depositProduct(prod1, 10);
+        stock.depositProduct(prod2, 20);
+
+        // megkeresem a prod1-et
+        ProductItem item = stock.findItem(prod1.getItemNumber());
+        // kell találnom belő 10 darabot
+        assertEquals(10, item.getQuantity());
+
+        // megkeresem a prod2-et
+        item = stock.findItem(prod2.getItemNumber());
+        // kell találnom belőle 20 darabot
+        assertEquals(20, item.getQuantity());
+
+        // és ha prod3-at keresek, akkor az RuntimeException
+        Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.findItem(prod3.getItemNumber()));
         String message = "A keresett termék nem található.";
         String realMessage = exception.getMessage();
         assertEquals(realMessage, message);
-
-        boolean error = false;
-        try {
-            stock.bookProduct(prod1.getItemNumber(), -1);
-        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
-            error = true;
-        }
-        assertTrue(error);
     }
 
     @Test
@@ -54,6 +60,11 @@ class StockTest extends ProductContainer {
 
     @Test
     void bookProduct() {
+        // raktározok pár terméket
+        stock = new Stock();
+        stock.depositProduct(prod1, 10);
+        stock.depositProduct(prod2, 20);
+
         Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.bookProduct(prod2.getItemNumber(), 20));
         String message = "A keresett termék nem található.";
         String realMessage = exception.getMessage();
@@ -69,7 +80,7 @@ class StockTest extends ProductContainer {
             assertEquals(8, stock.getBookedQuantity(prod1.getItemNumber()));
             // 2 darab foglalhatónak kellene lennie prod1-ből
             assertEquals(2, stock.getBookableQuantity(prod1.getItemNumber()));
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException | NotEnoughItemException | InvalidBookArgumentException e) {
+        } catch (NotEnoughItemException | InvalidBookArgumentException e) {
             e.printStackTrace();
         }
         boolean error = false;
@@ -91,7 +102,7 @@ class StockTest extends ProductContainer {
         try {
             stock.depositProduct(prod1, 100);
             assertEquals(100, stock.getBookableQuantity(prod1.getItemNumber()));
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
+        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException e) {
             e.printStackTrace();
         }
 

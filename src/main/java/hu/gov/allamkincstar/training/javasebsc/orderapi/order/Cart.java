@@ -19,7 +19,7 @@ public final class Cart extends ProductContainer {
         return itemList;
     }
 
-    public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException, ItemExistsWithNameException, ItemExistsWithItemNumberException {
+    public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException {
         OrderItem item = new OrderItem(stock.bookProduct(product.getItemNumber(), quantity));
         registerNewItem(item);
         return item;
@@ -28,15 +28,18 @@ public final class Cart extends ProductContainer {
     public void removeProduct(String itemNumber, Stock stock){
         OrderItem item = (OrderItem) findItem(itemNumber);
         stock.releaseBookedQuantity(itemNumber, item.getQuantity());
+        productItems.remove(itemNumber);
     }
 
-    public OrderItem increaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException {
+    public OrderItem increaseItemQuantity(String itemNumber, Stock stock) throws NotEnoughItemException, InvalidBookArgumentException, InvalidIncreaseArgumentException {
+        OrderItem item = (OrderItem) findItem(itemNumber);
         stock.bookProduct(item.getProduct().getItemNumber(), 1);
         item.increaseQuantity(1);
         return item;
     }
 
-    public void decreaseItemQuantity(OrderItem item, Stock stock) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+    public void decreaseItemQuantity(String itemNumber, Stock stock) throws NotEnoughItemException, InvalidIncreaseArgumentException {
+        OrderItem item = (OrderItem) findItem(itemNumber);
         stock.releaseBookedQuantity(item.getProduct().getItemNumber(), 1);
         item.decreaseQuantity(1);
         if (item.getQuantity() == 0) removeItem(item.getProduct().getItemNumber());
