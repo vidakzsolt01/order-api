@@ -27,7 +27,7 @@ class CartTest extends Container {
             stock.depositProduct(prod2, 20);
             stock.depositProduct(prod3, 30);
             stock.depositProduct(prod4, 40);
-        } catch (ItemExistsWithNameException | ItemExistsWithItemNumberException | InvalidIncreaseArgumentException e) {
+        } catch (InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
     }
@@ -78,7 +78,7 @@ class CartTest extends Container {
             // a kosárban még mindig 5 van a 0.-ból
             assertEquals(5, ((OrderItem)cart.productItemList().get(0)).getQuantity());
 
-        } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
     }
@@ -113,7 +113,7 @@ class CartTest extends Container {
             assertEquals(10, ((OrderItem)cart.productItemList().get(1)).getQuantity());
             // bepakolok további 5 prod1-et
             cart.addNewProduct(prod1, 5, stock);
-        } catch (NotEnoughItemException | InvalidBookArgumentException | InvalidIncreaseArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
         // a kosárban továbbra is 2 termék kell, legyen, ...
@@ -157,7 +157,7 @@ class CartTest extends Container {
             // a kosárban nem lehet semmi
             assertEquals(0, cart.productItemList().size());
 
-        } catch (InvalidIncreaseArgumentException | NotEnoughItemException | InvalidBookArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
     }
@@ -194,7 +194,7 @@ class CartTest extends Container {
             assertEquals(8, ((OrderItem)cart.productItemList().get(INDEX_PROD1)).getQuantity());
             assertEquals(12, ((OrderItem)cart.productItemList().get(INDEX_PROD2)).getQuantity());
 
-        } catch (InvalidIncreaseArgumentException | NotEnoughItemException | InvalidBookArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
     }
@@ -228,7 +228,7 @@ class CartTest extends Container {
             assertEquals(2, ((OrderItem)cart.productItemList().get(INDEX_PROD1)).getQuantity());
             assertEquals(8, ((OrderItem)cart.productItemList().get(INDEX_PROD2)).getQuantity());
 
-        } catch (InvalidIncreaseArgumentException | NotEnoughItemException | InvalidBookArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
     }
@@ -261,7 +261,7 @@ class CartTest extends Container {
             assertEquals(5,  order.getOrderItems().get(INDEX_PROD1).getQuantity());
             assertEquals(10, order.getOrderItems().get(INDEX_PROD2).getQuantity());
 
-        } catch (InvalidIncreaseArgumentException | NotEnoughItemException | InvalidBookArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
     }

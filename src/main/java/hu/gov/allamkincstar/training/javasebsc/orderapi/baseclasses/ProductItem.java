@@ -1,6 +1,6 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidIncreaseArgumentException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
 
 public abstract class ProductItem {
@@ -10,8 +10,14 @@ public abstract class ProductItem {
     protected final String index;
 
     public ProductItem(Product product, int quantity) {
+        // Itt kell vizsgálni, hogy a mennyiség ne lehessen 1-nél kisebb.
+        // Elsőre InvalidQuantityArgumentExceptiont-t dobtam, de ez messzire vezet
+        // (az Ordeitem/Stockitem minden példányosításánál kezelni kell a kivételt),
+        // ezért elvetettem (nem olyan "komoly" program ez most) és ilyenkor simán
+        // 1-et teszek a quantity-be.
+        if (quantity <= 0) this.quantity = 1;
+        else this.quantity = quantity;
         this.product = product;
-        this.quantity = quantity;
         index = product.itemNumber;
     }
 
@@ -25,14 +31,14 @@ public abstract class ProductItem {
         return index;
     }
 
-    public void increaseQuantity(int quantityToAdd) throws InvalidIncreaseArgumentException {
-        if (quantityToAdd < 0) throw  new InvalidIncreaseArgumentException(quantityToAdd);
+    public void increaseQuantity(int quantityToAdd) throws InvalidQuantityArgumentException {
+        if (quantityToAdd < 0) throw  new InvalidQuantityArgumentException();
         quantity += quantityToAdd;
     }
 
-    public void decreaseQuantity(int quantityToSubtract) throws NotEnoughItemException, InvalidIncreaseArgumentException {
-        if (quantityToSubtract < 0) throw  new InvalidIncreaseArgumentException(quantityToSubtract);
-        if (this.quantity < quantityToSubtract) throw new NotEnoughItemException(this, quantityToSubtract);
+    public void decreaseQuantity(int quantityToSubtract) throws NotEnoughItemException, InvalidQuantityArgumentException {
+        if (quantityToSubtract < 0) throw  new InvalidQuantityArgumentException();
+        if (this.quantity < quantityToSubtract) throw new NotEnoughItemException();
         quantity -= quantityToSubtract;
     }
 
