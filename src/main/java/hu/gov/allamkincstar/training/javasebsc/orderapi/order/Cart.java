@@ -21,8 +21,8 @@ public final class Cart extends ProductContainer {
         return itemList;
     }
 
-    public OrderItem addNewProduct(Product product, int quantity, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException {
-        OrderItem item = new OrderItem(stock.bookProduct(product.getItemNumber(), quantity));
+    public OrderItem addNewProduct(String itemNumber, int quantity, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException {
+        OrderItem item = new OrderItem(stock.bookProduct(itemNumber, quantity));
         registerNewItem(item);
         return item;
     }
@@ -54,8 +54,10 @@ public final class Cart extends ProductContainer {
         if (item.getQuantity() == 0) removeItem(item.getProduct().getItemNumber());
     }
 
-    public Order closeCart(ShoppingModeEnum shoppingMode){
-        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(this.productItemList()) : new OrderOnline(this.productItemList(), new DeliveryParameters());
+    public Order closeCart(ShoppingModeEnum shoppingMode) throws CartIsEmptyException {
+        if (productItems.size() == 0) throw new CartIsEmptyException();
+        long id = OrderRegister.getNextOrderId();
+        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(id, this.productItemList()) : new OrderOnline(id, this.productItemList(), new DeliveryParameters());
     }
 
 }

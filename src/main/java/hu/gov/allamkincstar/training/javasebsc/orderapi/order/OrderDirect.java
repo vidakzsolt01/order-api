@@ -3,9 +3,13 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.DELIVERED;
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.PENDING;
@@ -16,14 +20,14 @@ public final class OrderDirect extends Order {
     private Customer customer;
     private PaymentModeEnum paymentMode;
 
-    public OrderDirect(ArrayList<OrderItem> ordeItems) {
-        super(ordeItems);
+    public OrderDirect(Long orderId, ArrayList<OrderItem> ordeItems) {
+        super(orderId, ordeItems);
     }
 
 
     @Override
-    public void doOrder(Customer customer,
-                        PaymentModeEnum paymentMode) throws InvalidOrderOperationException {
+    public void dispatchOrder(Customer customer,
+                              PaymentModeEnum paymentMode) throws InvalidOrderOperationException {
         this.customer    = customer;
         this.paymentMode = paymentMode;
         switch (orderStatus){
@@ -40,9 +44,22 @@ public final class OrderDirect extends Order {
     }
 
     @Override
+    public void dispatchOrder(Customer customer, PaymentModeEnum paymentMode, DeliveryModeEnum deliveryMode){
+        throw new RuntimeException("This method cannot be used in this class");
+    }
+
+    @Override
     public void validatePaymentModeToSet() throws InvalidPaymentModeException{
         if (paymentMode == PaymentModeEnum.BY_WIRE || paymentMode == PaymentModeEnum.ADDITIONAL)
             throw new InvalidPaymentModeException(paymentMode);
+    }
+
+    @Override
+    public void closeOrder(Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException, InvalidOrderOperationException {
+        if (orderStatus != OrderStatusDirectEnum.DELIVERED) {
+            throw new InvalidOrderOperationException("Nem véglegesített rendelés nem zárható le.");
+        }
+        finishAllProduct(stock);
     }
 
     //TODO implementálni: fizetés nyugtázása - paymentConfirm()

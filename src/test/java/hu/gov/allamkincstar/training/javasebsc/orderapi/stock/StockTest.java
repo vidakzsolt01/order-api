@@ -346,7 +346,7 @@ class StockTest extends ProductContainer {
             // jó lenne egy Order, de egy kosár épp oly jó lesz
             Cart cart = new Cart();
             // teszek a kosaramba a prod1-ből 5-öt
-            cart.addNewProduct(prod1, 5, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 5, stock);
             // a raktárkészlet a prod1-ből még mindig 10, bár 5 már foglalt, de 5 még szabad (foglalható)
             assertEquals(10, stock.findItem(prod1.getItemNumber()).getQuantity());
             assertEquals(10, stock.getBookedQuantity(prod1.getItemNumber())+stock.getBookableQuantity(prod1.getItemNumber()));

@@ -2,24 +2,37 @@ package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.Customer;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class Order {
 
-    protected final ArrayList<OrderItem> orderItems;
-    protected     PaymentModeEnum                   paymentMode = null;
+    protected final Long orderID;
+    protected PaymentModeEnum paymentMode = null;
     protected Customer customer;
     protected Integer netSum;
     protected Integer VATSum;
     protected Integer grossSum;
     protected Integer billTotal;
+    protected LocalDateTime creationDate;
+    protected final ArrayList<OrderItem> orderItems;
+
+    public Boolean getPaid() {
+        return paid;
+    }
+
     protected Boolean paid = Boolean.FALSE;
 
-    public Order(ArrayList<OrderItem> ordeItems) {
+    public Order(Long orderID, ArrayList<OrderItem> ordeItems) {
+        this.orderID = orderID;
         this.customer = customer;
         this.orderItems = ordeItems;
         //this.orderItems = ordeItems;
@@ -33,7 +46,9 @@ public abstract class Order {
         grossSum = netSum + VATSum;
     }
 
-    public abstract void doOrder(Customer customer, PaymentModeEnum paymentMode) throws InvalidOrderOperationException;
+    public abstract void dispatchOrder(Customer customer, PaymentModeEnum paymentMode) throws InvalidOrderOperationException;
+
+    public abstract void dispatchOrder(Customer customer, PaymentModeEnum paymentMode, DeliveryModeEnum deliveryMode) throws InvalidOrderOperationException;
 
     protected void validateCustomer() throws InvalidOrderOperationException {
         if (customer == null){
@@ -59,6 +74,8 @@ public abstract class Order {
 
     public abstract void validatePaymentModeToSet() throws InvalidPaymentModeException;
 
+    public abstract void closeOrder(Stock stock)  throws InvalidOrderOperationException, NotEnoughItemException, InvalidQuantityArgumentException;
+
     public abstract Customer getCustomer();
 
     public abstract void setCustomer(Customer customer);
@@ -71,6 +88,12 @@ public abstract class Order {
 
     public ArrayList<OrderItem> getOrderItems(){
         return orderItems;
+    }
+
+    protected void finishAllProduct(Stock stock) throws InvalidQuantityArgumentException, NotEnoughItemException {
+        for (OrderItem item :productItems()){
+            stock.finishItemBook(item);
+        }
     }
 
 }

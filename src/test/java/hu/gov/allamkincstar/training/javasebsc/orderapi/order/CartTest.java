@@ -55,12 +55,12 @@ class CartTest extends Container {
         assertEquals(0, cart.productItemList().size());
         try {
             // hozzáadunk 5 prod1-et
-            cart.addNewProduct(prod1, 5, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 5, stock);
             // 1 termék van a listában
             assertEquals(1, cart.productItemList().size());
 
             // hozzáadunk 10 prod2-t
-            cart.addNewProduct(prod2, 10, stock);
+            cart.addNewProduct(prod2.getItemNumber(), 10, stock);
             // 2 termék van a listában
             assertEquals(2, cart.productItemList().size());
 
@@ -101,18 +101,18 @@ class CartTest extends Container {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
             // foglalok a kosárnak 5 prod1-et
-            cart.addNewProduct(prod1, 5, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 5, stock);
             // a kosárban 1 elem kell legyen
             assertEquals(1, cart.productItemList().size());
             // kérek 10 prod2-t is
-            cart.addNewProduct(prod2, 10, stock);
+            cart.addNewProduct(prod2.getItemNumber(), 10, stock);
             // a kosárban 2 elem kell legyen, ...
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
             assertEquals(5, ((OrderItem)cart.productItemList().get(0)).getQuantity());
             assertEquals(10, ((OrderItem)cart.productItemList().get(1)).getQuantity());
             // bepakolok további 5 prod1-et
-            cart.addNewProduct(prod1, 5, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 5, stock);
         } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
@@ -136,8 +136,8 @@ class CartTest extends Container {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
             // hozzáadok a kosárhoz pár terméket
-            cart.addNewProduct(prod1, 10, stock);
-            cart.addNewProduct(prod2, 10, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 10, stock);
+            cart.addNewProduct(prod2.getItemNumber(), 10, stock);
             // a kosárban 2 termék van
             assertEquals(2, cart.productItemList().size());
 
@@ -176,8 +176,8 @@ class CartTest extends Container {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
             // hozzáadok a kosárhoz pár terméket
-            cart.addNewProduct(prod1, 5, stock);
-            cart.addNewProduct(prod2, 10, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 5, stock);
+            cart.addNewProduct(prod2.getItemNumber(), 10, stock);
             // a kosárban 2 termék van
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
@@ -210,8 +210,8 @@ class CartTest extends Container {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
             // hozzáadok a kosárhoz pár terméket
-            cart.addNewProduct(prod1, 5, stock);
-            cart.addNewProduct(prod2, 10, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 5, stock);
+            cart.addNewProduct(prod2.getItemNumber(), 10, stock);
             // a kosárban 2 termék van
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
@@ -248,8 +248,8 @@ class CartTest extends Container {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
             // hozzáadok a kosárhoz pár terméket
-            cart.addNewProduct(prod1, 5, stock);
-            cart.addNewProduct(prod2, 10, stock);
+            cart.addNewProduct(prod1.getItemNumber(), 5, stock);
+            cart.addNewProduct(prod2.getItemNumber(), 10, stock);
             // a kosárban 2 termék van
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
@@ -261,7 +261,7 @@ class CartTest extends Container {
             assertEquals(5,  order.getOrderItems().get(INDEX_PROD1).getQuantity());
             assertEquals(10, order.getOrderItems().get(INDEX_PROD2).getQuantity());
 
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartIsEmptyException e) {
             e.printStackTrace();
         }
     }

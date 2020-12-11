@@ -20,7 +20,7 @@ public class StockItem extends ProductItem{
     }
 
     public StockItem bookSomeQuantity(int quantityToBook) throws NotEnoughItemException{
-        if (!isBookable(quantityToBook))
+        if (!isBookableQuantity(quantityToBook))
             throw new NotEnoughItemException("Nem foglalható le a kívánt mennyiség a termékből");
         bookedQuantity += quantityToBook;
         return this;
@@ -36,8 +36,12 @@ public class StockItem extends ProductItem{
         return this;
     }
 
-    private boolean isBookable(int quantityToBook){
+    public boolean isBookableQuantity(int quantityToBook){
         return (getBookableQuantity() >= quantityToBook);
+    }
+
+    public boolean isBookable(){
+        return (getBookableQuantity() > 0);
     }
 
     public Integer getBookedQuantity(){
@@ -49,10 +53,12 @@ public class StockItem extends ProductItem{
     }
 
     public void finishBook(int quantityToFinish) throws NotEnoughItemException, InvalidQuantityArgumentException {
-        if (quantityToFinish > getQuantity())
-            throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez");
+        // ezt hagyjuk: mindegy, hogy mennyi az összes (úgysem lehet kecesebb a foglaltnál),
+        // elég csak a foglalt mennyiségre koncentrálni.
+        //if (quantityToFinish > getQuantity())
+        //    throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez");
         if (quantityToFinish > bookedQuantity)
-            throw new NotEnoughItemException("Nincs akkora lefoglalt mennyiség ami a raktárkészlet véglegesítéshez kellene");
+            throw new NotEnoughItemException("A véglegesíteni kívánt mennyiség nincs lefoglalva");
         decreaseQuantity(quantityToFinish);
         bookedQuantity -= quantityToFinish;
     }

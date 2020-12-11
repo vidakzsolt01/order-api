@@ -5,6 +5,7 @@ public class Customer {
     private String name;
     private String phoneNumber;
     private String email;
+    private String address;
     private String deliveryAddress;
     private String accountAddress;
 
@@ -19,11 +20,19 @@ public class Customer {
 
     public Customer(Long customerID, String name, String address, String phoneNumber, String email, String deliveryAddress) {
         this(customerID, name);
-        this.deliveryAddress = address;
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.deliveryAddress = deliveryAddress;
         this.accountAddress = deliveryAddress;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Customer(Long customerID, String name, String address, String phoneNumber, String email, String deliveryAddress, String accountAddress) {
