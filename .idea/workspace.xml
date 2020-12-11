@@ -23,8 +23,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItemTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/OrderRegister.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/CartIsEmptyException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnlineTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItemTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +48,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -85,17 +97,17 @@
       <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
       <recent name="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
       <recent name="hu.gov.allamkincstar.training.javasebsc.order" />
       <recent name="hu.gov.allamkincstar.training.javasebsc.stock" />
       <recent name="stock" />
-      <recent name="dto" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="hu.gov.allamkincstar.training.javasebsc.baseclasses" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StockTest.releaseBookedQuantity">
+  <component name="RunManager" selected="JUnit.OrderOnlineTest full">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -107,63 +119,60 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Debug JUnit" type="JUnit" factoryName="JUnit" show_console_on_std_err="true" show_console_on_std_out="true">
-      <useClassPathOnly />
-      <extension name="coverage" sample_coverage="false" />
-      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
-      <option name="MAIN_CLASS_NAME" value="" />
+    <configuration name="OrderOnlineTest full" type="JUnit" factoryName="JUnit">
+      <module name="order-api" />
+      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
+      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderOnlineTest" />
       <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="PARAMETERS" value="" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StockTest.releaseBookedQuantity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderOnlineTest.confirmPayment" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="order-api" />
       <useClassPathOnly />
-      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock" />
-      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock.StockTest" />
-      <option name="METHOD_NAME" value="releaseBookedQuantity" />
+      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
+      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderOnlineTest" />
+      <option name="METHOD_NAME" value="confirmPayment" />
       <option name="TEST_OBJECT" value="method" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Whole project" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <useClassPathOnly />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="hu.gov.allamkincstar.training.javasebsc.orderapi.stock.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="PARAMETERS" value="" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="order-api [compile with -X]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+                <option value="-X" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.Debug JUnit" />
-      <item itemvalue="JUnit.Whole project" />
-      <item itemvalue="JUnit.StockTest.releaseBookedQuantity" />
+      <item itemvalue="JUnit.OrderOnlineTest.confirmPayment" />
+      <item itemvalue="JUnit.OrderOnlineTest full" />
+      <item itemvalue="Maven.order-api [compile with -X]" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.StockTest.releaseBookedQuantity" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -237,19 +246,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java</url>
-          <line>104</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
