@@ -16,6 +16,6 @@ public interface ProductContainerHandler {
     boolean isProductExist(String itemNumber);
     void changeItemQuantity(String itemNumber, int quantity) throws NotEnoughItemException, InvalidQuantityArgumentException;
     void disposeEmptyItem(ProductItem productItem) throws NoItemFoundException, NotEmptyItemException;
-    ArrayList productItemList();
+    List<ProductItem> productItemList();
 
 }

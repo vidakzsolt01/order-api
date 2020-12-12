@@ -20,7 +20,7 @@ public final class OrderDirect extends Order {
     private Customer customer;
     private PaymentModeEnum paymentMode;
 
-    public OrderDirect(Long orderId, ArrayList<OrderItem> ordeItems) {
+    public OrderDirect(Long orderId, List<ProductItem> ordeItems) {
         super(orderId, ordeItems);
     }
 

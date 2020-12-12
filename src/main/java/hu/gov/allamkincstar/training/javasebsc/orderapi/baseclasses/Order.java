@@ -23,7 +23,7 @@ public abstract class Order {
     protected Integer grossSum;
     protected Integer billTotal;
     protected LocalDateTime creationDate;
-    protected final ArrayList<OrderItem> orderItems;
+    protected final List<ProductItem> orderItems;
 
     public Boolean getPaid() {
         return paid;
@@ -31,7 +31,7 @@ public abstract class Order {
 
     protected Boolean paid = Boolean.FALSE;
 
-    public Order(Long orderID, ArrayList<OrderItem> ordeItems) {
+    public Order(Long orderID, List<ProductItem> ordeItems) {
         this.orderID = orderID;
         this.customer = customer;
         this.orderItems = ordeItems;
@@ -86,7 +86,7 @@ public abstract class Order {
         return result;
     }
 
-    public ArrayList<OrderItem> getOrderItems(){
+    public List<ProductItem> getOrderItems(){
         return orderItems;
     }
 
