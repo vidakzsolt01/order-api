@@ -9,6 +9,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class OrderOnline extends Order{
 
@@ -21,7 +22,7 @@ public final class OrderOnline extends Order{
     private       LocalDateTime         deliveredDate = null;
     private       LocalDateTime         closedDate = null;
 
-    public OrderOnline(Long orderID, ArrayList<OrderItem> orderItemList, DeliveryParameters deliveryParameters){
+    public OrderOnline(Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
         super(orderID, orderItemList);
         this.deliveryParameters = deliveryParameters;
         if (this.grossSum < deliveryParameters.getLimitForFree())

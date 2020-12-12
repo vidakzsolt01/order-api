@@ -107,7 +107,7 @@ public abstract class ProductContainer implements ProductContainerHandler {
      * @return az eredeti terméklista másolata egy List<>-ként implementálva
      */
     @Override
-    public abstract ArrayList productItemList();
+    public abstract List<ProductItem> productItemList();
 
     @Override
     public boolean isProductExist(String itemNumber) {
