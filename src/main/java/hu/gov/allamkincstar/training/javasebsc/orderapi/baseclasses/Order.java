@@ -1,5 +1,7 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses;
 
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.DeliveryModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.PaymentModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
@@ -11,13 +13,12 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public abstract class Order {
 
-    protected final Long orderID;
-    protected PaymentModeEnum paymentMode = null;
-    protected Customer customer;
+    protected final Long            orderID;
+    protected       PaymentModeEnum paymentMode = null;
+    protected       Customer        customer;
     protected Integer netSum;
     protected Integer VATSum;
     protected Integer grossSum;

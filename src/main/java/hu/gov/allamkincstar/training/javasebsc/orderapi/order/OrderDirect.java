@@ -1,24 +1,25 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.DeliveryModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusDirectEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.PaymentModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.DELIVERED;
-import static hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.OrderStatusDirectEnum.PENDING;
+import static hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusDirectEnum.DELIVERED;
+import static hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusDirectEnum.PENDING;
 
 public final class OrderDirect extends Order {
 
     protected OrderStatusDirectEnum orderStatus = PENDING;
-    private Customer customer;
-    private PaymentModeEnum paymentMode;
+    private   Customer              customer;
+    private   PaymentModeEnum       paymentMode;
 
     public OrderDirect(Long orderId, List<ProductItem> ordeItems) {
         super(orderId, ordeItems);

@@ -1,6 +1,9 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.DeliveryModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusOnlineEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.PaymentModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
@@ -8,15 +11,14 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItem
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public final class OrderOnline extends Order{
 
     private final DeliveryParameters    deliveryParameters;
-    private       OrderStatusOnlineEnum orderStatus    = OrderStatusOnlineEnum.PENDING;
-    private       DeliveryModeEnum      deliveryMode   = null;
-    private       String                failureComment = null;
+    private OrderStatusOnlineEnum orderStatus    = OrderStatusOnlineEnum.PENDING;
+    private DeliveryModeEnum      deliveryMode   = null;
+    private String                failureComment = null;
     private       LocalDateTime         payedDate = null;
     private       LocalDateTime         passedToServiceDate = null;
     private       LocalDateTime         deliveredDate = null;
@@ -129,7 +131,7 @@ public final class OrderOnline extends Order{
 
     @Override
     public void closeOrder(Stock stock) throws InvalidOrderOperationException, NotEnoughItemException, InvalidQuantityArgumentException {
-        if (!paid) throw new InvalidOrderOperationException("Számla nincs kiegyenlítve, rendelés nem zárható le.");
+        if (!paid) throw new InvalidOrderOperationException("Számla nincs kiegyenlítve, a rendelés nem zárható le.");
         if (!(orderStatus == OrderStatusOnlineEnum.DELIVERED || orderStatus == OrderStatusOnlineEnum.FAILED_DELIVERY)) {
             throw new InvalidOrderOperationException("Nem véglegesített rendelés nem zárható le.");
         }
