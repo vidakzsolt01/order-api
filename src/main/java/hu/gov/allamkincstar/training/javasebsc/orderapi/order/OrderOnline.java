@@ -100,7 +100,7 @@ public final class OrderOnline extends Order{
             throw new InvalidOrderOperationException("Nem kiszállítás alatt lévő megrendelés szállítása nem nyugtázható");
         }
         if (!deliverySuccess)
-            throw  new InvalidOrderOperationException("Sikertelen átvétel esetén a sikertelenség okát fel kell tüntetni");
+            throw  new InvalidOrderOperationException("Sikertelen átvétel esetén a sikertelenség okát fel kell tűntetni");
 
         checkPaidAfterDelivery();
         orderStatus  = OrderStatusOnlineEnum.DELIVERED;
