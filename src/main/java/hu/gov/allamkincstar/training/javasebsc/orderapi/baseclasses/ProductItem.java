@@ -10,13 +10,22 @@ public abstract class ProductItem {
     protected final String index;
 
     public ProductItem(Product product, int quantity) {
-        // Itt kell vizsgálni, hogy a mennyiség ne lehessen 1-nél kisebb.
-        // Elsőre InvalidQuantityArgumentExceptiont-t dobtam, de ez messzire vezet
-        // (az Ordeitem/Stockitem minden példányosításánál kezelni kell a kivételt),
-        // ezért elvetettem (nem olyan "komoly" program ez most) és ilyenkor simán
-        // 1-et teszek a quantity-be.
-        if (quantity <= 0) this.quantity = 1;
-        else this.quantity = quantity;
+        // Itt kellene vizsgálni, hogy a mennyiség ne lehessen 1-nél kisebb.
+        // Elsőre InvalidQuantityArgumentException-t dobtam, de ez messzire vezet
+        // (az OrderItem/StockItem minden példányosításánál kezelni kell a kivételt; brrrr!!!)
+        // Másodikra azt gondoltam, hogy ilyenkor simán 1-et teszek a quantity-be, ám
+        // a Unit tesztek rávilágítottak, hogy ez is szamárság: mikor lekérem
+        // egy tároló tartalmát (pl. productItemList), akkor másolatot csinálok a listákról,
+        // melyekben az elemeket újra példányosítom (new ...Item()), így soha nem
+        // tudok olyan (valós!!!) listát produkálni, amelyben bármely elem mennyisége
+        // 0 lenne.
+        // Mindezekért a végső megoldás:
+        // - a 0-t elfogadom valid értéknek
+        // - a 0-nál kisebb értékekre azt mondom, hogy miután az API-ban a mennyiség-változtatások
+        //   ellenőrzöttek, és nem eshet sehol negatívba, a negatív érték csak kliens programhiba
+        //   lehet, ezért jó az InvalidQuantityArgumentException, de RuntimeException-ként.
+        if (quantity < 0)throw new InvalidQuantityArgumentException();
+        this.quantity = quantity;
         this.product = product;
         index = product.itemNumber;
     }

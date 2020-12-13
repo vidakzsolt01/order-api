@@ -129,7 +129,7 @@ class StockTest extends ProductContainer {
             message = e.getMessage();
         }
         assertTrue(error);
-        assertTrue(message.startsWith("A 'mennyiség' értéke nem lehet egynél kisebb"));
+        assertTrue(message.startsWith("A 'mennyiség' nem lehet negatív"));
 
         // nemlétező termék foglalási kísérlete NoItemFoundException RuntimeException-höz vezet
         Exception exception = assertThrows(NoItemFoundException.class, ()-> stock.bookProduct(prod3.getItemNumber(), 20));
@@ -192,7 +192,7 @@ class StockTest extends ProductContainer {
         // negatív mennyiséggel megkísérelt felvétel InvalidQuantityArgumentException-t ad
         exception = assertThrows(InvalidQuantityArgumentException.class, ()-> stock.depositProduct(prod3, -20));
         realMessage = exception.getMessage();
-        assertTrue(realMessage.startsWith("A 'mennyiség' értéke nem lehet egynél kisebb"));
+        assertTrue(realMessage.startsWith("A 'mennyiség' nem lehet negatív"));
         // maradt a 2 termék a raktárban
         assertEquals(2, stock.productItemList().size());
 
@@ -304,27 +304,19 @@ class StockTest extends ProductContainer {
             //---------------------------------------------------------------------
 
             //---------------------------------------------------------------------
-            // ha felszabadítanék 0-t, akkor az InvalidQuantityArgumentException
-            //---------------
-            // HÁT NEM!!!
-            //-----
-            // a ProductItem konstruktorában ellenőrzöm, hogy ne legyen 1-nél kisebb a
-            // mennyiség, ellenkező esetben quuantity=1-gyel hozom létre az objektumot,
-            // ergo ez esetben fel akarunk szabadítani 1-et, de 0 van lefoglalva, ezért
-            // a hiba NotEnoughItemException lesz.
-            // (Kicsit hülyén néz ki, de ezt a programot nem akartam tovább "mélyíteni"
-            // (főleg a raktárkezelést, ami már így is jócskán "túl van tolva"))
-            stock.releaseBookedQuantity(new OrderItem(prod1, 0));
-            //---------------------------------------------------------------------
-
-        } catch (InvalidQuantityArgumentException | NotEnoughItemException e) {
+            // ha felszabadítanék még egyet, akkor az NotEnoughItemException
+            stock.releaseBookedQuantity(new OrderItem(prod1, 1));
+        } catch (NotEnoughItemException e) {
             realMessage = e.getMessage();
         }
-        // szóval ehellyett
-        //        assertEquals("A 'mennyiség' értéke nem lehet egynél kisebb", realMessage);
-        //
-        // ezt várom:
         assertEquals("A felszabadítandó mennyiség nem lehet több a foglaltnál", realMessage);
+
+        //---------------------------------------------------------------------
+        // ha felszabadítanék -1-et, akkor az InvalidQuantityArgumentException
+        Exception exception = assertThrows(InvalidQuantityArgumentException.class, () -> stock.releaseBookedQuantity(new OrderItem(prod1, -1)));
+        realMessage = exception.getMessage();
+        assertEquals("A 'mennyiség' nem lehet negatív", realMessage);
+        //---------------------------------------------------------------------
 
     }
 

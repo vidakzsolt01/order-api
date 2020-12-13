@@ -53,7 +53,7 @@ public class StockItem extends ProductItem{
     }
 
     public void finishBook(int quantityToFinish) throws NotEnoughItemException, InvalidQuantityArgumentException {
-        // ezt hagyjuk: mindegy, hogy mennyi az összes (úgysem lehet kecesebb a foglaltnál),
+        // ezt hagyjuk: mindegy, hogy mennyi az összes (úgysem lehet kevesebb a foglaltnál),
         // elég csak a foglalt mennyiségre koncentrálni.
         //if (quantityToFinish > getQuantity())
         //    throw new NotEnoughItemException("Nincs elég mennyiség a raktárkészlet kívánt véglegesítéshez");

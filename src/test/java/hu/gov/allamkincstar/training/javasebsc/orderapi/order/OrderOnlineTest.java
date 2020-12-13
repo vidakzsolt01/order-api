@@ -1,6 +1,10 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.DeliveryModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusOnlineEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.PaymentModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.ShoppingModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.CartIsEmptyException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
@@ -27,7 +31,7 @@ class OrderOnlineTest extends Container {
     static void prolog() {
         // a tesztekhez kellene egy OrderOnline, amit a Cart.closeCart()-ja hoz létre,
         // tehát csinálok egy Cart-ot, aminek a feltöltését viszont raktárból
-        // lehet intézni, tehát kezdem a raktáral
+        // lehet intézni, tehát kezdem a raktárral
         stock = new Stock();
         try {
             stock.depositProduct(new Product("111111", "Termék-1", 1000, 27), 100);
@@ -37,13 +41,13 @@ class OrderOnlineTest extends Container {
             e.printStackTrace();
         }
 
-        // tehát csinálok Cart-ot a rakétártételekből
-        List<ProductItem> stockProduts = stock.productItemList();
+        // tehát csinálok Cart-ot a raktártételekből
+        List<ProductItem> stockProducts = stock.productItemList();
         cart = new Cart();
         try {
-            cart.addNewProduct(stockProduts.get(0).getProduct().getItemNumber(), 100, stock);
-            cart.addNewProduct(stockProduts.get(1).getProduct().getItemNumber(), 100, stock);
-            cart.addNewProduct(stockProduts.get(2).getProduct().getItemNumber(), 100, stock);
+            cart.addNewProduct(stockProducts.get(0).getProduct().getItemNumber(), 100, stock);
+            cart.addNewProduct(stockProducts.get(1).getProduct().getItemNumber(), 100, stock);
+            cart.addNewProduct(stockProducts.get(2).getProduct().getItemNumber(), 100, stock);
         } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
         }
@@ -56,7 +60,7 @@ class OrderOnlineTest extends Container {
         }
     }
 
-    private OrderOnline createOrder(){
+    private OrderOnline createOrder(Cart cart){
         OrderOnline order = null;
         try {
             order = (OrderOnline) cart.closeCart(ShoppingModeEnum.ONLINE);
@@ -75,7 +79,7 @@ class OrderOnlineTest extends Container {
      * Ezeket tesztelem itt - kivéve a státuszt, mert az
      * - "védett" mező, nem állítható közvetlenül "kívülről" (tehát itt nem tudok különböző
      *    értékeket adni neki), és
-     * - az Order példányosításakor eleve PANDING értéket kap, vagyis nemigen tesztelhető
+     * - az Order példányosításakor eleve PENDING értéket kap, vagyis nemigen tesztelhető
      *
      * dispatchOrder() BOOKED-ra állítja az Order státuszát
      */
@@ -184,16 +188,17 @@ class OrderOnlineTest extends Container {
         assertEquals(OrderStatusOnlineEnum.WAITING_FOR_DELIVERY, order.getOrderStatus());
         // fizetés dátuma nem üres
         assertNotNull(order.getPayedDate());
-        // LocalDateTime.now() kerül bele, ezt nem
-        // vethetem össze a "mostani" LocalDateTime.now()-val (vagy igen?)
+        // LocalDateTime.now() kerül bele, ezt nem vethetem össze
+        // a "mostani" LocalDateTime.now()-val (vagy igen?)
+        // (HÁT NEM!!!)
         //assertEquals(LocalDateTime.now(), order.getPaymentDate());
         // fizetve true
         assertTrue(order.getPaid());
 
         //-----------------------------------------------------------------------
-        // ez eddig a prolog()-ban létrehozott futárszolgálatos változat,
-        // most csinálok egy személyesátvételest. Ilyenkor a státusz DELIVERED lesz.
-        OrderOnline order1 = createOrder();
+        // ez eddig a prolog()-ban létrehozott "futárszolgálat"-os változat,
+        // most csinálok egy "személyes átvétel"-est. Ilyenkor a státusz DELIVERED lesz.
+        OrderOnline order1 = createOrder(cart);
         try {
             //kell futtatni egy feladást a BOOKED státusz miatt
             order1.dispatchOrder(order.getCustomer(), order.getPaymentMode(), DeliveryModeEnum.DIRECT_RECEIVING);
@@ -212,7 +217,9 @@ class OrderOnlineTest extends Container {
     /**
      * passToDeliveryService()
      * - ha a státusz nem WAITING_FOR_DELIVERY, akkor InvalidOrderOperationException
-     * - ha a fizetési mód NEM "utánévét" (ADDITIONAL), ÉS
+     *   (miután WAITING_FOR_DELIVERY csak DELIVERY_SERVICE átvételi mód esetén fordulhat
+     *    elő, ezt külön nem vizgálom a metódusban, tesztelni sem kell)
+     * - ha a fizetési mód NEM "utánvét" (ADDITIONAL), ÉS
      *   még nincs fizetve, akkor InvalidOrderOperationException
      * - a státusz IN_PROGRESS lesz
      * - az átadva dátum (passToServiceDate) a gépidő lesz
@@ -239,6 +246,8 @@ class OrderOnlineTest extends Container {
     /**
      * confirmDelivery()
      * - ha a státusz nem IN_PROGRESS, akkor az InvalidOrderOperationException
+     *   (miután IN_PROGRESS csak DELIVERY_SERVICE átvételi mód esetén fordulhat
+     *    elő, ezt külön nem vizgálom a metódusban, ezt tesztelni sem kell)
      * - ha nem sikeres a szállítás ÉS a sikertelenségi megjegyzés nincs kitöltve,
      *   akkor az InvalidOrderOperationException
      * - ha
@@ -268,17 +277,170 @@ class OrderOnlineTest extends Container {
         assertNotNull(order.getDeliveredDate());
     }
 
+    // closeOrder() - rendelés lezárása
+    // - ha a rendelés fizetése nincs rendezve, az InvalidOrderOperationException
+    // - ha a rendelés nincs kiszállítva akár sikeresen (DELIVERED), akár sikertelenül (FAILED_DELIVERY),
+    //   az InvalidOrderOperationException
+    // - ha as kézbesítés
+    //   = sikertelen, akkor felszabadítja az összes, a rendelésben lefoglalt terméket
+    //   = sikeres, akkor véglegesíti a raktárkészletben a készletcsökkenést
+    // - zárásdátumot beállítja a gépidőre.
     @Test
     @Order(5)
     void closeOrder() {
-    }
+        // nézzük a "normális" menetet (feladva, fizetve, kiszállítva)
+        try {
+            // tehát a kiindulás:
+            // - rendelés fizetve, (sikeresen) kiszállítva
+            // - prod1, prod2, prod3 100-100 mennyiséggel van képviselve a rendelésben
+            // - a raktárban prod1, prod2, prod3-ból 1000, 2000, 2000 van
+            assertTrue(order.getPaid());
+            assertEquals(OrderStatusOnlineEnum.DELIVERED, order.getOrderStatus());
+            assertEquals(100, order.productItems().get(0).getQuantity());
+            assertEquals(100, order.productItems().get(1).getQuantity());
+            assertEquals(100, order.productItems().get(2).getQuantity());
+            assertEquals(100, stock.productItemList().get(0).getQuantity());
+            assertEquals(500, stock.productItemList().get(1).getQuantity());
+            assertEquals(1000, stock.productItemList().get(2).getQuantity());
+            order.closeOrder(stock);
+            // a termékekből 0, 400 és 900 kell maradjon a raktárban
+            assertEquals(0, stock.productItemList().get(0).getQuantity());
+            assertEquals(400, stock.productItemList().get(1).getQuantity());
+            assertEquals(900, stock.productItemList().get(2).getQuantity());
+        } catch (InvalidOrderOperationException | InvalidQuantityArgumentException | NotEnoughItemException e) {
+            e.printStackTrace();
+        }
+        //-----------------------------------------------------------------------
+        // ez eddig "szabályos" folyamatot követve teszteltem, most nézzük a kezelt
+        // hibákat:
+        // - csinálok előbb egy "nem kifizetett"-et
+        OrderOnline order1 = createOrder(cart);
+        String message = MESSAGE_DEFAULT;
+        try {
+            //kell futtatni egy feladást a BOOKED státusz miatt
+            order1.dispatchOrder(order.getCustomer(), order.getPaymentMode(), order.getDeliveryMode());
+            // a fizetés megerősítése kimarad
+            //order1.confirmPayment();
+            // tehát
+            // - a fizetve (paid): false
+            // - a státusz: BOOKED a feladás után
+            assertFalse(order1.getPaid());
+            assertEquals(OrderStatusOnlineEnum.BOOKED, order1.getOrderStatus());
+            order1.closeOrder(stock);
+        } catch (InvalidOrderOperationException | NotEnoughItemException e) {
+            message = e.getMessage();
+        }
+        // "...nincs kiegyenlítve..." kell
+        assertTrue(message.contains("Számla nincs kiegyenlítve, a rendelés nem zárható le"));
 
-    @Test
-    void setPaymentMode() {
-    }
+        // nézzük tovább a "fizetve" után
+        try {
+            // a fizetés megerősítése
+            order1.confirmPayment();
+            // tehát
+            // - a fizetve (paid): true
+            // - a státusz: WAITING_FOR_DELIVERY a fizetés után
+            assertTrue(order1.getPaid());
+            assertEquals(OrderStatusOnlineEnum.WAITING_FOR_DELIVERY, order1.getOrderStatus());
+            order1.closeOrder(stock);
+        } catch (InvalidOrderOperationException | NotEnoughItemException e) {
+            message = e.getMessage();
+        }
+        // "Nem véglegesített..." kell
+        assertTrue(message.contains("Nem véglegesített rendelés nem zárható le"));
 
-    @Test
-    void setDeliveryMode() {
+        // ha ki is szállítom, akkor - elvileg - lefutna a close, de miután
+        // ebben a rednelésben is van 100 prod1 (emlékeztető: az eredeti
+        // kosárból (lásd: prolog()) csináltam ezt is), ÉS ezt a 100-at a
+        // szabályos menetben már kivettem a raktárból, itt NotEnoughItemException
+        // várható - ha "sikeres"-nek mondom a szállítást.
+        try {
+            // a fizetés megerősítése
+            order1.confirmPayment();
+            // tehát
+            // - a fizetve (paid): true
+            assertTrue(order1.getPaid());
+            // - a státusz: WAITING_FOR_DELIVERY a fizetés után
+            assertEquals(OrderStatusOnlineEnum.WAITING_FOR_DELIVERY, order1.getOrderStatus());
+            // adjuk át a futárnak a csomagot
+            order1.passToDeliveryService();
+            // - a státusz: IN_PROGRESS az átadás után
+            assertEquals(OrderStatusOnlineEnum.IN_PROGRESS, order1.getOrderStatus());
+            // kézbesítés: sikeres
+            order1.confirmDelivery(true);
+            // - a státusz: DELIVERED a megerősítés után
+            assertEquals(OrderStatusOnlineEnum.DELIVERED, order1.getOrderStatus());
+            order1.closeOrder(stock);
+        } catch (InvalidOrderOperationException | NotEnoughItemException e) {
+            message = e.getMessage();
+        }
+        // "...nincs lefoglalva..." kell
+        assertTrue(message.contains("A véglegesíteni kívánt mennyiség nincs lefoglalva"));
+
+        // A "sikertelen" esetén viszont hiba nélkül le kell fusson, DE...
+        // előbb lássuk: a sikertelenségi megjegyzést nem adom meg
+        // (új order1 kell, mert az előzőt ellőttem a DELIVERED-ig)
+        order1 = createOrder(cart);
+        message = MESSAGE_DEFAULT;
+        try {
+            //kell futtatni egy feladást a BOOKED státusz miatt
+            order1.dispatchOrder(order.getCustomer(), order.getPaymentMode(), order.getDeliveryMode());
+            // a fizetés megerősítése
+            order1.confirmPayment();
+            // - a státusz: WAITING_FOR_DELIVERY a fizetés után
+            assertEquals(OrderStatusOnlineEnum.WAITING_FOR_DELIVERY, order1.getOrderStatus());
+            // adjuk át a futárnak a csomagot
+            order1.passToDeliveryService();
+            // - a státusz: IN_PROGRESS az átadás után
+            assertEquals(OrderStatusOnlineEnum.IN_PROGRESS, order1.getOrderStatus());
+            // kézbesítés: sikertelen
+            order1.confirmDelivery(false);
+        } catch (InvalidOrderOperationException e) {
+            message = e.getMessage();
+        }
+        // "Sikertelen átvétel... oka..." kell
+        assertTrue(message.contains("Sikertelen átvétel esetén a sikertelenség okát fel kell tűntetni"));
+
+        message = MESSAGE_DEFAULT;
+        try {
+            // a fizetés megerősítése
+            order1.confirmPayment();
+            // kézbesítés: sikertelen
+            order1.confirmDelivery(false, "Sérült csomagolás miatt nem vették át");
+            // tehát
+            // - a fizetve (paid): true
+            // - a státusz: FAILED_DELIVERY a sikertelen kiszállítás után
+            assertTrue(order1.getPaid());
+            assertEquals(OrderStatusOnlineEnum.FAILED_DELIVERY, order1.getOrderStatus());
+            order1.closeOrder(stock);
+        } catch (InvalidOrderOperationException | NotEnoughItemException e) {
+            message = e.getMessage();
+        }
+        // MESSAGE_DEFAULT kell
+        assertEquals(MESSAGE_DEFAULT, message);
+
+/*
+        //-----------------------------------------------------------------------
+        // - csinálok még egy ""személyes átvétel"-est is
+        //   (ez abban különbözik, hogy a fizetés megerősítése után egyből DELIVERED
+        //    lesz).
+        order1 = createOrder(cart);
+        message = MESSAGE_DEFAULT;
+        try {
+            //kell futtatni egy feladást a BOOKED státusz miatt
+            order1.dispatchOrder(order.getCustomer(), order.getPaymentMode(), order.getDeliveryMode());
+            // a fizetés megerősítése kimarad
+            //order1.confirmPayment();
+            // tehát
+            // - a fizetve (paid): false
+            // - a státusz: BOOKED a feladás után
+            assertFalse(order1.getPaid());
+            assertEquals(OrderStatusOnlineEnum.BOOKED, order1.getOrderStatus());
+            order1.closeOrder(stock);
+        } catch (InvalidOrderOperationException | NotEnoughItemException e) {
+            message = e.getMessage();
+        }
+*/
     }
 
     @Test
@@ -299,10 +461,10 @@ class OrderOnlineTest extends Container {
         final String address = "Cím2";
         final String phoneNumber = "ph.num.2";
         final String email = "lofarok@g.hu";
-        final String deliveryAddress = "ideacsomagot";
-        final String accountAddress = "ideaszámlát";
+        final String deliveryAddress = "ide a csomagot";
+        final String accountAddress = "ide a számlát";
 
-        // ezzel a constructorral az accountAddress megkapja a deliveryAddress értékét
+        // ezzel a konstructorral az accountAddress megkapja a deliveryAddress értékét
         order.setCustomer(new Customer(customerID, name, address, phoneNumber,email,deliveryAddress));
         assertEquals(customerID, order.getCustomer().getCustomerID());
         assertEquals(name, order.getCustomer().getName());
