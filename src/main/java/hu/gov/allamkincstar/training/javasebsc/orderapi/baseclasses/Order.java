@@ -19,11 +19,14 @@ public abstract class Order {
     protected final Long            orderID;
     protected       PaymentModeEnum paymentMode = null;
     protected       Customer        customer;
-    protected Integer netSum;
-    protected Integer VATSum;
-    protected Integer grossSum;
-    protected Integer billTotal;
-    protected LocalDateTime creationDate;
+    protected final Integer         netSum;
+    protected final Integer         VATSum;
+    protected final Integer         grossSum;
+    protected       LocalDateTime   creationDate = null;
+    protected       LocalDateTime   payedDate = null;
+    protected       LocalDateTime   closedDate = null;
+    protected       LocalDateTime   deliveredDate = null;
+
     protected final List<ProductItem> orderItems;
 
     public Boolean getPaid() {
@@ -34,22 +37,23 @@ public abstract class Order {
 
     public Order(Long orderID, List<ProductItem> ordeItems) {
         this.orderID = orderID;
-        this.customer = customer;
         this.orderItems = ordeItems;
         //this.orderItems = ordeItems;
-        netSum = 0;
-        VATSum = 0;
-        ordeItems.forEach( item -> {
+        int netSum = 0;
+        int VATSum = 0;
+        for (ProductItem item : ordeItems) {
             OrderItem orderItem = new OrderItem(item);
             netSum += orderItem.getNetAmount();
             VATSum += orderItem.getVATAmount();
-        });
+        }
+        this.netSum = netSum;
+        this.VATSum = VATSum;
         grossSum = netSum + VATSum;
     }
 
-    public abstract void dispatchOrder(Customer customer, PaymentModeEnum paymentMode) throws InvalidOrderOperationException;
+    public abstract void dispatchOrder(Customer customer, PaymentModeEnum paymentMode) throws InvalidOrderOperationException, InvalidPaymentModeException;
 
-    public abstract void dispatchOrder(Customer customer, PaymentModeEnum paymentMode, DeliveryModeEnum deliveryMode) throws InvalidOrderOperationException;
+    public abstract void dispatchOrder(Customer customer, PaymentModeEnum paymentMode, DeliveryModeEnum deliveryMode) throws InvalidOrderOperationException, InvalidPaymentModeException;
 
     protected void validateCustomer() throws InvalidOrderOperationException {
         if (customer == null){
@@ -71,15 +75,11 @@ public abstract class Order {
 
     public abstract PaymentModeEnum getPaymentMode();
 
-    public abstract void setPaymentMode(PaymentModeEnum paymentMode) throws InvalidPaymentModeException;
-
-    public abstract void validatePaymentModeToSet() throws InvalidPaymentModeException;
+    public abstract void validatePaymentModeToSet(PaymentModeEnum paymentMode) throws InvalidPaymentModeException;
 
     public abstract void closeOrder(Stock stock)  throws InvalidOrderOperationException, NotEnoughItemException, InvalidQuantityArgumentException;
 
     public abstract Customer getCustomer();
-
-    public abstract void setCustomer(Customer customer);
 
     public List<OrderItem> productItems(){
         List<OrderItem> result = new ArrayList<>();
@@ -91,10 +91,31 @@ public abstract class Order {
         return orderItems;
     }
 
+    protected void releaseAllProduct(Stock stock) throws NotEnoughItemException {
+        for (OrderItem item :productItems()){
+            stock.releaseBookedQuantity(item);
+        }
+    }
+
     protected void finishAllProduct(Stock stock) throws InvalidQuantityArgumentException, NotEnoughItemException {
         for (OrderItem item :productItems()){
             stock.finishItemBook(item);
         }
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public LocalDateTime getPayedDate() {
+        return payedDate;
+    }
+
+    public LocalDateTime getClosedDate() {
+        return closedDate;
+    }
+
+    public LocalDateTime getDeliveredDate() {
+        return deliveredDate;
+    }
 }

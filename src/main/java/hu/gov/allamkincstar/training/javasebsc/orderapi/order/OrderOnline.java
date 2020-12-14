@@ -19,16 +19,15 @@ public final class OrderOnline extends Order{
     private OrderStatusOnlineEnum orderStatus    = OrderStatusOnlineEnum.PENDING;
     private DeliveryModeEnum      deliveryMode   = null;
     private String                failureComment = null;
-    private       LocalDateTime         payedDate = null;
-    private       LocalDateTime         passedToServiceDate = null;
-    private       LocalDateTime         deliveredDate = null;
-    private       LocalDateTime         closedDate = null;
+    private final Integer         billTotal;
+    private LocalDateTime         passedToServiceDate = null;
 
     public OrderOnline(Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
         super(orderID, orderItemList);
         this.deliveryParameters = deliveryParameters;
         if (this.grossSum < deliveryParameters.getLimitForFree())
             billTotal = grossSum + deliveryParameters.getDeliveryCharge();
+        else billTotal = grossSum;
     }
 
     @Override
@@ -37,12 +36,12 @@ public final class OrderOnline extends Order{
     }
 
     @Override
-    public void dispatchOrder(Customer customer, PaymentModeEnum paymentMode, DeliveryModeEnum deliveryMode) throws InvalidOrderOperationException{
+    public void dispatchOrder(Customer customer, PaymentModeEnum paymentMode, DeliveryModeEnum deliveryMode) throws InvalidOrderOperationException, InvalidPaymentModeException {
+        validatePaymentModeToSet(paymentMode);
         this.customer = customer;
         this.paymentMode = paymentMode;
         this.deliveryMode = deliveryMode;
         validateCustomer();
-        if (paymentMode == null) throw new InvalidOrderOperationException("Nem választott fizetési módot");
         if (deliveryMode == null) throw new InvalidOrderOperationException("Nem választott szállítási módot");
         if (orderStatus != OrderStatusOnlineEnum.PENDING) throw new InvalidOrderOperationException("Feladás csak előkészítés státuszban kezdeményezhető");
         // ha a fizetési mód "utánvét", akkor egyből WAITING_FOR_DELIVERY lesz, egyébként BOOKED
@@ -51,19 +50,17 @@ public final class OrderOnline extends Order{
     }
 
     @Override
-    public void validatePaymentModeToSet() throws InvalidPaymentModeException{
-        if (paymentMode == PaymentModeEnum.CASH)
-            throw new InvalidPaymentModeException(paymentMode);
+    public void validatePaymentModeToSet(PaymentModeEnum paymentModeToSet) throws InvalidPaymentModeException{
+        // online megrendelés esetén érvényes fizetési módok: utávét, utalás, bankkártya
+        if (!(paymentModeToSet == PaymentModeEnum.ADDITIONAL ||
+              paymentModeToSet == PaymentModeEnum.BY_WIRE    ||
+              paymentModeToSet == PaymentModeEnum.CREDIT_CARD))
+            throw new InvalidPaymentModeException(paymentModeToSet);
     }
 
     @Override
     public Customer getCustomer(){
         return customer;
-    }
-
-    @Override
-    public void setCustomer(Customer customer){
-        this.customer = customer;
     }
 
     @Override
@@ -143,12 +140,14 @@ public final class OrderOnline extends Order{
         closedDate = LocalDateTime.now();
     }
 
+/*
     private void releaseAllProduct(Stock stock) throws NotEnoughItemException {
         for (OrderItem item :productItems()){
             stock.releaseBookedQuantity(item);
         }
     }
 
+*/
 /*
     private void finishAllProduct(Stock stock) throws InvalidQuantityArgumentException, NotEnoughItemException {
         for (OrderItem item :productItems()){
@@ -161,18 +160,8 @@ public final class OrderOnline extends Order{
         return orderStatus;
     }
 
-    @Override
-    public void setPaymentMode(PaymentModeEnum paymentMode) throws InvalidPaymentModeException{
-        validatePaymentModeToSet();
-        this.paymentMode = paymentMode;
-    }
-
     public DeliveryModeEnum getDeliveryMode(){
         return deliveryMode;
-    }
-
-    public void setDeliveryMode(DeliveryModeEnum deliveryMode){
-        this.deliveryMode = deliveryMode;
     }
 
     public String getFailureComment(){

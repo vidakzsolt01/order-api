@@ -5,10 +5,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.DeliveryModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusOnlineEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.PaymentModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.ShoppingModeEnum;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.CartIsEmptyException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.StockItem;
 import org.junit.jupiter.api.*;
@@ -19,7 +16,8 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 // Az egyes metódusok tesztjeit a megrendelés tervezett életciklusa szerinti
-// sorrendben akaraom futtatni, hogy lássam, hogy ha minden "szabályosan" halad,
+// sorrendben akaraom futtatni (egyik metódus által állított értékeket
+// felhasználom a következőben), hogy lássam, hogy ha minden "szabályosan" halad,
 // akkor mit mutat a kód.
 // A "szabályos" sorrend (egy online, bakkártyás, futárszolgálatos rendelés esetén)
 // tehát:
@@ -113,62 +111,62 @@ class OrderOnlineTest extends Container {
     @Test
     @Order(1)
     void dispatchOrder() {
-        // miután az Order épp most jött létre, a rendelésfeladás nem mehet,
+        // miután az Order épp most jött létre és még nincs Customer, a rendelésfeladás nem mehet,
         // InvalidOrderOperationException-hoz vezet
         String message = MESSAGE_DEFAULT;
 
         // customer kezdetben null: InvalidOrderOperationException
         try {
             order.dispatchOrder(customer, PaymentModeEnum.CREDIT_CARD, DeliveryModeEnum.DELIVERY_SERVICE);
-        } catch (InvalidOrderOperationException e) {
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
-        assertTrue(message.contains("ásárló-adatok"));
+        assertTrue(message.contains("Vásárló-adatok nélkül"));
 
         // hiányos customer-adatok (nincs cím, email és telefon): InvalidOrderOperationException
         customer = new Customer(1L, "Vevő");
         try {
             order.dispatchOrder(customer, PaymentModeEnum.CREDIT_CARD, DeliveryModeEnum.DELIVERY_SERVICE);
-        } catch (InvalidOrderOperationException e) {
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
-        assertTrue(message.contains("ásárló-adatok"));
+        assertTrue(message.contains("Kötelező vásárló-adatok hiányoznak"));
 
         // hiányos customer-adatok (nincs email és telefon): InvalidOrderOperationException
         customer.setDeliveryAddress("Cím");
         try {
             order.dispatchOrder(customer, PaymentModeEnum.CREDIT_CARD, DeliveryModeEnum.DELIVERY_SERVICE);
-        } catch (InvalidOrderOperationException e) {
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
-        assertTrue(message.contains("ásárló-adatok"));
+        assertTrue(message.contains("Kötelező vásárló-adatok hiányoznak"));
 
         // hiányos customer-adatok (telefon): InvalidOrderOperationException
         customer.setEmail("email@gcim.hu");
         try {
             order.dispatchOrder(customer, PaymentModeEnum.CREDIT_CARD, DeliveryModeEnum.DELIVERY_SERVICE);
-        } catch (InvalidOrderOperationException e) {
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
-        assertTrue(message.contains("ásárló-adatok"));
+        assertTrue(message.contains("Kötelező vásárló-adatok hiányoznak"));
 
         // customer-adatok rendben, szállítási mód nincs átadva: InvalidOrderOperationException
         customer.setPhoneNumber("phonenumber");
         try {
             order.dispatchOrder(customer, PaymentModeEnum.CREDIT_CARD, null);
-        } catch (InvalidOrderOperationException e) {
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
         assertTrue(message.contains("Nem választott szállítási módot"));
 
         // customer-adatok rendben, szállítási mód rendben, fizetési mód
-        // nincs átadva: InvalidOrderOperationException
+        // hibás: InvalidOrderOperationException
         try {
-            order.dispatchOrder(customer, null, DeliveryModeEnum.DELIVERY_SERVICE);
-        } catch (InvalidOrderOperationException e) {
+            order.dispatchOrder(customer, PaymentModeEnum.CASH, DeliveryModeEnum.DELIVERY_SERVICE);
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
-        assertTrue(message.contains("Nem választott fizetési módot"));
+        assertTrue(message.contains("Ez a fizetési mód ennél a megrendeléstípusnál nem választható"));
 
         // customer-adatok rendben, szállítási mód rendben, fizetési rendben, elvileg feladható
         // (a feladáshoz a státusznak PENDING-nek kell lennie, de a státusz "kívülről" nem
@@ -181,7 +179,7 @@ class OrderOnlineTest extends Container {
             // fizetési mód: bankkártya, átvételi mód: futárszolgálat
             order.dispatchOrder(customer, PaymentModeEnum.CREDIT_CARD, DeliveryModeEnum.DELIVERY_SERVICE);
             message = MESSAGE_DEFAULT;
-        } catch (InvalidOrderOperationException e) {
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
         // nem volt hiba?
@@ -239,7 +237,7 @@ class OrderOnlineTest extends Container {
             assertNotNull(order1.getPayedDate());
             // fizetve true
             assertTrue(order1.getPaid());
-        } catch (InvalidOrderOperationException e) {
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
             e.printStackTrace();
         }
     }
@@ -371,7 +369,7 @@ class OrderOnlineTest extends Container {
             assertFalse(order1.getPaid());
             assertEquals(OrderStatusOnlineEnum.BOOKED, order1.getOrderStatus());
             order1.closeOrder(stock);
-        } catch (InvalidOrderOperationException | NotEnoughItemException e) {
+        } catch (InvalidOrderOperationException | NotEnoughItemException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
         // "...nincs kiegyenlítve..." kell
@@ -471,7 +469,7 @@ class OrderOnlineTest extends Container {
             // prod2-ből 300 maradt a raktárban, 0 foglalt
             assertEquals(800, stock.findItem(prod3.getItemNumber()).getQuantity());
             assertEquals(0, ((StockItem)stock.findItem(prod3.getItemNumber())).getBookedQuantity());
-        } catch (InvalidOrderOperationException | NotEnoughItemException e) {
+        } catch (InvalidOrderOperationException | NotEnoughItemException | InvalidPaymentModeException e) {
             message = e.getMessage();
         }
         // Nincs hiba, minden OK
@@ -479,6 +477,9 @@ class OrderOnlineTest extends Container {
 
     }
 
+/*
+
+    megszűntettem a setCustomer()-t
     @Test
     void setCustomer() {
         assertEquals(1L, order.getCustomer().getCustomerID());
@@ -510,4 +511,5 @@ class OrderOnlineTest extends Container {
         assertEquals(accountAddress, order.getCustomer().getAccountAddress());
     }
 
+*/
 }
