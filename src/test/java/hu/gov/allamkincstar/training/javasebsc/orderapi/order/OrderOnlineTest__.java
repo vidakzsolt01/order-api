@@ -14,8 +14,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Az egyes metódusok tesztjeit a megrendelés tervezett életciklusa szerinti
+// sorrendben akaraom futtatni, hogy lássam, hogy ha minden "szabályosan" halad,
+// akkor mit mutat a kód.
+// A "szabályos" sorrend (egy online, bakkártyás, futárszolgálatos rendelés esetén)
+// tehát:
+// - dispatchOrder()         - rendelés feladása
+// - confirmPayment()        - fizetés megerősítése
+// - passToDeliveryService() - átadás a futárszolgálatnak
+// - confirmDelivery()       - szállítás/átvétel megerősítése.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class OrderOnlineTest extends Container {
+class OrderOnlineTest__ extends Container {
 
     static final String MESSAGE_DEFAULT = "no message";
     static OrderOnline order;
@@ -25,9 +34,14 @@ class OrderOnlineTest extends Container {
 
     @BeforeAll
     static void prolog() {
-        // a tesztekhez kellene egy OrderOnline, amit a Cart.closeCart()-ja hoz létre,
-        // tehát csinálok egy Cart-ot, aminek a feltöltését viszont raktárból
-        // lehet intézni, tehát kezdem a raktáral
+        //--------------------------------------------------------------------------------
+        // A tesztekhez kell egy OrderOnline object, amit a Cart.closeCart()-ja hoz létre,
+        // tehát kell  egy Cart.
+        // A Cart feltöltését viszont raktárból lehet intézni, tehát kell egy
+        // Raktár (Stock) is, kezdem ezzel
+        //-----------------------------------------------
+        // ezen a szinte az Exception-ökkel nem foglalkozom...
+        //--------------------------------------------------------------------------------
         stock = new Stock();
         try {
             stock.depositProduct(new Product("111111", "Termék-1", 1000, 27), 100);
@@ -37,7 +51,7 @@ class OrderOnlineTest extends Container {
             e.printStackTrace();
         }
 
-        // tehát csinálok Cart-ot a rakétártételekből
+        // Megvan a Raktár, most feltöltök Kosarat a rakétártételekből
         List<ProductItem> stockProduts = stock.productItemList();
         cart = new Cart();
         try {
@@ -48,7 +62,7 @@ class OrderOnlineTest extends Container {
             e.printStackTrace();
         }
 
-        // és itt a kezdeti végcél: csinálok OrderOnline-t
+        // Végül itt a kezdeti végcél: csinálok egy OrderOnline-t a Cart.closeCart()-tal
         try {
             order = (OrderOnline) cart.closeCart(ShoppingModeEnum.ONLINE);
         } catch (CartIsEmptyException e) {
@@ -56,6 +70,8 @@ class OrderOnlineTest extends Container {
         }
     }
 
+    // az egyes tesztmetódusok hibatesztjeihez időnként kell csinálnom egy-egy
+    // új Order-t, ehhez csinálok egy OrderOnline csináló metódust
     private OrderOnline createOrder(){
         OrderOnline order = null;
         try {
@@ -67,7 +83,8 @@ class OrderOnlineTest extends Container {
     }
 
     /**
-     * A rendelésfeladás akkor lehetséges, ha
+     * dispatchOrder() - rendelésfeladás
+     * Akkor lehetséges, ha
      * - van Customer (!= null) és a kötelező mezői (név, cím, email, telefon) ki vannak töltve
      * - a fizetési mód meg van adva
      * - a szállítási mód meg van adva
@@ -75,7 +92,7 @@ class OrderOnlineTest extends Container {
      * Ezeket tesztelem itt - kivéve a státuszt, mert az
      * - "védett" mező, nem állítható közvetlenül "kívülről" (tehát itt nem tudok különböző
      *    értékeket adni neki), és
-     * - az Order példányosításakor eleve PANDING értéket kap, vagyis nemigen tesztelhető
+     * - az Order példányosításakor eleve PENDING értéket kap, vagyis nemigen tesztelhető
      *
      * dispatchOrder() BOOKED-ra állítja az Order státuszát
      */
@@ -130,7 +147,8 @@ class OrderOnlineTest extends Container {
         }
         assertTrue(message.contains("Nem választott szállítási módot"));
 
-        // customer-adatok rendben, szállítási mód rendben, fizetési nincs átadva: InvalidOrderOperationException
+        // customer-adatok rendben, szállítási mód rendben, fizetési mód
+        // nincs átadva: InvalidOrderOperationException
         try {
             order.dispatchOrder(customer, null, DeliveryModeEnum.DELIVERY_SERVICE);
         } catch (InvalidOrderOperationException e) {
@@ -146,6 +164,7 @@ class OrderOnlineTest extends Container {
         assertEquals(OrderStatusOnlineEnum.PENDING, order.getOrderStatus());
 
         try {
+            // fizetési mód: bankkártya, átvételi mód: futárszolgálat
             order.dispatchOrder(customer, PaymentModeEnum.CREDIT_CARD, DeliveryModeEnum.DELIVERY_SERVICE);
             message = MESSAGE_DEFAULT;
         } catch (InvalidOrderOperationException e) {
@@ -158,7 +177,7 @@ class OrderOnlineTest extends Container {
     }
 
     /**
-     * confirmPayment()
+     * confirmPayment() - fizetés megerősítése
      * - csak akkor fut le, ha BOOKED a státusz (státuszt nem lehet közvetlenül állítani,
      *   ezt nem tudom tesztelni)
      * - beállítja
@@ -186,19 +205,21 @@ class OrderOnlineTest extends Container {
         assertNotNull(order.getPayedDate());
         // LocalDateTime.now() kerül bele, ezt nem
         // vethetem össze a "mostani" LocalDateTime.now()-val (vagy igen?)
+        // HÁT NEM!!! (néha jó, de inkább nem)
         //assertEquals(LocalDateTime.now(), order.getPaymentDate());
         // fizetve true
         assertTrue(order.getPaid());
 
         //-----------------------------------------------------------------------
-        // ez eddig a prolog()-ban létrehozott futárszolgálatos változat,
-        // most csinálok egy személyesátvételest. Ilyenkor a státusz DELIVERED lesz.
+        // ez eddig a prolog()-ban létrehozott "futárszolgálat"-os változat,
+        // most csinálok egy másik, "személyes átvétel"-est.
+        // Ilyenkor a fizetés megerősítése után a státusz egyből DELIVERED lesz.
         OrderOnline order1 = createOrder();
         try {
             //kell futtatni egy feladást a BOOKED státusz miatt
             order1.dispatchOrder(order.getCustomer(), order.getPaymentMode(), DeliveryModeEnum.DIRECT_RECEIVING);
             order1.confirmPayment();
-            // a státusz: WAITING_FOR_DELIVERY (szállítási mód "futárszolgálat" (DELIVERY_SERVICE) volt)
+            // a státusz: DELIVERED (átvételi mód "személyes átvétel" (DIRECT_RECEIVING) volt)
             assertEquals(OrderStatusOnlineEnum.DELIVERED, order1.getOrderStatus());
             // fizetés dátuma nem üres
             assertNotNull(order1.getPayedDate());
@@ -210,7 +231,7 @@ class OrderOnlineTest extends Container {
     }
 
     /**
-     * passToDeliveryService()
+     * passToDeliveryService() - átadás a futárszolgálatnak
      * - ha a státusz nem WAITING_FOR_DELIVERY, akkor InvalidOrderOperationException
      * - ha a fizetési mód NEM "utánévét" (ADDITIONAL), ÉS
      *   még nincs fizetve, akkor InvalidOrderOperationException
@@ -220,12 +241,12 @@ class OrderOnlineTest extends Container {
     @Test
     @Order(3)
     void passToDeliveryService() {
-        String message;
+        String message = MESSAGE_DEFAULT;
         try {
-            if (order.getOrderStatus() == OrderStatusOnlineEnum.PENDING) dispatchOrder();
+            //if (order.getOrderStatus() == OrderStatusOnlineEnum.PENDING) dispatchOrder();
+            // az előbb lefutott a fizetés megerősítése, a státusz WAITING_FOR_DELIVERY
             assertEquals(OrderStatusOnlineEnum.WAITING_FOR_DELIVERY, order.getOrderStatus());
             order.passToDeliveryService();
-            message = MESSAGE_DEFAULT;
         } catch (InvalidOrderOperationException e) {
             message = e.getMessage();
         }
@@ -237,7 +258,7 @@ class OrderOnlineTest extends Container {
     }
 
     /**
-     * confirmDelivery()
+     * confirmDelivery() - szállítás/átvétel megerősítése
      * - ha a státusz nem IN_PROGRESS, akkor az InvalidOrderOperationException
      * - ha nem sikeres a szállítás ÉS a sikertelenségi megjegyzés nincs kitöltve,
      *   akkor az InvalidOrderOperationException

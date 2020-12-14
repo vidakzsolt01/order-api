@@ -23,20 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7279cbe1-c3f7-4a56-a948-5435ff160a45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/OrderRegister.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/exceptions/CartIsEmptyException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnlineTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/baseclasses/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderDirect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/CartTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockItemTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/stock/StockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnlineTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/gov/allamkincstar/training/javasebsc/orderapi/order/OrderOnlineTest__.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,18 +110,18 @@
     <configuration name="OrderOnlineTest full" type="JUnit" factoryName="JUnit">
       <module name="order-api" />
       <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
-      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderOnlineTest" />
+      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderOnlineTest__" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderOnlineTest.confirmPayment" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <configuration name="OrderOnlineTest__.confirmPayment" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="order-api" />
       <useClassPathOnly />
       <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
-      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderOnlineTest" />
+      <option name="MAIN_CLASS_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderOnlineTest__" />
       <option name="METHOD_NAME" value="confirmPayment" />
       <option name="TEST_OBJECT" value="method" />
       <option name="PARAMETERS" value="" />
@@ -169,9 +157,9 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.OrderOnlineTest.confirmPayment" />
       <item itemvalue="JUnit.OrderOnlineTest full" />
       <item itemvalue="Maven.order-api [compile with -X]" />
+      <item itemvalue="JUnit.OrderOnlineTest__.confirmPayment" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
