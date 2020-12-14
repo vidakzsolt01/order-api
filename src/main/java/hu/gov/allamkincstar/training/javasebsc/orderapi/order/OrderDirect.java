@@ -10,6 +10,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuanti
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusDirectEnum.DELIVERED;
@@ -18,8 +19,6 @@ import static hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatus
 public final class OrderDirect extends Order {
 
     protected OrderStatusDirectEnum orderStatus = PENDING;
-    private   Customer              customer;
-    private   PaymentModeEnum       paymentMode;
 
     public OrderDirect(Long orderId, List<ProductItem> ordeItems) {
         super(orderId, ordeItems);
@@ -28,31 +27,35 @@ public final class OrderDirect extends Order {
 
     @Override
     public void dispatchOrder(Customer customer,
-                              PaymentModeEnum paymentMode) throws InvalidOrderOperationException {
-        this.customer    = customer;
-        this.paymentMode = paymentMode;
+                              PaymentModeEnum paymentMode) throws InvalidOrderOperationException, InvalidPaymentModeException {
+        this.customer = customer;
+        validateCustomer();
+        validatePaymentModeToSet(paymentMode);
         switch (orderStatus){
             case PENDING:
-                orderStatus = OrderStatusDirectEnum.BOOKED;
                 break;
             case BOOKED:
                 throw new InvalidOrderOperationException("A rendelés már feladásra került.");
             case DELIVERED:
-                throw new InvalidOrderOperationException("A rendelés már korábban lezárva");
+                throw new InvalidOrderOperationException("Lezárt rendelés nem adható fel");
             default:
                 throw new InvalidOrderOperationException("Feladásban nem kezelt rendelésállapot: "+orderStatus);
         }
+        this.paymentMode = paymentMode;
+        orderStatus = OrderStatusDirectEnum.BOOKED;
+        creationDate = LocalDateTime.now();
     }
 
     @Override
     public void dispatchOrder(Customer customer, PaymentModeEnum paymentMode, DeliveryModeEnum deliveryMode){
-        throw new RuntimeException("This method cannot be used in this class");
+        throw new RuntimeException("This method cannot be used for this inherited class");
     }
 
     @Override
-    public void validatePaymentModeToSet() throws InvalidPaymentModeException{
-        if (paymentMode == PaymentModeEnum.BY_WIRE || paymentMode == PaymentModeEnum.ADDITIONAL)
-            throw new InvalidPaymentModeException(paymentMode);
+    public void validatePaymentModeToSet(PaymentModeEnum paymentModeToSet) throws InvalidPaymentModeException{
+        // személyes vásárlás esetén az érvényes fizetési módok: készpénz, bankkártya
+        if (!(paymentModeToSet == PaymentModeEnum.CASH || paymentModeToSet == PaymentModeEnum.CREDIT_CARD))
+            throw new InvalidPaymentModeException(paymentModeToSet);
     }
 
     @Override
@@ -61,9 +64,9 @@ public final class OrderDirect extends Order {
             throw new InvalidOrderOperationException("Nem véglegesített rendelés nem zárható le.");
         }
         finishAllProduct(stock);
+        closedDate = LocalDateTime.now();
     }
 
-    //TODO implementálni: fizetés nyugtázása - paymentConfirm()
     public void confirmPayment() throws InvalidOrderOperationException {
         switch (orderStatus){
             case PENDING:
@@ -74,17 +77,11 @@ public final class OrderDirect extends Order {
             case DELIVERED:
                 throw new InvalidOrderOperationException("A rendelés már korábban lezárva");
             default:
-                throw new InvalidOrderOperationException("Lezárásban nem kezelt rendelésállapot: "+orderStatus);
+                throw new InvalidOrderOperationException("Fizetésmegerősítésben nem kezelt rendelésállapot: "+orderStatus);
         }
-    }
-
-    //TODO implementálni: rendelés lezárása - orderClose()
-    public void orderClose() throws InvalidOrderOperationException {
-        if (orderStatus != DELIVERED){
-            throw new InvalidOrderOperationException("Rendelés még nincs lezárva.");
-        }
-        //TODO implementálni és meghívni a metódust, mely véglegesíti a
-        // raktárkészleten a rendelésben lefoglalt mennyiségeket
+        paid = true;
+        payedDate = LocalDateTime.now();
+        deliveredDate = LocalDateTime.now();
     }
 
     @Override
@@ -93,18 +90,8 @@ public final class OrderDirect extends Order {
     }
 
     @Override
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    @Override
     public PaymentModeEnum getPaymentMode() {
         return paymentMode;
-    }
-
-    @Override
-    public void setPaymentMode(PaymentModeEnum paymentMode) throws InvalidPaymentModeException{
-        this.paymentMode = paymentMode;
     }
 
     public OrderStatusDirectEnum getOrderStatus() {
