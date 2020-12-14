@@ -21,9 +21,9 @@ class StockItemTest extends Container{
     }
 
     /**
-     * tesztek:
+     * bookSomeQuantity() - foglal egy megadott mennyiséget, vizsgálom, hogy
      * - a foglalás érvényesül a bookedQuantity tulajdonságban
-     * - minden foglalást pontosan követ a bookedQuantity
+     * - minden foglalást pontosan követ a bookedQuantity property és az isBookeable() metódus
      * - túlfoglalás esetén NotEnoughItemException
      */
     @Test
@@ -33,19 +33,19 @@ class StockItemTest extends Container{
         assertEquals(10, stockItem.getBookableQuantity());
         assertTrue(stockItem.isBookable());
         try {
-            // foglalok 9-et,  9 foglalt, 1 foglalható, tehát a termék foglalható
+            // foglalok 9-et:  9 foglalt, 1 foglalható, tehát a termék foglalható
             stockItem.bookSomeQuantity(9);
             assertEquals(9, stockItem.getBookedQuantity());
             assertEquals(1, stockItem.getBookableQuantity());
             assertTrue(stockItem.isBookable());
 
-            // foglalok további 1-et,  10 foglalt, 0 foglalható, tehát a termék NEM foglalható
+            // foglalok további 1-et:  10 foglalt, 0 foglalható, tehát a termék NEM foglalható
             stockItem.bookSomeQuantity(9);
             assertEquals(9, stockItem.getBookedQuantity());
             assertEquals(1, stockItem.getBookableQuantity());
             assertFalse(stockItem.isBookable());
 
-            // foglalnék további 2-t, várt: NotEnoughItemException exception
+            // foglalnék további 2-t: NotEnoughItemException
             stockItem.bookSomeQuantity(2);
         } catch (NotEnoughItemException e) {
             message = e.getMessage();
@@ -54,7 +54,7 @@ class StockItemTest extends Container{
     }
 
     /**
-     * Tesztek:
+     * isBookableQuantity() - megmondja, hogy adott mennyiség foglalható-e
      * -
      */
     @Test
@@ -65,16 +65,14 @@ class StockItemTest extends Container{
         assertEquals(10, stockItem.getBookableQuantity());
         assertTrue(stockItem.isBookableQuantity(10));
         try {
-            // foglalok 9-et,  9 foglalt, 1 foglalható, tehát
+            // foglalok 9-et:  9 foglalt, 1 foglalható, tehát
             // - a termékből 10 már nem foglalható, de
-            // - 1 még foglalható, tehát
-            // - egyébként van még foglalható
+            // - 1 még foglalható
             stockItem.bookSomeQuantity(9);
             assertEquals(9, stockItem.getBookedQuantity());
             assertEquals(1, stockItem.getBookableQuantity());
             assertFalse(stockItem.isBookableQuantity(10));
             assertTrue(stockItem.isBookableQuantity(1));
-            assertTrue(stockItem.isBookable());
         } catch (NotEnoughItemException e) {
             e.printStackTrace();
         }
@@ -82,7 +80,7 @@ class StockItemTest extends Container{
     }
 
     /**
-     * Teszt:
+     * isBookable() - megmondja, hogy van-e még foglalható mennyiség
      * - ha kevesebbet foglalok a tárolt mennyiségnél, akkor a termék foglalható
      * - ha annyit foglalok, amennyi van, akkor a termék már nem foglalható
      */
@@ -94,14 +92,13 @@ class StockItemTest extends Container{
         assertEquals(10, stockItem.getBookableQuantity());
         assertTrue(stockItem.isBookable());
         try {
-            // foglalok 9-et,  9 foglalt, 1 foglalható, tehát
-            // -van még foglalható
+            // foglalok 9-et:  9 foglalt, 1 foglalható, tehát van még foglalható
             stockItem.bookSomeQuantity(9);
             assertEquals(9, stockItem.getBookedQuantity());
             assertEquals(1, stockItem.getBookableQuantity());
             assertTrue(stockItem.isBookable());
 
-            // foglalok további 1-et,  10 foglalt, 0 foglalható, tehát
+            // foglalok további 1-et:  10 foglalt, 0 foglalható, tehát
             // nincs már foglalható
             stockItem.bookSomeQuantity(1);
             assertEquals(10, stockItem.getBookedQuantity());
@@ -120,28 +117,27 @@ class StockItemTest extends Container{
         assertEquals(10, stockItem.getBookableQuantity());
 
         try {
-            // foglalok 9-et,  9 foglalt, 1 foglalható
+            // foglalok 9-et:  9 foglalt, 1 foglalható
             stockItem.bookSomeQuantity(9);
             assertEquals(9, stockItem.getBookedQuantity());
             assertEquals(1, stockItem.getBookableQuantity());
 
-            // felszabadítok 3-at,  6 foglalt, 4 foglalható
+            // felszabadítok 3-at:  6 foglalt, 4 foglalható
             stockItem.releaseBookedQuantity(3);
             assertEquals(6, stockItem.getBookedQuantity());
             assertEquals(4, stockItem.getBookableQuantity());
 
-            // felszabadítok további 5-öt,  1 foglalt, 9 foglalható
+            // felszabadítok további 5-öt:  1 foglalt, 9 foglalható
             stockItem.releaseBookedQuantity(5);
             assertEquals(1, stockItem.getBookedQuantity());
             assertEquals(9, stockItem.getBookableQuantity());
 
-            // felszabadítanék további 4-et, várt: NotEnoughItemException
+            // felszabadítanék további 4-et: NotEnoughItemException
             stockItem.releaseBookedQuantity(4);
         } catch (NotEnoughItemException e) {
             message = e.getMessage();
         }
         assertEquals("A felszabadítandó mennyiség nem lehet több a foglaltnál", message);
-
     }
 
     @Test
@@ -155,6 +151,7 @@ class StockItemTest extends Container{
     }
 
     /**
+     * finishBook() - véglegesít egy foglalást
      * - a foglalás véglegesítése után
      *   = a termékmennyiségnek csökkenni kell a véglegesített mennyiséggel, és
      *   = a foglalt mennyiségnek is csökkenni kell a véglegesített mennyiséggel
@@ -168,19 +165,19 @@ class StockItemTest extends Container{
         assertEquals(10, stockItem.getQuantity());
 
         try {
-            // foglalok 9-et,  9 foglalt, 1 foglalható, az összes 10
+            // foglalok 9-et:  9 foglalt, 1 foglalható, az összes 10
             stockItem.bookSomeQuantity(9);
             assertEquals(9, stockItem.getBookedQuantity());
             assertEquals(1, stockItem.getBookableQuantity());
             assertEquals(10, stockItem.getQuantity());
 
-            // véglegesítek 5-öt, a foglalt 4, a foglalható marad 1, az összes 5
+            // véglegesítek 5-öt: a foglalt 4, a foglalható marad 1, az összes 5
             stockItem.finishBook(5);
             assertEquals(4, stockItem.getBookedQuantity());
             assertEquals(1, stockItem.getBookableQuantity());
             assertEquals(5, stockItem.getQuantity());
 
-            // véglegesítenék még 5-öt, elvárt: NotEnoughItemException
+            // véglegesítenék még 5-öt: NotEnoughItemException
             stockItem.finishBook(5);
         } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             message = e.getMessage();

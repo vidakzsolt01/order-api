@@ -7,6 +7,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.order.OrderItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class Stock extends ProductContainer {
 
@@ -15,8 +16,8 @@ public final class Stock extends ProductContainer {
     }
 
     @Override
-    public ArrayList productItemList(){
-        ArrayList itemList = new ArrayList<StockItem>();
+    public List<ProductItem> productItemList(){
+        List<ProductItem> itemList = new ArrayList<>();
         productItems.forEach((key, value) -> itemList.add(new StockItem((StockItem) value)));
         return itemList;
     }

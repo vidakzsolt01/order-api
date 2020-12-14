@@ -1,7 +1,8 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ShoppingModeEnum;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.ShoppingModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,7 +22,7 @@ class CartTest extends Container {
     static Stock stock = new Stock();
 
     @BeforeAll
-    static void beforeall(){
+    static void prolog(){
         try {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 20);
@@ -70,13 +71,13 @@ class CartTest extends Container {
             assertEquals(2, cart.productItemList().size());
 
             // az 0. termékből 5 van a kosárlistában
-            assertEquals(5, ((OrderItem)cart.productItemList().get(0)).getQuantity());
+            assertEquals(5, cart.productItemList().get(0).getQuantity());
 
-            List<OrderItem> cartProducts = cart.productItemList();
+            List<ProductItem> cartProducts = cart.productItemList();
             // megnövelem a lekért listában a 0. termék mennyiségét
-            ((OrderItem) cartProducts.get(0)).increaseQuantity(10);
+            cartProducts.get(0).increaseQuantity(10);
             // a kosárban még mindig 5 van a 0.-ból
-            assertEquals(5, ((OrderItem)cart.productItemList().get(0)).getQuantity());
+            assertEquals(5, cart.productItemList().get(0).getQuantity());
 
         } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
@@ -88,7 +89,7 @@ class CartTest extends Container {
      * <ul>
      *     <li>működik a termékhozzáadás</li>
      *     <li>ha ugyanazt terméket adom többször hozzá, akkor az elemszám nem,
-     *     csak a, ennyiség növekszik</li>
+     *     csak a, mennyiség növekszik</li>
      * </ul>
      */
     @Test
@@ -96,7 +97,7 @@ class CartTest extends Container {
         Cart cart = new Cart();
 
         try {
-            // fogalmamsincs, mi van a raktárban, az előző tesztek után,
+            // fogalmam sincs, mi van a raktárban az előző tesztek után,
             // adok hozzá pár prod1-et és prod2-t
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
@@ -109,8 +110,8 @@ class CartTest extends Container {
             // a kosárban 2 elem kell legyen, ...
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
-            assertEquals(5, ((OrderItem)cart.productItemList().get(0)).getQuantity());
-            assertEquals(10, ((OrderItem)cart.productItemList().get(1)).getQuantity());
+            assertEquals(5, cart.productItemList().get(0).getQuantity());
+            assertEquals(10, cart.productItemList().get(1).getQuantity());
             // bepakolok további 5 prod1-et
             cart.addNewProduct(prod1.getItemNumber(), 5, stock);
         } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
@@ -119,19 +120,19 @@ class CartTest extends Container {
         // a kosárban továbbra is 2 termék kell, legyen, ...
         assertEquals(2, cart.productItemList().size());
         // ... és pontosan 10 prod1, és 10 prod2
-        assertEquals(10, ((OrderItem)cart.productItemList().get(0)).getQuantity());
-        assertEquals(10, ((OrderItem)cart.productItemList().get(1)).getQuantity());
+        assertEquals(10, cart.productItemList().get(0).getQuantity());
+        assertEquals(10, cart.productItemList().get(1).getQuantity());
     }
 
     /**
-     * Azt akarom igazolni, hogy működik a termékeltávolítás
+     * Azt akarom igazolni, hogy működik a termék eltávolítása
      */
     @Test
     void removeProduct(){
         Cart cart = new Cart();
 
         try {
-            // fogalmamsincs, mi van a raktárban, az előző tesztek után,
+            // fogalmam sincs, mi van a raktárban, az előző tesztek után,
             // adok hozzá pár prod1-et és prod2-t
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
@@ -171,7 +172,7 @@ class CartTest extends Container {
         final int INDEX_PROD1 = 0;
         final int INDEX_PROD2 = 1;
         try {
-            // fogalmamsincs, mi van a raktárban, az előző tesztek után,
+            // fogalmam sincs, mi van a raktárban, az előző tesztek után,
             // adok hozzá pár prod1-et és prod2-t
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
@@ -181,18 +182,18 @@ class CartTest extends Container {
             // a kosárban 2 termék van
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
-            assertEquals(5, ((OrderItem)cart.productItemList().get(INDEX_PROD1)).getQuantity());
-            assertEquals(10, ((OrderItem)cart.productItemList().get(INDEX_PROD2)).getQuantity());
+            assertEquals(5, cart.productItemList().get(INDEX_PROD1).getQuantity());
+            assertEquals(10, cart.productItemList().get(INDEX_PROD2).getQuantity());
 
-            //növelem a prod1-et 3×, a prod2-t 2×
+            // növelem a prod1-et 3×, a prod2-t 2×
             cart.increaseItemQuantity(prod1.getItemNumber(), stock);
             cart.increaseItemQuantity(prod1.getItemNumber(), stock);
             cart.increaseItemQuantity(prod1.getItemNumber(), stock);
             cart.increaseItemQuantity(prod2.getItemNumber(), stock);
             cart.increaseItemQuantity(prod2.getItemNumber(), stock);
             // pontosan 8 prod1, és 12 prod2 kell, legyen
-            assertEquals(8, ((OrderItem)cart.productItemList().get(INDEX_PROD1)).getQuantity());
-            assertEquals(12, ((OrderItem)cart.productItemList().get(INDEX_PROD2)).getQuantity());
+            assertEquals(8, cart.productItemList().get(INDEX_PROD1).getQuantity());
+            assertEquals(12, cart.productItemList().get(INDEX_PROD2).getQuantity());
 
         } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
@@ -205,7 +206,7 @@ class CartTest extends Container {
         final int INDEX_PROD1 = 0;
         final int INDEX_PROD2 = 1;
         try {
-            // fogalmamsincs, mi van a raktárban, az előző tesztek után,
+            // fogalmam sincs, mi van a raktárban, az előző tesztek után,
             // adok hozzá pár prod1-et és prod2-t
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
@@ -215,8 +216,8 @@ class CartTest extends Container {
             // a kosárban 2 termék van
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
-            assertEquals(5, ((OrderItem)cart.productItemList().get(INDEX_PROD1)).getQuantity());
-            assertEquals(10, ((OrderItem)cart.productItemList().get(INDEX_PROD2)).getQuantity());
+            assertEquals(5, cart.productItemList().get(INDEX_PROD1).getQuantity());
+            assertEquals(10, cart.productItemList().get(INDEX_PROD2).getQuantity());
 
             //csökkentem a prod1-et 3×, a prod2-t 2×
             cart.decreaseItemQuantity(prod1.getItemNumber(), stock);
@@ -225,8 +226,8 @@ class CartTest extends Container {
             cart.decreaseItemQuantity(prod2.getItemNumber(), stock);
             cart.decreaseItemQuantity(prod2.getItemNumber(), stock);
             // pontosan 2 prod1, és 8 prod2 kell, legyen
-            assertEquals(2, ((OrderItem)cart.productItemList().get(INDEX_PROD1)).getQuantity());
-            assertEquals(8, ((OrderItem)cart.productItemList().get(INDEX_PROD2)).getQuantity());
+            assertEquals(2, cart.productItemList().get(INDEX_PROD1).getQuantity());
+            assertEquals(8, cart.productItemList().get(INDEX_PROD2).getQuantity());
 
         } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
             e.printStackTrace();
@@ -243,7 +244,7 @@ class CartTest extends Container {
         final int INDEX_PROD1 = 0;
         final int INDEX_PROD2 = 1;
         try {
-            // fogalmamsincs, mi van a raktárban, az előző tesztek után,
+            // fogalmam sincs, mi van a raktárban, az előző tesztek után,
             // adok hozzá pár prod1-et és prod2-t
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 10);
@@ -253,8 +254,8 @@ class CartTest extends Container {
             // a kosárban 2 termék van
             assertEquals(2, cart.productItemList().size());
             // ... és pontosan 5 prod1, és 10 prod2
-            assertEquals(5, ((OrderItem)cart.productItemList().get(INDEX_PROD1)).getQuantity());
-            assertEquals(10, ((OrderItem)cart.productItemList().get(INDEX_PROD2)).getQuantity());
+            assertEquals(5, cart.productItemList().get(INDEX_PROD1).getQuantity());
+            assertEquals(10, cart.productItemList().get(INDEX_PROD2).getQuantity());
 
             OrderOnline order = (OrderOnline) cart.closeCart(ShoppingModeEnum.ONLINE);
             // az order-ben pontosan 5 prod1, és 10 prod2 kell, legyen

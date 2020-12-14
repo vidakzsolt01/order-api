@@ -1,11 +1,13 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.ShoppingModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Slf4j
@@ -15,8 +17,8 @@ public final class Cart extends ProductContainer {
     }
 
     @Override
-    public ArrayList productItemList() {
-        ArrayList itemList = new ArrayList<OrderItem>();
+    public List<ProductItem> productItemList() {
+        List<ProductItem> itemList = new ArrayList<>();
         productItems.forEach( (key, value) -> itemList.add(new OrderItem(value)));
         return itemList;
     }
