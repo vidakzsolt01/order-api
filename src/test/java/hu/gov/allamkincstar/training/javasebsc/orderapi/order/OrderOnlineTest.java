@@ -310,10 +310,20 @@ class OrderOnlineTest extends Container {
         } catch (InvalidOrderOperationException | InvalidQuantityArgumentException | NotEnoughItemException e) {
             e.printStackTrace();
         }
+        // ez eddig "szabályos" folyamatot (feladás, fizetés, átadás futárnak, szállítás
+        // megerősítése, lezárás) követve teszteltem, most nézzük a kezelt
         //-----------------------------------------------------------------------
-        // ez eddig "szabályos" folyamatot követve teszteltem, most nézzük a kezelt
-        // hibákat:
+
+        //-----------------------------------------------------------------------
+        // most nézzük a kezelt hibákat:
         // - csinálok előbb egy "nem kifizetett"-et
+        // (új kosár is kell, mert az előzőt "levásároltuk").
+        Cart cart = new Cart();
+        try {
+            cart.addNewProduct(stock.productItemList().get(1).getIndex(), 100, stock);
+        } catch (NotEnoughItemException e) {
+            e.printStackTrace();
+        }
         OrderOnline order1 = createOrder(cart);
         String message = MESSAGE_DEFAULT;
         try {
@@ -349,11 +359,12 @@ class OrderOnlineTest extends Container {
         // "Nem véglegesített..." kell
         assertTrue(message.contains("Nem véglegesített rendelés nem zárható le"));
 
-        // ha ki is szállítom, akkor - elvileg - lefutna a close, de miután
+        // ha ki is szállítom, akkor le kell futnia a closeOrder()-nek, de miután
         // ebben a rednelésben is van 100 prod1 (emlékeztető: az eredeti
         // kosárból (lásd: prolog()) csináltam ezt is), ÉS ezt a 100-at a
         // szabályos menetben már kivettem a raktárból, itt NotEnoughItemException
-        // várható - ha "sikeres"-nek mondom a szállítást.
+        // várható - ha "sikeres"-nek mondom a szállítást. "Sikertelen" esetben
+        // szintén NotEnoughItemException, épp csak "...nincs foglalva a felszabadításhoz..."
         try {
             // a fizetés megerősítése
             order1.confirmPayment();
