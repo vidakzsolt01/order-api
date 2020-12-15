@@ -12,6 +12,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Order;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,14 +70,14 @@ class OrderOnlineTest extends Container {
             cart.addNewProduct(prod1.getItemNumber(), 100, stock);
             cart.addNewProduct(prod2.getItemNumber(), 100, stock);
             cart.addNewProduct(prod3.getItemNumber(), 100, stock);
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartClosedException e) {
             e.printStackTrace();
         }
 
         // Végül itt a kezdeti végcél: csinálok egy OrderOnline-t a Cart.closeCart()-tal
         try {
             order = (OrderOnline) cart.closeCart(ShoppingModeEnum.ONLINE);
-        } catch (CartIsEmptyException e) {
+        } catch (CartIsEmptyException | CartClosedException e) {
             e.printStackTrace();
         }
     }
@@ -88,7 +89,7 @@ class OrderOnlineTest extends Container {
         OrderOnline order = null;
         try {
             order = (OrderOnline) cart.closeCart(ShoppingModeEnum.ONLINE);
-        } catch (CartIsEmptyException e) {
+        } catch (CartIsEmptyException | CartClosedException e) {
             e.printStackTrace();
         }
         return order;
@@ -205,7 +206,7 @@ class OrderOnlineTest extends Container {
         // a státusz: BOOKED
         assertEquals(OrderStatusOnlineEnum.BOOKED, order.getOrderStatus());
         // fizetés dátuma üres
-        assertNull(order.getPayedDate());
+        assertNull(order.getPaidDate());
         // fizetve false
         assertFalse(order.getPaid());
         order.confirmPayment();
@@ -214,7 +215,7 @@ class OrderOnlineTest extends Container {
         // a státusz: WAITING_FOR_DELIVERY (szállítási mód "futárszolgálat" (DELIVERY_SERVICE) volt)
         assertEquals(OrderStatusOnlineEnum.WAITING_FOR_DELIVERY, order.getOrderStatus());
         // fizetés dátuma nem üres
-        assertNotNull(order.getPayedDate());
+        assertNotNull(order.getPaidDate());
         // LocalDateTime.now() kerül bele, ezt nem
         // vethetem össze a "mostani" LocalDateTime.now()-val (vagy igen?)
         // HÁT NEM!!! (néha jó, de inkább nem)
@@ -226,6 +227,13 @@ class OrderOnlineTest extends Container {
         // ez eddig a prolog()-ban létrehozott "futárszolgálat"-os változat,
         // most csinálok egy másik, "személyes átvétel"-est.
         // Ilyenkor a fizetés megerősítése után a státusz egyből DELIVERED lesz.
+        // (új kosár is kell, mert az előzőt levásároltuk)
+        cart = new Cart();
+        try {
+            cart.addNewProduct(prod2.getItemNumber(), 100, stock);
+        } catch (NotEnoughItemException | CartClosedException e) {
+            e.printStackTrace();
+        }
         OrderOnline order1 = createOrder(cart);
         try {
             //kell futtatni egy feladást a BOOKED státusz miatt
@@ -234,10 +242,11 @@ class OrderOnlineTest extends Container {
             // a státusz: DELIVERED (átvételi mód "személyes átvétel" (DIRECT_RECEIVING) volt)
             assertEquals(OrderStatusOnlineEnum.DELIVERED, order1.getOrderStatus());
             // fizetés dátuma nem üres
-            assertNotNull(order1.getPayedDate());
+            assertNotNull(order1.getPaidDate());
             // fizetve true
             assertTrue(order1.getPaid());
-        } catch (InvalidOrderOperationException | InvalidPaymentModeException e) {
+            order1.closeOrder(stock);
+        } catch (InvalidOrderOperationException | InvalidPaymentModeException | NotEnoughItemException e) {
             e.printStackTrace();
         }
     }
@@ -321,20 +330,23 @@ class OrderOnlineTest extends Container {
             // tehát a kiindulás:
             // - rendelés fizetve, (sikeresen) kiszállítva
             // - prod1, prod2, prod3 100-100 mennyiséggel van képviselve a rendelésben
-            // - a raktárban prod1, prod2, prod3-ból 1000, 2000, 2000 van
+            // - a raktárban prod1, prod2, prod3-ból 100, 500, 1000 van
             assertTrue(order.getPaid());
             assertEquals(OrderStatusOnlineEnum.DELIVERED, order.getOrderStatus());
             assertEquals(100, order.productItems().get(0).getQuantity());
             assertEquals(100, order.productItems().get(1).getQuantity());
             assertEquals(100, order.productItems().get(2).getQuantity());
             assertEquals(100, stock.productItemList().get(0).getQuantity());
-            assertEquals(500, stock.productItemList().get(1).getQuantity());
+            assertEquals(400, stock.productItemList().get(1).getQuantity());
             assertEquals(1000, stock.productItemList().get(2).getQuantity());
             order.closeOrder(stock);
-            // a termékekből 0, 400 és 900 kell maradjon a raktárban
+            // a termékekből 0, 400 és 900 kell maradjon a raktárban 0, 0, 0 foglalással
             assertEquals(0, stock.productItemList().get(0).getQuantity());
-            assertEquals(400, stock.productItemList().get(1).getQuantity());
+            assertEquals(300, stock.productItemList().get(1).getQuantity());
             assertEquals(900, stock.productItemList().get(2).getQuantity());
+            assertEquals(0, ((StockItem)stock.findItem(prod1.getItemNumber())).getBookedQuantity());
+            assertEquals(0, ((StockItem)stock.findItem(prod2.getItemNumber())).getBookedQuantity());
+            assertEquals(0, ((StockItem)stock.findItem(prod3.getItemNumber())).getBookedQuantity());
         } catch (InvalidOrderOperationException | InvalidQuantityArgumentException | NotEnoughItemException e) {
             e.printStackTrace();
         }
@@ -349,7 +361,7 @@ class OrderOnlineTest extends Container {
         Cart cart = new Cart();
         try {
             cart.addNewProduct(prod2.getItemNumber(), 100, stock);
-        } catch (NotEnoughItemException e) {
+        } catch (NotEnoughItemException | CartClosedException e) {
             e.printStackTrace();
         }
         // ezen a ponton a raktárban van
@@ -357,6 +369,7 @@ class OrderOnlineTest extends Container {
         // - 400 db prod2, amiből 100 le van foglalva és
         // - 900 db prod3.
         OrderOnline order1 = createOrder(cart);
+        assertEquals(100, order.productItems().get(1).getQuantity());
         String message = MESSAGE_DEFAULT;
         try {
             //kell futtatni egy feladást a BOOKED státusz miatt
@@ -416,8 +429,12 @@ class OrderOnlineTest extends Container {
         // A "sikertelen - megjegyzéssel" esetén viszont hiba nélkül le kell fusson
         message = MESSAGE_DEFAULT;
         try {
-            // a fizetés megerősítése
+            // - a státusz: IN_PROGRESS kellene legyen
+            assertEquals(OrderStatusOnlineEnum.IN_PROGRESS, order1.getOrderStatus());
+            // a fizetés megerősítése nem fut hibára, de nem is csinál semmit
+            LocalDateTime before = order1.getPaidDate();
             order1.confirmPayment();
+            assertEquals(before, order1.getPaidDate());
             // kézbesítés: sikertelen
             order1.confirmDelivery(false, "Sérült csomagolás miatt nem vették át");
             // tehát
@@ -435,8 +452,9 @@ class OrderOnlineTest extends Container {
         }
         // MESSAGE_DEFAULT kell
         assertEquals(MESSAGE_DEFAULT, message);
-
         // a sikeres végigfutását már láttam az első tesztesetben, itt nem kívánom újra
+        //-----------------------------------------------------------------------
+
         //-----------------------------------------------------------------------
         // - csinálok még egy ""személyes átvétel"-est is: ez abban különbözik, hogy a
         //   fizetés megerősítése után egyből DELIVERED lesz
@@ -446,7 +464,7 @@ class OrderOnlineTest extends Container {
         try {
             // foglaljunk most a prod3-ból 100-at
             cart.addNewProduct(prod3.getItemNumber(), 100, stock);
-        } catch (NotEnoughItemException e) {
+        } catch (NotEnoughItemException | CartClosedException e) {
             e.printStackTrace();
         }
         order1 = createOrder(cart);

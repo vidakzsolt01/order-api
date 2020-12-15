@@ -13,6 +13,8 @@ import java.util.List;
 @Slf4j
 public final class Cart extends ProductContainer {
 
+    private boolean closed = false;
+
     public Cart() {
     }
 
@@ -23,13 +25,15 @@ public final class Cart extends ProductContainer {
         return itemList;
     }
 
-    public OrderItem addNewProduct(String itemNumber, int quantity, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException {
+    public OrderItem addNewProduct(String itemNumber, int quantity, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException, CartClosedException{
+        if (closed) throw new CartClosedException();
         OrderItem item = new OrderItem(stock.bookProduct(itemNumber, quantity));
         registerNewItem(item);
         return item;
     }
 
-    public void removeProduct(String itemNumber, Stock stock){
+    public void removeProduct(String itemNumber, Stock stock) throws CartClosedException{
+        if (closed) throw new CartClosedException();
         OrderItem item = (OrderItem) findItem(itemNumber);
         try {
             // itt nem akarok exception-öket dobálni, mert:
@@ -42,24 +46,39 @@ public final class Cart extends ProductContainer {
         productItems.remove(itemNumber);
     }
 
-    public OrderItem increaseItemQuantity(String itemNumber, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException{
+    public OrderItem increaseItemQuantity(String itemNumber, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException, CartClosedException{
+        if (closed) throw new CartClosedException();
         OrderItem item = (OrderItem) findItem(itemNumber);
         stock.bookProduct(item.getProduct().getItemNumber(), 1);
         item.increaseQuantity(1);
         return item;
     }
 
-    public void decreaseItemQuantity(String itemNumber, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException {
+    public void decreaseItemQuantity(String itemNumber, Stock stock) throws NotEnoughItemException, InvalidQuantityArgumentException, CartClosedException{
+        if (closed) throw new CartClosedException();
         OrderItem item = (OrderItem) findItem(itemNumber);
         stock.releaseBookedQuantity(new OrderItem(item.getProduct(), 1));
         item.decreaseQuantity(1);
         if (item.getQuantity() == 0) removeItem(item.getProduct().getItemNumber());
     }
 
-    public Order closeCart(ShoppingModeEnum shoppingMode) throws CartIsEmptyException {
+    public Order closeCart(ShoppingModeEnum shoppingMode) throws CartIsEmptyException, CartClosedException{
+        if (closed) throw new CartClosedException();
         if (productItems.size() == 0) throw new CartIsEmptyException();
         long id = OrderRegister.getNextOrderId();
-        return (shoppingMode == ShoppingModeEnum.DIRECT) ? new OrderDirect(id, this.productItemList()) : new OrderOnline(id, this.productItemList(), new DeliveryParameters());
+        Order result;
+        if (shoppingMode == ShoppingModeEnum.DIRECT) result = OrderDirect.createOrder(this, id, this.productItemList());
+        else result = OrderOnline.createOrder(this, id, this.productItemList(), new DeliveryParameters());
+        closed = true;
+        return result;
+    }
+
+    public boolean getlosed(){
+        return closed;
+    }
+
+    public void reOpen(){
+        closed = false;
     }
 
 }

@@ -15,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CartTest extends Container {
 
+    // controll message a hibaüzenetek (exceptions) ellenőrzéséhez
+    static final String MESSAGE_DEFAULT = "no message";
+
     static Product prod1 = new Product("111111", "Termék-1", 1000, 27);
     static Product prod2 = new Product("222222", "Termék-2", 2000, 5);
     static Product prod3 = new Product("333333", "Termék-3", 2000, 12);
@@ -79,7 +82,7 @@ class CartTest extends Container {
             // a kosárban még mindig 5 van a 0.-ból
             assertEquals(5, cart.productItemList().get(0).getQuantity());
 
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartClosedException e) {
             e.printStackTrace();
         }
     }
@@ -114,7 +117,7 @@ class CartTest extends Container {
             assertEquals(10, cart.productItemList().get(1).getQuantity());
             // bepakolok további 5 prod1-et
             cart.addNewProduct(prod1.getItemNumber(), 5, stock);
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartClosedException e) {
             e.printStackTrace();
         }
         // a kosárban továbbra is 2 termék kell, legyen, ...
@@ -158,7 +161,7 @@ class CartTest extends Container {
             // a kosárban nem lehet semmi
             assertEquals(0, cart.productItemList().size());
 
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartClosedException e) {
             e.printStackTrace();
         }
     }
@@ -195,7 +198,7 @@ class CartTest extends Container {
             assertEquals(8, cart.productItemList().get(INDEX_PROD1).getQuantity());
             assertEquals(12, cart.productItemList().get(INDEX_PROD2).getQuantity());
 
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartClosedException e) {
             e.printStackTrace();
         }
     }
@@ -229,7 +232,7 @@ class CartTest extends Container {
             assertEquals(2, cart.productItemList().get(INDEX_PROD1).getQuantity());
             assertEquals(8, cart.productItemList().get(INDEX_PROD2).getQuantity());
 
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartClosedException e) {
             e.printStackTrace();
         }
     }
@@ -261,9 +264,22 @@ class CartTest extends Container {
             // az order-ben pontosan 5 prod1, és 10 prod2 kell, legyen
             assertEquals(5,  order.getOrderItems().get(INDEX_PROD1).getQuantity());
             assertEquals(10, order.getOrderItems().get(INDEX_PROD2).getQuantity());
-
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartIsEmptyException e) {
+            // kosár lezárva
+            assertTrue(cart.getlosed());
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartIsEmptyException | CartClosedException e) {
             e.printStackTrace();
         }
+        // a kosár lezárása után a tartalma nem módosítható
+        // kosár lezárva
+        assertTrue(cart.getlosed());
+        String message = MESSAGE_DEFAULT;
+        try {
+            // tehát ha hozzáadnék egyet
+            cart.addNewProduct(prod1.getItemNumber(), 1, stock);
+        } catch (NotEnoughItemException | CartClosedException e) {
+            message = e.getMessage();
+        }
+        // az "Kosár lezárva"
+        assertTrue(message.contains("A kosár lezárva"));
     }
 }

@@ -22,7 +22,13 @@ public final class OrderOnline extends Order{
     private final Integer         billTotal;
     private LocalDateTime         passedToServiceDate = null;
 
-    public OrderOnline(Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
+    public final static OrderOnline createOrder(Object caller, Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
+        if (caller instanceof Cart) return new OrderOnline(orderID, orderItemList, deliveryParameters);
+        return null;
+    }
+
+
+    private OrderOnline(Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
         super(orderID, orderItemList);
         this.deliveryParameters = deliveryParameters;
         if (this.grossSum < deliveryParameters.getLimitForFree())
@@ -65,11 +71,13 @@ public final class OrderOnline extends Order{
 
     @Override
     public void confirmPayment(){
-        if (orderStatus == OrderStatusOnlineEnum.BOOKED) {
+        if (orderStatus == OrderStatusOnlineEnum.BOOKED &&
+            !paid &&
+            paidDate == null) {
             orderStatus = (deliveryMode == DeliveryModeEnum.DELIVERY_SERVICE) ?
                     OrderStatusOnlineEnum.WAITING_FOR_DELIVERY :
                     OrderStatusOnlineEnum.DELIVERED;
-            payedDate = LocalDateTime.now();
+            paidDate    = LocalDateTime.now();
             paid        = true;
         }
     }
@@ -123,7 +131,7 @@ public final class OrderOnline extends Order{
 
     private void checkPaidAfterDelivery(){
         if (!paid)               paid = true;
-        if (payedDate == null) payedDate = LocalDateTime.now();
+        if (paidDate == null) paidDate = LocalDateTime.now();
     }
 
     @Override
@@ -172,8 +180,8 @@ public final class OrderOnline extends Order{
         return deliveryParameters;
     }
 
-    public LocalDateTime getPayedDate() {
-        return payedDate;
+    public LocalDateTime getPaidDate() {
+        return paidDate;
     }
 
     public LocalDateTime getPassedToServiceDate() {
@@ -186,5 +194,9 @@ public final class OrderOnline extends Order{
 
     public LocalDateTime getClosedDate() {
         return closedDate;
+    }
+
+    public Integer getBillTotal(){
+        return billTotal;
     }
 }

@@ -20,10 +20,15 @@ public final class OrderDirect extends Order {
 
     protected OrderStatusDirectEnum orderStatus = PENDING;
 
-    public OrderDirect(Long orderId, List<ProductItem> ordeItems) {
-        super(orderId, ordeItems);
+    public static OrderDirect createOrder(Object caller, Long orderID, List<ProductItem> orderItemList){
+        if (caller instanceof Cart) return new OrderDirect(orderID, orderItemList);
+        return null;
     }
 
+
+    private  OrderDirect(Long orderId, List<ProductItem> ordeItems) {
+        super(orderId, ordeItems);
+    }
 
     @Override
     public void dispatchOrder(Customer customer,
@@ -37,7 +42,9 @@ public final class OrderDirect extends Order {
             case BOOKED:
                 throw new InvalidOrderOperationException("A rendelés már feladásra került.");
             case DELIVERED:
-                throw new InvalidOrderOperationException("Lezárt rendelés nem adható fel");
+                throw new InvalidOrderOperationException("Átvételre került rendelés nem adható fel újra");
+            case CLOSED:
+                throw new InvalidOrderOperationException("Lezárt rendelés nem adható fel újra");
             default:
                 throw new InvalidOrderOperationException("Feladásban nem kezelt rendelésállapot: "+orderStatus);
         }
@@ -65,6 +72,7 @@ public final class OrderDirect extends Order {
         }
         finishAllProduct(stock);
         closedDate = LocalDateTime.now();
+        orderStatus = OrderStatusDirectEnum.CLOSED;
     }
 
     public void confirmPayment() throws InvalidOrderOperationException {
@@ -75,12 +83,14 @@ public final class OrderDirect extends Order {
                 orderStatus = DELIVERED;
                 break;
             case DELIVERED:
-                throw new InvalidOrderOperationException("A rendelés már korábban lezárva");
+                throw new InvalidOrderOperationException("A rendelés már korábban átvételre került");
+            case CLOSED:
+                throw new InvalidOrderOperationException("Lezárt rendelés fizetése nem nyugtázható");
             default:
                 throw new InvalidOrderOperationException("Fizetésmegerősítésben nem kezelt rendelésállapot: "+orderStatus);
         }
-        paid = true;
-        payedDate = LocalDateTime.now();
+        paid          = true;
+        paidDate      = LocalDateTime.now();
         deliveredDate = LocalDateTime.now();
     }
 

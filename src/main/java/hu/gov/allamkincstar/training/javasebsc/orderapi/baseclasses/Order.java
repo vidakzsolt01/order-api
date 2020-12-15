@@ -17,14 +17,14 @@ import java.util.List;
 public abstract class Order {
 
     protected final Long            orderID;
-    protected       PaymentModeEnum paymentMode = null;
+    protected       PaymentModeEnum paymentMode   = null;
     protected       Customer        customer;
     protected final Integer         netSum;
     protected final Integer         VATSum;
     protected final Integer         grossSum;
-    protected       LocalDateTime   creationDate = null;
-    protected       LocalDateTime   payedDate = null;
-    protected       LocalDateTime   closedDate = null;
+    protected       LocalDateTime   creationDate  = null;
+    protected       LocalDateTime   paidDate      = null;
+    protected       LocalDateTime   closedDate    = null;
     protected       LocalDateTime   deliveredDate = null;
 
     protected final List<ProductItem> orderItems;
@@ -107,8 +107,8 @@ public abstract class Order {
         return creationDate;
     }
 
-    public LocalDateTime getPayedDate() {
-        return payedDate;
+    public LocalDateTime getPaidDate() {
+        return paidDate;
     }
 
     public LocalDateTime getClosedDate() {
@@ -117,5 +117,21 @@ public abstract class Order {
 
     public LocalDateTime getDeliveredDate() {
         return deliveredDate;
+    }
+
+    public Long getOrderID(){
+        return orderID;
+    }
+
+    public Integer getNetSum(){
+        return netSum;
+    }
+
+    public Integer getVATSum(){
+        return VATSum;
+    }
+
+    public Integer getGrossSum(){
+        return grossSum;
     }
 }
