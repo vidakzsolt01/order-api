@@ -63,14 +63,14 @@ class OrderDirectTest extends Container {
             cart.addNewProduct(prod1.getItemNumber(), 100, stock);
             cart.addNewProduct(prod2.getItemNumber(), 100, stock);
             cart.addNewProduct(prod3.getItemNumber(), 100, stock);
-        } catch (NotEnoughItemException | InvalidQuantityArgumentException e) {
+        } catch (NotEnoughItemException | InvalidQuantityArgumentException | CartClosedException e) {
             e.printStackTrace();
         }
 
         // Végül itt a kezdeti végcél: csinálok egy OrderDirect-t a Cart.closeCart()-tal
         try {
             order = (OrderDirect) cart.closeCart(ShoppingModeEnum.DIRECT);
-        } catch (CartIsEmptyException e) {
+        } catch (CartIsEmptyException | CartClosedException e) {
             e.printStackTrace();
         }
     }
@@ -82,7 +82,7 @@ class OrderDirectTest extends Container {
         OrderDirect order = null;
         try {
             order = (OrderDirect) cart.closeCart(ShoppingModeEnum.DIRECT);
-        } catch (CartIsEmptyException e) {
+        } catch (CartIsEmptyException | CartClosedException e) {
             e.printStackTrace();
         }
         return order;
@@ -193,7 +193,7 @@ class OrderDirectTest extends Container {
         // - átvéve dátum üres
         // - státusz = BOOKED
         assertFalse(order.getPaid());
-        assertNull(order.getPayedDate());
+        assertNull(order.getPaidDate());
         assertNull(order.getDeliveredDate());
         assertEquals(OrderStatusDirectEnum.BOOKED, order.orderStatus);
         try {
@@ -209,7 +209,7 @@ class OrderDirectTest extends Container {
         // - átvéve dátum nem üres
         // - státusz = DELIVERED
         assertTrue(order.getPaid());
-        assertNotNull(order.getPayedDate());
+        assertNotNull(order.getPaidDate());
         assertNotNull(order.getDeliveredDate());
         assertEquals(OrderStatusDirectEnum.DELIVERED, order.orderStatus);
     }
@@ -243,10 +243,10 @@ class OrderDirectTest extends Container {
         }
         // végállapot
         // - zárás dátum nem üres
-        // - státusz: DELIVERED marad
+        // - státusz: CLOSED marad
         // - a raktárban 0 prod1-ből 0, a 400 prod2-ből 0 és az 900 prod2-ből 0 foglalt,
         assertNotNull(order.getClosedDate());
-        assertEquals(OrderStatusDirectEnum.DELIVERED, order.orderStatus);
+        assertEquals(OrderStatusDirectEnum.CLOSED, order.orderStatus);
         assertEquals(0, stock.findItem(prod1.getItemNumber()).getQuantity());
         assertEquals(400, stock.findItem(prod2.getItemNumber()).getQuantity());
         assertEquals(900, stock.findItem(prod3.getItemNumber()).getQuantity());
@@ -256,8 +256,14 @@ class OrderDirectTest extends Container {
 
         //-----------------------------------------------------------------------------
         // eddig volt a "sima" menet, lássunk hibásat is
-        // pl. "idő előtti" zárás és olyan tételeket, amelyek nincsenek lefoglalva
-        // (csinálok az eredet kosárból még egy rendelést, ezek nincsnek lefoglalva a raktárban)
+        // pl. "idő előtti" zárás
+        // Csinálok egy rendelést, amelyhez új kosár is kell
+        cart = new Cart();
+        try {
+            cart.addNewProduct(prod2.getItemNumber(), 100, stock);
+        } catch (NotEnoughItemException | CartClosedException e) {
+            e.printStackTrace();
+        }
         OrderDirect order1 = createOrder(cart);
         //ha most akarok zárni a "szűz" rendelésre, akkor InvalidOrderOperationException ()
         try {
@@ -301,16 +307,16 @@ class OrderDirectTest extends Container {
             // a státusza foglalt
             assertEquals(OrderStatusDirectEnum.BOOKED, order1.getOrderStatus());
             order1.confirmPayment();
-            // akkor annak menni kell, státusdz: DELIVERED
+            // akkor annak menni kell, státusz: DELIVERED
             assertEquals(OrderStatusDirectEnum.DELIVERED, order1.getOrderStatus());
-            // és ha most lezárom, akkor az menne, de a raktárkészletbe bukunk bele
-            // (nincs lefoglalva az a mennyiség, ami a kosárban van)
+            // és ha most lezárom, akkor az mennie kell
             order1.closeOrder(stock);
+            message = MESSAGE_DEFAULT;
         } catch (InvalidOrderOperationException | NotEnoughItemException e) {
             message = e.getMessage();
         }
-        // "A véglegesíteni kívánt mennyiség nincs lefoglalva"
-        assertTrue(message.contains("A véglegesíteni kívánt mennyiség nincs lefoglalva"));
+        // minden OK
+        assertEquals(MESSAGE_DEFAULT, message);
 
     }
 

@@ -357,7 +357,7 @@ class StockTest extends ProductContainer {
             assertEquals(5, stock.findItem(prod1.getItemNumber()).getQuantity());
             //---------------------------------------------------------------------
 
-        } catch (InvalidQuantityArgumentException | NotEnoughItemException e) {
+        } catch (InvalidQuantityArgumentException | NotEnoughItemException | CartClosedException e) {
             e.printStackTrace();
         }
     }
