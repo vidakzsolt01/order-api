@@ -55,7 +55,7 @@ class OrderOnlineTest extends Container {
         //-----------------------------------------------
         // itt nem a raktárat és a kosarat akarom tesztelni: az exception-ökkel nem foglalkozom...
         //--------------------------------------------------------------------------------
-        stock = new Stock();
+        stock = Stock.getInstance();
         try {
             stock.depositProduct(prod1, 100);
             stock.depositProduct(prod2, 500);

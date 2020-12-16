@@ -22,7 +22,7 @@ class CartTest extends Container {
     static Product prod2 = new Product("222222", "Termék-2", 2000, 5);
     static Product prod3 = new Product("333333", "Termék-3", 2000, 12);
     static Product prod4 = new Product("444444", "Termék-4", 10, 27);
-    static Stock stock = new Stock();
+    static Stock stock = Stock.getInstance();
 
     @BeforeAll
     static void prolog(){

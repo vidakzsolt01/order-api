@@ -11,8 +11,15 @@ import java.util.List;
 
 public final class Stock extends ProductContainer {
 
-    public Stock() {
+    private static Stock INSTANCE;
+
+    private Stock() {
         super();
+    }
+
+    public static Stock getInstance(){
+        if (INSTANCE == null) INSTANCE = new Stock();
+        return INSTANCE;
     }
 
     @Override
