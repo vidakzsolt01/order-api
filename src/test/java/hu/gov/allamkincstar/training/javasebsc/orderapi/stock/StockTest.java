@@ -29,7 +29,7 @@ class StockTest extends ProductContainer {
     @BeforeEach
     void prolog(){
         // raktározok pár terméket
-        stock = new Stock();
+        stock = Stock.getInstance();
         try {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 20);
@@ -153,7 +153,7 @@ class StockTest extends ProductContainer {
     void depositProduct() {
         String message = "Minden OK";
         // induljunk üres raktárral: üres a terméklista
-        stock = new Stock();
+        stock = Stock.getInstance();
         assertEquals(0, stock.productItemList().size());
 
         // felveszek 10 prod1-et: 1 termék van a listában, és az a prod1, és 10 van belőle

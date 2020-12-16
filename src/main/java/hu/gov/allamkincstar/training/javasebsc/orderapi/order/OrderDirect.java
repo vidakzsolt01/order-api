@@ -20,11 +20,12 @@ public final class OrderDirect extends Order {
 
     protected OrderStatusDirectEnum orderStatus = PENDING;
 
-    public static OrderDirect createOrder(Object caller, Long orderID, List<ProductItem> orderItemList){
-        if (caller instanceof Cart) return new OrderDirect(orderID, orderItemList);
+    public static OrderDirect createOrder(Cart caller, Long orderID, List<ProductItem> orderItemList){
+        if (orderItemList == caller.productItemList()){
+            return new OrderDirect(orderID, orderItemList);
+        }
         return null;
     }
-
 
     private  OrderDirect(Long orderId, List<ProductItem> ordeItems) {
         super(orderId, ordeItems);
