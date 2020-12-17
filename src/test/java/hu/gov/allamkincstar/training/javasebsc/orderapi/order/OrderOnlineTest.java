@@ -56,6 +56,8 @@ class OrderOnlineTest extends Container {
         // itt nem a raktárat és a kosarat akarom tesztelni: az exception-ökkel nem foglalkozom...
         //--------------------------------------------------------------------------------
         stock = Stock.getInstance();
+        // a raktár singleton, ezért itt kiürítem a helyes teszteredmények
+        // ("foglalt", "maradt", stb. készletek) miatt
         for (ProductItem item:stock.productItemList()){
             stock.removeItem(item.getIndex());
         }
@@ -340,8 +342,8 @@ class OrderOnlineTest extends Container {
             assertEquals(100, order.productItems().get(1).getQuantity());
             assertEquals(100, order.productItems().get(2).getQuantity());
             assertEquals(100, stock.findItem(prod1.getItemNumber()).getQuantity());
-            assertEquals(400, stock.findItem(prod1.getItemNumber()).getQuantity());
-            assertEquals(1000, stock.findItem(prod1.getItemNumber()).getQuantity());
+            assertEquals(400, stock.findItem(prod2.getItemNumber()).getQuantity());
+            assertEquals(1000, stock.findItem(prod3.getItemNumber()).getQuantity());
             order.closeOrder(stock);
             // a termékekből 0, 400 és 900 kell maradjon a raktárban 0, 0, 0 foglalással
             assertEquals(0, stock.productItemList().get(0).getQuantity());
@@ -353,8 +355,8 @@ class OrderOnlineTest extends Container {
         } catch (InvalidOrderOperationException | InvalidQuantityArgumentException | NotEnoughItemException e) {
             e.printStackTrace();
         }
-        // ez eddig "szabályos" folyamatot (feladás, fizetés, átadás futárnak, szállítás
-        // megerősítése, lezárás) követve teszteltem, most nézzük a kezelt
+        // ez eddig "szabályos" folyamatot (feladás, fizetés, átadás futárnak,
+        // szállítás/átvétel megerősítése, lezárás) követve teszteltem
         //-----------------------------------------------------------------------
 
         //-----------------------------------------------------------------------
