@@ -4,10 +4,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.DeliveryModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusOnlineEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.PaymentModeEnum;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
 import java.time.LocalDateTime;
@@ -22,11 +19,15 @@ public final class OrderOnline extends Order{
     private final Integer         billTotal;
     private LocalDateTime         passedToServiceDate = null;
 
-    public final static OrderOnline createOrder(Object caller, Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
-        if (caller instanceof Cart) return new OrderOnline(orderID, orderItemList, deliveryParameters);
-        return null;
+    public static OrderOnline createOrder(Cart caller, Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
+        if (orderItemList.size() != caller.productItemList().size()) throw new IllegalOrderCreationException();
+        for (int i = 0; i < orderItemList.size(); i++){
+            if (!(orderItemList.get(i).getIndex() == caller.productItemList().get(i).getIndex() ||
+                  orderItemList.get(i).getQuantity() == caller.productItemList().get(i).getQuantity())
+               ) throw new IllegalOrderCreationException();
+        }
+        return new OrderOnline(orderID, orderItemList, deliveryParameters);
     }
-
 
     private OrderOnline(Long orderID, List<ProductItem> orderItemList, DeliveryParameters deliveryParameters){
         super(orderID, orderItemList);
