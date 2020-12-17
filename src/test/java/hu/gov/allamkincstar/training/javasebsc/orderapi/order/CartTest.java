@@ -26,6 +26,9 @@ class CartTest extends Container {
 
     @BeforeAll
     static void prolog(){
+        for (ProductItem item:stock.productItemList()){
+            stock.removeItem(item.getIndex());
+        }
         try {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 20);

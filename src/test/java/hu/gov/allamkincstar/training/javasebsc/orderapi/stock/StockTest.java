@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class StockTest extends ProductContainer {
 
     static Product prod1          = new Product("111111", "Termék-1", 1000, 27);
@@ -30,6 +31,9 @@ class StockTest extends ProductContainer {
     void prolog(){
         // raktározok pár terméket
         stock = Stock.getInstance();
+        for (ProductItem item:stock.productItemList()){
+            stock.removeItem(item.getIndex());
+        }
         try {
             stock.depositProduct(prod1, 10);
             stock.depositProduct(prod2, 20);
