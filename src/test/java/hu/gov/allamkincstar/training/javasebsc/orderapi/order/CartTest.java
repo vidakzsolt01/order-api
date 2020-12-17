@@ -26,6 +26,8 @@ class CartTest extends Container {
 
     @BeforeAll
     static void prolog(){
+        // a raktár singleton, ezért itt kiürítem a helyes teszteredmények
+        // ("foglalt", "maradt", stb. készletek) miatt
         for (ProductItem item:stock.productItemList()){
             stock.removeItem(item.getIndex());
         }

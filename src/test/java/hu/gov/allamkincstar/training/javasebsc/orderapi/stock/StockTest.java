@@ -25,12 +25,13 @@ class StockTest extends ProductContainer {
     // létező cikkszám vs. "más" terméknév
     static Product prodFailName   = new Product("222222", "Termék-X", 2000, 12);
     static Stock stock;
-    //static Stock stock = new Stock();
 
     @BeforeEach
     void prolog(){
         // raktározok pár terméket
         stock = Stock.getInstance();
+        // a raktár singleton, ezért itt kiürítem a helyes teszteredmények
+        // ("foglalt", "maradt", stb. készletek) miatt
         for (ProductItem item:stock.productItemList()){
             stock.removeItem(item.getIndex());
         }
@@ -158,6 +159,11 @@ class StockTest extends ProductContainer {
         String message = "Minden OK";
         // induljunk üres raktárral: üres a terméklista
         stock = Stock.getInstance();
+        // a raktár singleton, ezért itt kiürítem a helyes teszteredmények
+        // ("foglalt", "maradt", stb. készletek) miatt
+        for (ProductItem item:stock.productItemList()){
+            stock.removeItem(item.getIndex());
+        }
         assertEquals(0, stock.productItemList().size());
 
         // felveszek 10 prod1-et: 1 termék van a listában, és az a prod1, és 10 van belőle

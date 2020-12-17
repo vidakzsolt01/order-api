@@ -51,6 +51,8 @@ class OrderDirectTest extends Container {
         // itt nem a raktárat és a kosarat akarom tesztelni: az exception-ökkel nem foglalkozom...
         //--------------------------------------------------------------------------------
         stock = Stock.getInstance();
+        // a raktár singleton, ezért itt kiürítem a helyes teszteredmények
+        // ("foglalt", "maradt", stb. készletek) miatt
         for (ProductItem item:stock.productItemList()){
             stock.removeItem(item.getIndex());
         }
