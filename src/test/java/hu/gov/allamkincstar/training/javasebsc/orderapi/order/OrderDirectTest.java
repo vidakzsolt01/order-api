@@ -1,6 +1,7 @@
 package hu.gov.allamkincstar.training.javasebsc.orderapi.order;
 
 import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.Product;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.ProductItem;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
@@ -8,6 +9,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.StockItem;
 import org.junit.jupiter.api.*;
 
 import java.awt.*;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -49,6 +51,9 @@ class OrderDirectTest extends Container {
         // itt nem a raktárat és a kosarat akarom tesztelni: az exception-ökkel nem foglalkozom...
         //--------------------------------------------------------------------------------
         stock = Stock.getInstance();
+        for (ProductItem item:stock.productItemList()){
+            stock.removeItem(item.getIndex());
+        }
         try {
             stock.depositProduct(prod1, 100);
             stock.depositProduct(prod2, 500);

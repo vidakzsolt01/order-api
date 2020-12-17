@@ -56,6 +56,9 @@ class OrderOnlineTest extends Container {
         // itt nem a raktárat és a kosarat akarom tesztelni: az exception-ökkel nem foglalkozom...
         //--------------------------------------------------------------------------------
         stock = Stock.getInstance();
+        for (ProductItem item:stock.productItemList()){
+            stock.removeItem(item.getIndex());
+        }
         try {
             stock.depositProduct(prod1, 100);
             stock.depositProduct(prod2, 500);
@@ -336,9 +339,9 @@ class OrderOnlineTest extends Container {
             assertEquals(100, order.productItems().get(0).getQuantity());
             assertEquals(100, order.productItems().get(1).getQuantity());
             assertEquals(100, order.productItems().get(2).getQuantity());
-            assertEquals(100, stock.productItemList().get(0).getQuantity());
-            assertEquals(400, stock.productItemList().get(1).getQuantity());
-            assertEquals(1000, stock.productItemList().get(2).getQuantity());
+            assertEquals(100, stock.findItem(prod1.getItemNumber()).getQuantity());
+            assertEquals(400, stock.findItem(prod1.getItemNumber()).getQuantity());
+            assertEquals(1000, stock.findItem(prod1.getItemNumber()).getQuantity());
             order.closeOrder(stock);
             // a termékekből 0, 400 és 900 kell maradjon a raktárban 0, 0, 0 foglalással
             assertEquals(0, stock.productItemList().get(0).getQuantity());

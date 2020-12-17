@@ -4,10 +4,7 @@ import hu.gov.allamkincstar.training.javasebsc.orderapi.baseclasses.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.DeliveryModeEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.OrderStatusDirectEnum;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.enums.PaymentModeEnum;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidOrderOperationException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidPaymentModeException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.InvalidQuantityArgumentException;
-import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.NotEnoughItemException;
+import hu.gov.allamkincstar.training.javasebsc.orderapi.exceptions.*;
 import hu.gov.allamkincstar.training.javasebsc.orderapi.stock.Stock;
 
 import java.time.LocalDateTime;
@@ -21,10 +18,13 @@ public final class OrderDirect extends Order {
     protected OrderStatusDirectEnum orderStatus = PENDING;
 
     public static OrderDirect createOrder(Cart caller, Long orderID, List<ProductItem> orderItemList){
-        if (orderItemList == caller.productItemList()){
-            return new OrderDirect(orderID, orderItemList);
+        if (orderItemList.size() != caller.productItemList().size()) throw new IllegalOrderCreationException();
+        for (int i = 0; i < orderItemList.size(); i++){
+            if (!(orderItemList.get(i).getIndex() == caller.productItemList().get(i).getIndex() ||
+                    orderItemList.get(i).getQuantity() == caller.productItemList().get(i).getQuantity())
+            ) throw new IllegalOrderCreationException();
         }
-        return null;
+        return new OrderDirect(orderID, orderItemList);
     }
 
     private  OrderDirect(Long orderId, List<ProductItem> ordeItems) {
