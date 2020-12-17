@@ -103,17 +103,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.StockTest">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OrderOnlineTest full" type="JUnit" factoryName="JUnit">
       <module name="order-api" />
       <option name="PACKAGE_NAME" value="hu.gov.allamkincstar.training.javasebsc.orderapi.order" />
@@ -181,8 +170,8 @@
     <list>
       <item itemvalue="JUnit.OrderOnlineTest full" />
       <item itemvalue="JUnit.OrderOnlineTest__.confirmPayment" />
-      <item itemvalue="Maven.order-api [compile with -X]" />
       <item itemvalue="JUnit.StockTest" />
+      <item itemvalue="Maven.order-api [compile with -X]" />
     </list>
     <recent_temporary>
       <list>
